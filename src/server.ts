@@ -24,10 +24,13 @@ export class Server extends Database {
     }
 
     public async configure(): Promise<void> {
-        this.expressApplication.use(this.mainController.router);
+        const routes = this.mainController.routes();
+        for (const route of routes) {
+            this.expressApplication.use(route.path, route.controller.router);
+        }
     }
 
-    public listen() {
+    public up() {
         this.expressApplication.listen(this.port, () => {
             console.log(`Server is up and running on ${this.port}`)
         });

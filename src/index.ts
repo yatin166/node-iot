@@ -6,10 +6,10 @@ const expressServer = new Server(
     express(),
     8000,
     new MainController(),
-    'mongodb://localhost:27017/test'
+    'mongodb://localhost:27017/iot'
 );
 
 expressServer
     .configure()
-    .then(() => expressServer.listen())
+    .then(() => expressServer.up())
     .catch(error => console.log(`Error occurred in starting server ${error}`))
