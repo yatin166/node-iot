@@ -1,6 +1,6 @@
 import express from 'express'
 import { MainController } from './controllers/Main.controller';
-import { Database } from './Database';
+import { Database } from './database';
 
 export class Server extends Database {
     private readonly expressApplication: express.Application;
@@ -24,8 +24,7 @@ export class Server extends Database {
     }
 
     public async configure(): Promise<void> {
-        const routes = this.mainController.routes();
-        for (const route of routes) {
+        for (const route of this.mainController.routerConfiguration) {
             this.expressApplication.use(route.path, route.controller.router);
         }
     }
