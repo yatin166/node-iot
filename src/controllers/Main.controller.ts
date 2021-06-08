@@ -26,10 +26,6 @@ export class MainController {
         this.routerConfiguration.push(...this.initRouters());
     }
 
-    public routes(): RouterConfiguration[] {
-        return this.routerConfiguration;
-    }
-
     private initRouters(): RouterConfiguration[] {
         return [
             {
