@@ -1,4 +1,5 @@
 import express from 'express';
+import { UserModel } from '../models/User.model';
 import { Controller } from './Main.controller';
 
 const Path = {
@@ -23,7 +24,11 @@ export class AuthenticationController implements Controller {
         res.send({ message: 'Login API' })
     }
 
-    register(req: express.Request, res: express.Response) {
+    async register(req: express.Request, res: express.Response) {
+        await UserModel.create({
+            email: 'abc@abc.com',
+            password: 'abc123'
+        });
         res.send({ message: 'Register API' })
     }
 }

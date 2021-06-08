@@ -1,6 +1,7 @@
 import express from 'express'
 import { MainController } from './controllers/Main.controller';
 import { Database } from './database';
+import bodyParser from 'body-parser'
 
 export class Server extends Database {
     private readonly expressApplication: express.Application;
@@ -24,6 +25,8 @@ export class Server extends Database {
     }
 
     public async configure(): Promise<void> {
+        this.expressApplication.use(bodyParser.json());
+
         for (const route of this.mainController.routerConfiguration) {
             this.expressApplication.use(route.path, route.controller.router);
         }
