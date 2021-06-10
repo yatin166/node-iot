@@ -1,8 +1,9 @@
 import express from 'express';
+import { UserModel } from '../models/User.model';
 import { Controller } from './Main.controller';
 
 const Path = {
-    Details: '/:id/details',
+    All: '/all',
 }
 
 export class UserController implements Controller {
@@ -14,10 +15,13 @@ export class UserController implements Controller {
     }
 
     private initRoutes() {
-        this.router.get(Path.Details, this.getUserDetails.bind(this))
+        this.router.get(Path.All, this.getAllUsers.bind(this))
     }
 
-    getUserDetails(req: express.Request, res: express.Response) {
-        res.send({ message: 'User API: '+ req.params.id })
+    async getAllUsers(req: express.Request, res: express.Response) {
+        const users = await UserModel.getAll();
+        res.send({
+            users: users
+        })
     }
 }

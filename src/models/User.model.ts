@@ -1,30 +1,31 @@
 import { Schema, Model } from 'mongoose'
-import mongoose from 'mongoose'
+import mongoose, { Document } from 'mongoose'
+import { RegisterRequest } from '../dto/request/Register.request';
+import { UserDetailResponse } from '../dto/response/UserDetail.response';
 
-export interface UserSchema {
+export interface UserSchema extends Document {
     email: string,
     password: string
 }
 
-const userSchema = new Schema<UserSchema>({
-    email: {
-        type: String,
-        required: true
+const userSchema = new Schema<UserSchema>(
+    {
+        email: { type: String, required: true },
+        password: { type: String, required: true },
     },
-    password: {
-        type: String,
-        required: true
-    }
-}).pre('save', (next) => {
-    next();
-    return this;
-})
+    { timestamps: true }
+)
 
 const User: Model<UserSchema> = mongoose.model<UserSchema>('User', userSchema);
 
 export class UserModel {
 
-    public static async create(userDetails: UserSchema) {
-        const user = await User.create(userDetails);
+    public static async create(userDetails: RegisterRequest) {
+        await User.create(userDetails);
+    }
+
+    public static async getAll() {
+        const users = await User.find({});
+        return users.map(user => new UserDetailResponse(user));
     }
 }
