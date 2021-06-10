@@ -1,4 +1,5 @@
 import express from 'express';
+import { RegisterRequest } from '../dto/request/Register.request';
 import { UserModel } from '../models/User.model';
 import { Controller } from './Main.controller';
 
@@ -25,10 +26,8 @@ export class AuthenticationController implements Controller {
     }
 
     async register(req: express.Request, res: express.Response) {
-        await UserModel.create({
-            email: 'abc@abc.com',
-            password: 'abc123'
-        });
+        const registerRequest = req.body as RegisterRequest
+        await UserModel.create(registerRequest);
         res.send({ message: 'Register API' })
     }
 }
