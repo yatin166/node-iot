@@ -1,12 +1,11 @@
 import express from 'express';
-import { RegisterRequest } from '../dto/request/Register.request';
-import { UserModel } from '../models/User.model';
 import { LoginService } from '../services/authentication/Login.service';
 import { RegisterService } from '../services/authentication/Register.service';
 import { Controller } from './Main.controller';
 
 const Path = {
     Login: '/login',
+    AccessToken: '/access-token',
     Register: '/register'
 }
 
@@ -28,6 +27,7 @@ export class AuthenticationController implements Controller {
 
     private initRoutes() {
         this.router.get(Path.Login, this.login.bind(this))
+        this.router.post(Path.AccessToken, this.getAccessToken.bind(this))
         this.router.post(Path.Register, this.register.bind(this))
     }
 
@@ -35,6 +35,12 @@ export class AuthenticationController implements Controller {
         this.loginService.login(req.body)
             .then(loginResponse => res.send(loginResponse))
             .catch(error => next(error))
+    }
+
+    async getAccessToken(req: express.Request, res: express.Response, next: express.NextFunction) {
+        this.loginService.getAccessToken(req.body)
+            .then(loginResponse => res.send(loginResponse))
+            .catch(error => res.json({ message: 'Token Invalid' } ))
     }
 
     async register(req: express.Request, res: express.Response, next: express.NextFunction) {

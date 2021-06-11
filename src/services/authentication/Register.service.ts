@@ -1,5 +1,5 @@
+import { UserRepository } from '../../database/repository/User.repository';
 import { RegisterRequest } from '../../dto/request/Register.request';
-import { UserModel } from '../../models/User.model';
 
 export interface RegisterService {
     register(registerRequest: RegisterRequest): Promise<void>
@@ -8,6 +8,6 @@ export interface RegisterService {
 export class RegisterServiceImpl implements RegisterService {
 
     async register(registerRequest: RegisterRequest): Promise<void> {
-        await UserModel.create(registerRequest);
+        await UserRepository.create(registerRequest);
     }
 }

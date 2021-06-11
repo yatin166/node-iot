@@ -1,7 +1,7 @@
 import express from 'express'
 import { MainController } from './controllers/Main.controller';
-import { Database } from './database';
 import bodyParser from 'body-parser'
+import { Database } from './database/Database';
 
 export class Server extends Database {
     private readonly expressApplication: express.Application;
