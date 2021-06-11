@@ -21,8 +21,10 @@
   },
   "homepage": "https://github.com/yatin166/node-iot#readme",
   "dependencies": {
+    "@types/jsonwebtoken": "^8.5.1",
     "class-validator": "^0.13.1",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.13"
   },
   "devDependencies": {

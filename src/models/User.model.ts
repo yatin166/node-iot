@@ -21,7 +21,18 @@ const User: Model<UserSchema> = mongoose.model<UserSchema>('User', userSchema);
 export class UserModel {
 
     public static async create(userDetails: RegisterRequest) {
-        await User.create(userDetails);
+        await User.create({
+            email: userDetails.email,
+            password: userDetails.password,
+        });
+    }
+
+    public static async getById(id: string) {
+        return User.findOne({ id });
+    }
+
+    public static async getByEmail(email: string) {
+        return User.findOne({ email });
     }
 
     public static async getAll() {

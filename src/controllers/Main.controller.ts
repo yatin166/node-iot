@@ -1,4 +1,8 @@
 import express from 'express';
+import { AccessTokenServiceImpl } from '../services/authentication/AccessToken.service';
+import { LoginServiceImpl } from '../services/authentication/Login.service';
+import { RefreshTokenServiceImpl } from '../services/authentication/RefreshToken.service';
+import { RegisterServiceImpl } from '../services/authentication/Register.service';
 import { AuthenticationController } from './Authentication.controller';
 import { UserController } from './User.controller';
 
@@ -29,7 +33,14 @@ export class MainController {
     private initRouters(): RouterConfiguration[] {
         return [
             {
-                controller: new AuthenticationController(this.router),
+                controller: new AuthenticationController(
+                    this.router,
+                    new LoginServiceImpl(
+                        new RefreshTokenServiceImpl(),
+                        new AccessTokenServiceImpl()
+                    ),
+                    new RegisterServiceImpl()
+                ),
                 path: this.configurePath(Path.AuthenticationController)
             },
             {
