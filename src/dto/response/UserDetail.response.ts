@@ -1,5 +1,5 @@
 import { IsString, IsNotEmpty } from 'class-validator';
-import { UserSchema } from '../../models/User.model';
+import { UserSchema } from '../../database/schemas/User.model';
 
 export class UserDetailResponse {
 

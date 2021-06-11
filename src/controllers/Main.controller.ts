@@ -1,7 +1,7 @@
 import express from 'express';
-import { AccessTokenServiceImpl } from '../services/authentication/AccessToken.service';
+import { AccessTokenServiceImpl } from '../services/authentication/jwt/AccessToken.service';
 import { LoginServiceImpl } from '../services/authentication/Login.service';
-import { RefreshTokenServiceImpl } from '../services/authentication/RefreshToken.service';
+import { RefreshTokenServiceImpl } from '../services/authentication/jwt/RefreshToken.service';
 import { RegisterServiceImpl } from '../services/authentication/Register.service';
 import { AuthenticationController } from './Authentication.controller';
 import { UserController } from './User.controller';

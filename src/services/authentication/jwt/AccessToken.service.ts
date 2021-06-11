@@ -1,4 +1,4 @@
-import { TokenConfig } from '../../config/Token.config';
+import { TokenConfig } from '../../../config/Token.config';
 import { JWTServiceImpl } from './JWT.service';
 
 export interface AccessTokenPayload {
@@ -15,7 +15,7 @@ export interface AccessTokenService {
 export class AccessTokenServiceImpl extends JWTServiceImpl<AccessTokenPayload> implements AccessTokenService {
 
     getToken(payload: AccessTokenPayload): string {
-        return  this.create(payload, TokenConfig.accessToken())
+        return this.create(payload, TokenConfig.accessToken())
     }
 
     verifyToken(token: string): AccessTokenPayload {

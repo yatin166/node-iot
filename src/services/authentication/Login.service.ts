@@ -1,13 +1,15 @@
+import { UserRepository } from '../../database/repository/User.repository';
+import { AccessTokenRequest } from '../../dto/request/AccessToken.request';
 import { LoginRequest } from '../../dto/request/Login.request';
+import { AccessTokenResponse } from '../../dto/response/AccessToken.response';
 import { LoginResponse } from '../../dto/response/Login.response';
-import { UserModel } from '../../models/User.model';
-import { AccessTokenService, AccessTokenPayload } from './AccessToken.service';
-import { RefreshTokenPayload, RefreshTokenService } from './RefreshToken.service';
+import { AccessTokenService, AccessTokenPayload } from './jwt/AccessToken.service';
+import { RefreshTokenPayload, RefreshTokenService } from './jwt/RefreshToken.service';
 
 export interface LoginService {
     login(loginRequest: LoginRequest): Promise<LoginResponse>
 
-    getAccessToken(refreshToken: string): Promise<string | undefined>
+    getAccessToken(accessTokenRequest: AccessTokenRequest): Promise<AccessTokenResponse | undefined>
 }
 
 export class LoginServiceImpl implements LoginService {
@@ -21,7 +23,7 @@ export class LoginServiceImpl implements LoginService {
     }
 
     async login(loginRequest: LoginRequest): Promise<LoginResponse> {
-        const user = await UserModel.getByEmail(loginRequest.email);
+        const user = await UserRepository.getByEmail(loginRequest.email);
 
         if (!user || user.password !== loginRequest.password) {
             throw new Error('Wrong user password or Email')
@@ -38,24 +40,22 @@ export class LoginServiceImpl implements LoginService {
         return loginResponse
     }
 
-    async getAccessToken(refreshToken: string): Promise<string | undefined> {
-        try {
-            const refreshTokenPayload = this.refreshTokenService.verifyToken(refreshToken);
+    async getAccessToken(accessTokenRequest: AccessTokenRequest): Promise<AccessTokenResponse | undefined> {
+        const refreshTokenPayload = this.refreshTokenService.verifyToken(accessTokenRequest.refreshToken);
 
-            const user = await UserModel.getById(refreshTokenPayload.userId);
+        const user = await UserRepository.getById(refreshTokenPayload.userId);
 
-            if (!user) throw new Error('Wrong user password or Email')
+        if (!user) throw new Error('Wrong user password or Email')
 
-            const payload: AccessTokenPayload= {
-                userId: user.id,
-                userEmail: user.email
-            }
-
-            const accessToken = this.accessTokenService.getToken(payload);
-
-            return accessToken;
-        } catch (error) {
-            console.log(error)
+        const payload: AccessTokenPayload= {
+            userId: user.id,
+            userEmail: user.email
         }
+
+        const accessTokenResponse: AccessTokenResponse = {
+            accessToken: this.accessTokenService.getToken(payload)
+        }
+
+        return accessTokenResponse;
     }
 }

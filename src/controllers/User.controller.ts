@@ -1,5 +1,5 @@
 import express from 'express';
-import { UserModel } from '../models/User.model';
+import { UserRepository } from '../database/repository/User.repository';
 import { Controller } from './Main.controller';
 
 const Path = {
@@ -19,7 +19,7 @@ export class UserController implements Controller {
     }
 
     async getAllUsers(req: express.Request, res: express.Response) {
-        const users = await UserModel.getAll();
+        const users = await UserRepository.getAll();
         res.send({
             users: users
         })
