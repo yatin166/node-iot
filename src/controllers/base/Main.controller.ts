@@ -1,13 +1,13 @@
 import express from 'express';
-import { AccessTokenServiceImpl } from '../services/authentication/jwt/AccessToken.service';
-import { LoginServiceImpl } from '../services/authentication/Login.service';
-import { RefreshTokenServiceImpl } from '../services/authentication/jwt/RefreshToken.service';
-import { RegisterServiceImpl } from '../services/authentication/Register.service';
-import { AuthenticationController } from './Authentication.controller';
-import { UserController } from './User.controller';
+import { AccessTokenServiceImpl } from '../../services/authentication/jwt/AccessToken.service';
+import { LoginServiceImpl } from '../../services/authentication/Login.service';
+import { RefreshTokenServiceImpl } from '../../services/authentication/jwt/RefreshToken.service';
+import { RegisterServiceImpl } from '../../services/authentication/Register.service';
+import { AuthenticationController } from '../Authentication.controller';
+import { UserController } from '../User.controller';
 
 const Path = {
-    Api: '/api',
+    Api: '/api/v1',
     AuthenticationController: '/auth',
     UserController: '/user'
 }
@@ -22,19 +22,18 @@ interface RouterConfiguration {
 }
 
 export class MainController {
-    public router: express.Router;
     public routerConfiguration: RouterConfiguration[] = [];
 
     constructor() {
-        this.router = express.Router();
         this.routerConfiguration.push(...this.initRouters());
     }
 
     private initRouters(): RouterConfiguration[] {
+        const router = express.Router();
         return [
             {
                 controller: new AuthenticationController(
-                    this.router,
+                    router,
                     new LoginServiceImpl(
                         new RefreshTokenServiceImpl(),
                         new AccessTokenServiceImpl()
@@ -44,7 +43,7 @@ export class MainController {
                 path: this.configurePath(Path.AuthenticationController)
             },
             {
-                controller: new UserController(this.router),
+                controller: new UserController(router),
                 path: this.configurePath(Path.UserController)
             }
         ]

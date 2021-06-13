@@ -1,6 +1,6 @@
 import express from 'express';
 import { UserRepository } from '../database/repository/User.repository';
-import { Controller } from './Main.controller';
+import { Controller } from './base/Main.controller';
 
 const Path = {
     All: '/all',

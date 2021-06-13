@@ -5,7 +5,7 @@ export class TokenConfig {
 
     public static refreshToken(): JWTConfig {
         return {
-            expiresInSeconds: 5, // 2h
+            expiresInSeconds: 60 * 60 * 2, // 2h
             secret: this.tokenSecret
         }
     }

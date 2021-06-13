@@ -1,12 +1,14 @@
 import express from 'express';
-import { MainController } from './controllers/Main.controller';
+import { DatabaseConfig } from './config/Database.config';
+import { ServerConfig } from './config/Server.config';
+import { MainController } from './controllers/base/Main.controller';
 import { Server } from './server';
 
 const expressServer = new Server(
     express(),
-    8000,
+    ServerConfig.port(),
     new MainController(),
-    'mongodb://localhost:27017/iot'
+    DatabaseConfig.connectionPath()
 );
 
 expressServer

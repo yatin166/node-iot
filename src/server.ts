@@ -1,5 +1,5 @@
 import express from 'express'
-import { MainController } from './controllers/Main.controller';
+import { MainController } from './controllers/base/Main.controller';
 import bodyParser from 'body-parser'
 import { Database } from './database/Database';
 
