@@ -8,6 +8,8 @@ export interface UserSchema extends Document {
 
 const userSchema = new Schema<UserSchema>(
     {
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true },
         email: { type: String, required: true },
         password: { type: String, required: true },
     },

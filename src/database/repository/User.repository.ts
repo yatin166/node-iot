@@ -6,6 +6,8 @@ export class UserRepository {
 
     public static async create(userDetails: RegisterRequest) {
         return User.create({
+            firstName: userDetails.firstName,
+            lastName: userDetails.lastName,
             email: userDetails.email,
             password: userDetails.password,
         });

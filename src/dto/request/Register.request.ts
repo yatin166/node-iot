@@ -4,6 +4,14 @@ export class RegisterRequest {
 
     @IsNotEmpty()
     @IsString()
+    firstName!: string;
+
+    @IsNotEmpty()
+    @IsString()
+    lastName!: string;
+
+    @IsNotEmpty()
+    @IsString()
     email!: string;
 
     @IsNotEmpty()
