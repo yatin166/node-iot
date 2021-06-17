@@ -18,10 +18,6 @@ export class Server extends Database {
         this.expressApplication = expressApplication;
         this.port = port;
         this.mainController = mainController;
-
-        this.connect()
-            .then(() => console.log(`Database connection successful`))
-            .catch(error => console.log('error', error))
     }
 
     public async configure(): Promise<void> {
@@ -33,8 +29,13 @@ export class Server extends Database {
     }
 
     public up() {
-        this.expressApplication.listen(this.port, () => {
-            console.log(`Server is up and running on ${this.port}`)
-        });
+        this.connect()
+            .then(() => {
+                this.expressApplication.listen(this.port, () => {
+                    console.log(`Database connection successful`)
+                    console.log(`Server is up and running on ${this.port}`)
+                });
+            })
+            .catch(error => console.log('error', error))
     }
 }
