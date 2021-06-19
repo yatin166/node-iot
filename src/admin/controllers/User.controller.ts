@@ -1,12 +1,11 @@
 import express from 'express';
-import { UserRepository } from '../database/repository/User.repository';
-import { Controller } from './base/Main.authentication.controller';
+import { AdminController } from "./base/Main.admin.controller";
 
 const Path = {
     All: '/all',
 }
 
-export class UserController implements Controller {
+export class UserController implements AdminController {
     public readonly router: express.Router;
 
     constructor(router: express.Router) {
@@ -19,9 +18,9 @@ export class UserController implements Controller {
     }
 
     async getAllUsers(req: express.Request, res: express.Response) {
-        const users = await UserRepository.getAll();
+        //const users = await UserRepository.getAll();
         res.send({
-            users: users
+            users: 'This shall return all users'
         })
     }
 }

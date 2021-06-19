@@ -21,7 +21,7 @@ interface RouterConfiguration {
     path: string
 }
 
-export class MainController {
+export class MainAuthenticationController {
     public routerConfiguration: RouterConfiguration[] = [];
 
     constructor() {

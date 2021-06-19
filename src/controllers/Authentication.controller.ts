@@ -1,7 +1,7 @@
 import express from 'express';
 import { LoginService } from '../services/authentication/Login.service';
 import { RegisterService } from '../services/authentication/Register.service';
-import { Controller } from './base/Main.controller';
+import { Controller } from './base/Main.authentication.controller';
 
 const Path = {
     Login: '/login',
