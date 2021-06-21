@@ -1,4 +1,5 @@
 import express from 'express';
+import { authenticationMiddleware } from '../middleware/authentication.middleware';
 import { AdminController } from "./base/Main.admin.controller";
 
 const Path = {
@@ -14,10 +15,10 @@ export class UserController implements AdminController {
     }
 
     private initRoutes() {
-        this.router.get(Path.All, this.getAllUsers.bind(this))
+        this.router.get(Path.All, authenticationMiddleware, this.getAllUsers.bind(this))
     }
 
-    async getAllUsers(req: express.Request, res: express.Response) {
+    async getAllUsers(req: express.Request, res: express.Response, next: express.NextFunction) {
         //const users = await UserRepository.getAll();
         res.send({
             users: 'This shall return all users'

@@ -12,8 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.17.12",
+    "@types/jsonwebtoken": "^8.5.2",
     "@types/node": "^15.12.4",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.14",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
