@@ -1,5 +1,0 @@
-{
-  "watch": ["./src/**/*"],
-  "ext": "ts,json",
-  "exec": "npm run build && node ./build/admin/index.js & node ./build/index.js "
-}

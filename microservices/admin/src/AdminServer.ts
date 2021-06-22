@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import { Database } from '../database/Database';
 import { MainAdminController } from './controllers/base/Main.admin.controller';
+import { Database } from './database/Database';
 
 export class AdminServer extends Database {
     private readonly expressApplication: express.Application;
