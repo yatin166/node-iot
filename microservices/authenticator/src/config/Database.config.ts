@@ -11,10 +11,14 @@ export class DatabaseConfig {
     }
 
     private static getPort(): number {
+        if (process.env.DB_PORT)
+            return parseInt(process.env.DB_PORT, 10)
         return 27017
     }
 
     private static getDatabaseName(): string {
+        if (process.env.DB_NAME)
+            return process.env.DB_NAME
         return 'iot'
     }
 }

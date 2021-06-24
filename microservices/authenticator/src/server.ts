@@ -33,7 +33,7 @@ export class Server extends Database {
             .then(() => {
                 this.expressApplication.listen(this.port, () => {
                     console.log(`Database connection successful`)
-                    console.log(`Server is up and running on ${this.port}`)
+                    console.log(`Authentication server is up and running on ${this.port}`)
                 });
             })
             .catch(error => console.log('error', error))
