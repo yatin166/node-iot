@@ -19,5 +19,7 @@ export const authenticationMiddleware = (
         } catch (error) {
             res.status(403).json({ message: 'TOKEN EXPIRED' })
         }
+    } else {
+        res.status(403).json({ message: 'TOKEN EXPIRED' })
     }
 }
