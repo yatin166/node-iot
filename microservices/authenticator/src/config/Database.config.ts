@@ -10,8 +10,8 @@ export class DatabaseConfig {
         return 'localhost'
     }
 
-    private static getPort(): string {
-        return '27017'
+    private static getPort(): number {
+        return 27017
     }
 
     private static getDatabaseName(): string {

@@ -4,7 +4,6 @@ import { LoginServiceImpl } from '../../services/authentication/Login.service';
 import { RefreshTokenServiceImpl } from '../../services/authentication/jwt/RefreshToken.service';
 import { RegisterServiceImpl } from '../../services/authentication/Register.service';
 import { AuthenticationController } from '../Authentication.controller';
-import { UserController } from '../User.controller';
 
 const Path = {
     Api: '/api/v1',
@@ -41,10 +40,6 @@ export class MainAuthenticationController {
                     new RegisterServiceImpl()
                 ),
                 path: this.configurePath(Path.AuthenticationController)
-            },
-            {
-                controller: new UserController(router),
-                path: this.configurePath(Path.UserController)
             }
         ]
     }
