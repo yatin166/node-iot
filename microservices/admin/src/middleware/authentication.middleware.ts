@@ -1,5 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken'
+import { TokenConfig } from '../config/Token.config';
 import { AccessTokenPayload } from '../services/auth/Token.service';
 
 export const authenticationMiddleware = (
@@ -10,9 +11,8 @@ export const authenticationMiddleware = (
     const token = req.headers['autharization'];
 
     if (typeof token === 'string') {
-        const tokenSecret = 'HeD7y2RjKXcXUVKMrnfcNKwlyenM0bIk';
         try {
-            const accessTokenPayload = jwt.verify(token, tokenSecret) as AccessTokenPayload
+            const accessTokenPayload = jwt.verify(token, TokenConfig.accessTokenSecret()) as AccessTokenPayload
     
             if (accessTokenPayload)
                 next()
