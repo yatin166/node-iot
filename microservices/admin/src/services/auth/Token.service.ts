@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import { TokenConfig } from '../../config/Token.config';
 
 export interface AccessTokenPayload {
     userId: string;
@@ -12,7 +13,6 @@ export interface AccessTokenService {
 export class AccessTokenServiceImpl implements AccessTokenService {
 
     verify(token: string): AccessTokenPayload {
-        const tokenSecret = 'HeD7y2RjKXcXUVKMrnfcNKwlyenM0bIk';
-        return jwt.verify(token, tokenSecret) as AccessTokenPayload
+        return jwt.verify(token, TokenConfig.accessTokenSecret()) as AccessTokenPayload
     }
 }
