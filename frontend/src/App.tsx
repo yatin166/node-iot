@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
+import { Login } from './pages/authentication/Login';
 
 interface Props { }
 
@@ -8,9 +14,13 @@ export class App extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
-        Dahsboard WIP
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+        </Switch>
+      </Router>
     )
   }
 }
