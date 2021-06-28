@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { LoginRequest } from '../../dto/request/Login.request';
+import { Authentication } from '../../services/Authentication.api';
 
 interface State {
     email: string
@@ -21,8 +23,14 @@ export const Login = (): JSX.Element => {
         }
     }
 
-    const onSubmit = () => {
-        console.log(credentials)
+    const onSubmit = (e: any) => {
+        e.preventDefault()
+        const authentication = new Authentication();
+        const loginRequest: LoginRequest = {
+            email: credentials.email,
+            password: credentials.password
+        }
+        const login = authentication.login(loginRequest).then(() => console.log(credentials));
     }
 
     return (
