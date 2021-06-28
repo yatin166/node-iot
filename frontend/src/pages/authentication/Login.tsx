@@ -30,7 +30,9 @@ export const Login = (): JSX.Element => {
             email: credentials.email,
             password: credentials.password
         }
-        const login = authentication.login(loginRequest).then(() => console.log(credentials));
+        const login = authentication.login(loginRequest)
+            .then(loginResponse => console.log(loginResponse.data.refreshToken))
+            .catch(error => console.error(error))
     }
 
     return (

@@ -26,7 +26,7 @@ export class AuthenticationController implements Controller {
     }
 
     private initRoutes() {
-        this.router.get(Path.Login, this.login.bind(this))
+        this.router.post(Path.Login, this.login.bind(this))
         this.router.post(Path.AccessToken, this.getAccessToken.bind(this))
         this.router.post(Path.Register, this.register.bind(this))
     }
