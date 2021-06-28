@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors';
 import { MainAuthenticationController } from './controllers/base/Main.authentication.controller';
 import bodyParser from 'body-parser'
 import { Database } from './database/Database';
@@ -21,6 +22,7 @@ export class Server extends Database {
     }
 
     public async configure(): Promise<void> {
+        this.expressApplication.use(cors())
         this.expressApplication.use(bodyParser.json());
 
         for (const route of this.mainAuthenticationController.routerConfiguration) {
