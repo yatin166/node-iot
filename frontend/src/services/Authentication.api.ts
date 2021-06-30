@@ -1,34 +1,32 @@
+import { AccessTokenRequest } from "../dto/request/AccessToken.request";
 import { LoginRequest } from "../dto/request/Login.request";
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosError } from 'axios';
+import { AccessTokenResponse } from "../dto/response/AccessToken.response";
 import { LoginResponse } from "../dto/response/Login.response";
+import { LocalStorage, LocalStorageKey } from "../storage/LocalStorage";
+import { Api } from "./Api";
 
 const Path = {
     Base: 'http://localhost:8000/api/v1/auth',
-    Login: '/login'
+    Login: '/login',
+    AccessToken: '/access-token'
 }
 
-export class Authentication {
-    private readonly http: AxiosInstance;
+export class Authentication extends Api {
 
     constructor() {
-        this.http = axios.create()
-        this.http.interceptors.request.use(this.onSuccessRequest, this.onFailRequest)
+        super(Path.Base)
     }
 
-    private onSuccessRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
-        config.url = Path.Base + config.url;
-        return config
+    public async login(loginRequest: LoginRequest) {
+        const loginResponse = await this.http.post<LoginResponse>(Path.Login, loginRequest);
+        LocalStorage.persist(LocalStorageKey.REFRESH_TOKEN ,loginResponse.data.refreshToken);
+        const accessTokenRequest: AccessTokenRequest = { refreshToken: loginResponse.data.refreshToken }
+        this.getAccessToken(accessTokenRequest)
+            .then(response => LocalStorage.persist(LocalStorageKey.ACCESS_TOKEN, response.data.accessToken))
+            .catch(error => console.error(error))
     }
 
-    private onFailRequest = (error: AxiosError): Promise<AxiosError> => {
-        console.error({
-            errorCode: error.code,
-            message: error.message
-        })
-        return Promise.reject(error);
-    }
-
-    public login(loginRequest: LoginRequest) {
-        return this.http.post<LoginResponse>(Path.Login, loginRequest);
+    public async getAccessToken(accessTokenRequest: AccessTokenRequest) {
+        return this.http.post<AccessTokenResponse>(Path.AccessToken, accessTokenRequest);
     }
 }
