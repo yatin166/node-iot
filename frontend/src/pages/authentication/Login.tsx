@@ -31,7 +31,7 @@ export const Login = (): JSX.Element => {
             password: credentials.password
         }
         const login = authentication.login(loginRequest)
-            .then(loginResponse => console.log(loginResponse.data.refreshToken))
+            .then(() => console.log('Logged in'))
             .catch(error => console.error(error))
     }
 
