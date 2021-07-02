@@ -21,12 +21,8 @@ export class Authentication extends Api {
         const loginResponse = await this.http.post<LoginResponse>(Path.Login, loginRequest);
         LocalStorage.persist(LocalStorageKey.REFRESH_TOKEN ,loginResponse.data.refreshToken);
         const accessTokenRequest: AccessTokenRequest = { refreshToken: loginResponse.data.refreshToken }
-        this.getAccessToken(accessTokenRequest)
+        this.getAccessToken(Path.AccessToken, accessTokenRequest)
             .then(response => LocalStorage.persist(LocalStorageKey.ACCESS_TOKEN, response.data.accessToken))
             .catch(error => console.error(error))
-    }
-
-    public async getAccessToken(accessTokenRequest: AccessTokenRequest) {
-        return this.http.post<AccessTokenResponse>(Path.AccessToken, accessTokenRequest);
     }
 }
