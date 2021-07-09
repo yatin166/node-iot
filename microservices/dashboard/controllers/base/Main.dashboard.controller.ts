@@ -1,8 +1,9 @@
 import express from 'express';
+import { TimeSeriesController } from '../TimeSeries.controller';
 
 const Path = {
     Api: '/api/v1',
-    UserController: '/user'
+    TimeSeriesController: '/data'
 }
 
 export interface DashboardController {
@@ -23,7 +24,12 @@ export class MainDashboardController {
 
     private initRouters(): RouterConfiguration[] {
         const router = express.Router();
-        return []
+        return [
+            {
+                controller: new TimeSeriesController(router),
+                path: this.configurePath(Path.TimeSeriesController)
+            }
+        ]
     }
 
     private configurePath(path: string): string {
