@@ -15,10 +15,10 @@ export class TimeSeriesController implements DashboardController {
     }
 
     private initRoutes() {
-        this.router.get(Path.All, authenticationMiddleware, this.getAllUsers.bind(this))
+        this.router.get(Path.All, authenticationMiddleware, this.getTimeSeriesData.bind(this))
     }
 
-    async getAllUsers(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async getTimeSeriesData(req: express.Request, res: express.Response, next: express.NextFunction) {
         res.send({ points: [2, 4, 1, 7, 2, 7, 2, 3, 4, 6, 3, 6, 8, 2] })
     }
 }
