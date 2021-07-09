@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { LoginRequest } from '../../dto/request/Login.request';
 import { Authentication } from '../../services/Authentication.api';
 
@@ -7,7 +8,9 @@ interface State {
     password: string
 }
 
-export const Login = (): JSX.Element => {
+interface Props extends RouteComponentProps<{}> {}
+
+export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element => {
 
     const [credentials, setCredentials] = useState<State>({ email: '', password: '' });
 
@@ -40,11 +43,12 @@ export const Login = (): JSX.Element => {
             <form onSubmit={onSubmit}>
                 Email:
                 <input type='email' name='email' value={credentials.email} onChange={handleOnChange} />
-                Email:
+                Password:
                 <input type='password' name='password' value={credentials.password} onChange={handleOnChange} />
                 <button>Submit</button>
                 Login UI
             </form>
+            <button onClick={() => history.push('/register')}>Register</button>
         </div>
     )
 }

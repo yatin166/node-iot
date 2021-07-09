@@ -5,6 +5,7 @@ import {
     Route
 } from 'react-router-dom';
 import { Login } from './pages/authentication/Login';
+import { Register } from './pages/authentication/Register';
 
 interface Props { }
 
@@ -16,9 +17,8 @@ export class App extends React.Component<Props, State> {
         return (
             <Router>
                 <Switch>
-                    <Route exact path="/">
-                        <Login />
-                    </Route>
+                    <Route exact path="/" component={Login} />
+                    <Route exact path="/register" component={Register} />
                 </Switch>
             </Router>
         )
