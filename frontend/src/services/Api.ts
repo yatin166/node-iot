@@ -18,7 +18,7 @@ export class Api {
     private onRequestFulfilled = (config: AxiosRequestConfig): AxiosRequestConfig => {
         const token = LocalStorage.getAccessToken();
         if (token) {
-            config.headers['Authorization'] = LocalStorage.getAccessToken();
+            config.headers['Authorization'] = token;
         }
         config.url = this.basePath + config.url;
         return config
@@ -46,12 +46,16 @@ export class Api {
                         LocalStorage.persist(LocalStorageKey.ACCESS_TOKEN, response.data.accessToken);
                         return axios(originalRequest);
                     }
+                    LocalStorage.removeRefreshToken();
+                    return
                 })
                 .catch(error => {
                     console.error({
                         errorCode: error.code,
                         message: error.message
                     })
+                    LocalStorage.removeRefreshToken();
+                    window.location.reload();
                     return Promise.reject(error);
                 });
             }

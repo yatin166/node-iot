@@ -16,4 +16,8 @@ export class LocalStorage {
     public static getRefreshToken(): string | null {
         return localStorage.getItem(LocalStorageKey.REFRESH_TOKEN)
     }
+
+    public static removeRefreshToken(): void {
+        return localStorage.removeItem(LocalStorageKey.REFRESH_TOKEN);
+    }
 }
