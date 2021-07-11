@@ -1,8 +1,10 @@
+@import '../../assets/sass/index.scss';
+
 .button {
     padding: 1em;
     width: 100%;
-    background: orange;
-    border: 1px solid orange;
+    background: $primaryButtonColorLightTheme;
+    border: 1px solid $primaryButtonColorLightTheme;
     color: white;
     margin: 1em;
 }

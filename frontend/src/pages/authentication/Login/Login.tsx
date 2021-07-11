@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { LoginRequest } from '../../dto/request/Login.request';
-import { Input } from '../../components/form/Input';
-import { Button } from '../../components/button/Button';
-import { Flex } from '../../components/container/flex/Flex';
-import { Authentication } from '../../services/Authentication.api';
+import { LoginRequest } from '../../../dto/request/Login.request';
+import { Input } from '../../../components/form/Input';
+import { Button } from '../../../components/button/Button';
+import { Flex } from '../../../components/container/flex/Flex';
+import { Authentication } from '../../../services/Authentication.api';
 import styles from './Login.module.scss'
 
 interface State {
@@ -46,19 +46,19 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
         <div className={styles.formContainer}>
             <Flex.Vertical>
                 <form onSubmit={onSubmit}>
-                        <Input
-                            type='email'
-                            label='Email'
-                            name='email'
-                            onChange={handleOnChange}
-                            value={credentials.email} />
-                        <Input
-                            type='password'
-                            label='Password'
-                            name='password'
-                            onChange={handleOnChange}
-                            value={credentials.password} />
-                        <Button value='Login' onClick={() => {return}}/>
+                    <Input
+                        type='email'
+                        label='Email'
+                        name='email'
+                        onChange={handleOnChange}
+                        value={credentials.email} />
+                    <Input
+                        type='password'
+                        label='Password'
+                        name='password'
+                        onChange={handleOnChange}
+                        value={credentials.password} />
+                    <Button value='Login' onClick={() => {return}}/>
                 </form>
                 <Button value='Register' onClick={() => history.push('/register')}/>
             </Flex.Vertical>

@@ -4,7 +4,7 @@ import {
     Switch,
     Route
 } from 'react-router-dom';
-import { Login } from './pages/authentication/Login';
+import { Login } from './pages/authentication/Login/Login';
 import { Register } from './pages/authentication/Register';
 
 interface Props { }
