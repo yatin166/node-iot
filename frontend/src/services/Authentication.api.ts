@@ -1,7 +1,6 @@
 import { AccessTokenRequest } from "../dto/request/AccessToken.request";
 import { LoginRequest } from "../dto/request/Login.request";
 import { RegisterRequest } from "../dto/request/Register.request";
-import { AccessTokenResponse } from "../dto/response/AccessToken.response";
 import { LoginResponse } from "../dto/response/Login.response";
 import { LocalStorage, LocalStorageKey } from "../storage/LocalStorage";
 import { Api } from "./Api";

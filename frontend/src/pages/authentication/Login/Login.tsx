@@ -37,14 +37,14 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
             email: credentials.email,
             password: credentials.password
         }
-        const login = authentication.login(loginRequest)
+        authentication.login(loginRequest)
             .then(() => console.log('Logged in'))
             .catch(error => console.error(error))
     }
 
     return (
         <div className={styles.formContainer}>
-            <Flex.Vertical>
+            <Flex.Vertical width={'25vw'}>
                 <form onSubmit={onSubmit}>
                     <Input
                         type='email'
