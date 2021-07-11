@@ -8,14 +8,21 @@
 
     > div {
         border: 1px solid $primaryButtonBorderColorLightTheme;
-        border-radius: 1em;
         padding: 2em;
 
-        form {
+        form > div > div {
+            &:first-child {
+                padding-right: 1em;
+            }
+        }
+
+        .formEmailInput {
+            padding: 0 !important;
             width: 100%;
         }
-    }
-    button {
-        margin: 0 0 1em 0;
+
+        button {
+            margin: 0 0 1em 0;
+        }
     }
 }

@@ -3,6 +3,7 @@ import React from 'react';
 interface Props {
     justifyContent?: string;
     alignItems?: string;
+    width?: string;
     children?: React.ReactNode
 }
 
@@ -12,7 +13,7 @@ export class Flex extends React.Component<{}, Props> {
         return (
             <div style={{
                 display: 'flex',
-                width: 'fit-content',
+                width: props.width ? props.width : 'fit-content',
                 justifyContent: props.justifyContent ? props.justifyContent : 'flex-start',
                 alignItems: props.alignItems ? props.alignItems : 'flex-start',
                 flexDirection: 'column'
@@ -26,7 +27,7 @@ export class Flex extends React.Component<{}, Props> {
         return (
             <div style={{
                 display: 'flex',
-                width: 'fit-content',
+                width: props.width ? props.width : 'fit-content',
                 justifyContent: props.justifyContent ? props.justifyContent : 'flex-start',
                 alignItems: props.alignItems ? props.alignItems : 'flex-start',
                 flexDirection: 'row'
