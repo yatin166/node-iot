@@ -21,10 +21,9 @@ export class App extends React.Component<Props, State> {
         return (
             <Router>
                 <Switch>
-                    
-                        <Route exact path="/" component={Login} />
-                        <Route exact path="/register" component={Register} />
-                        <Route exact path="/dashboard" component={Dashboard} />
+                    <Route exact path="/" component={Login} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/dashboard" component={Dashboard} />
                 </Switch>
             </Router>
         )

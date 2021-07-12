@@ -22,3 +22,12 @@ services:
         external_links:
             - mongo
             - authentication
+    dashboard:
+        container_name: dashboard-service
+        restart: always
+        build: ./dashboard
+        ports:
+            - '8002:8002'
+        external_links:
+            - mongo
+            - authentication
