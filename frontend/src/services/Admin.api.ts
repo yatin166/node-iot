@@ -5,7 +5,7 @@ const Path = {
     AllUsers: '/user/all',
 }
 
-export class Authentication extends Api {
+export class Admin extends Api {
 
     constructor() {
         super(Path.Base)
