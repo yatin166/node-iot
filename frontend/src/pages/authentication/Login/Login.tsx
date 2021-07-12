@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { LoginRequest } from '../../../dto/request/Login.request';
 import { Input } from '../../../components/form/Input';
 import { Button } from '../../../components/button/Button';
 import { Flex } from '../../../components/container/flex/Flex';
-import { Authentication } from '../../../services/Authentication.api';
 import styles from './Login.module.scss'
+import { ApiServicesContext } from '../../../context/ApiServices.context';
 
 interface State {
     email: string
@@ -16,6 +16,7 @@ interface Props extends RouteComponentProps<{}> {}
 
 export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element => {
 
+    const apiServicesContext = useContext(ApiServicesContext);
     const [credentials, setCredentials] = useState<State>({ email: '', password: '' });
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,12 +33,11 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
 
     const onSubmit = (e: any) => {
         e.preventDefault()
-        const authentication = new Authentication();
         const loginRequest: LoginRequest = {
             email: credentials.email,
             password: credentials.password
         }
-        authentication.login(loginRequest)
+        apiServicesContext.authentication.login(loginRequest)
             .then(() => console.log('Logged in'))
             .catch(error => console.error(error))
     }

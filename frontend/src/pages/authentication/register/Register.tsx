@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { RegisterRequest } from '../../../dto/request/Register.request';
-import { Authentication } from '../../../services/Authentication.api';
 import { Input } from '../../../components/form/Input';
 import { Button } from '../../../components/button/Button';
 import { Flex } from '../../../components/container/flex/Flex';
 import { RouteComponentProps } from 'react-router-dom';
+import { ApiServicesContext } from '../../../context/ApiServices.context';
 import styles from './Register.module.scss'
 
 interface State {
@@ -19,6 +19,7 @@ interface Props extends RouteComponentProps<{}> {}
 
 export const Register: React.FunctionComponent<Props> = (props: Props): JSX.Element => {
 
+    const apiServicesContext = useContext(ApiServicesContext);
     const [credentials, setCredentials] = useState<State>({ email: '', password: '', confirmPassword: '', firstName: '', lastName: '' });
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,14 +45,13 @@ export const Register: React.FunctionComponent<Props> = (props: Props): JSX.Elem
 
     const onSubmit = (e: any) => {
         e.preventDefault()
-        const authentication = new Authentication();
         const registerRequest: RegisterRequest = {
             firstName: credentials.firstName,
             lastName: credentials.lastName,
             email: credentials.email,
             password: credentials.password
         }
-        authentication.register(registerRequest)
+        apiServicesContext.authentication.register(registerRequest)
             .then(() => console.log('Registered'))
             .catch(error => console.error(error))
     }
