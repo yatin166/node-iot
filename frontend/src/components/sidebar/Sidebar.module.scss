@@ -1,0 +1,8 @@
+@import '../../assets/sass/index.scss';
+
+.sidebarContainer {
+    height: 100vh;
+    width: 10vw;
+    background: $primarySidebarColorLightTheme;
+    border-radius: 0 0.5em 0.5em 0;
+}
