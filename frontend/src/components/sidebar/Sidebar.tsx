@@ -1,5 +1,4 @@
 import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import styles from './Sidebar.module.scss'
 
 interface Props {}
