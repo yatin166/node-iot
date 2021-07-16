@@ -1,0 +1,18 @@
+import { IsString, IsNotEmpty } from 'class-validator';
+import { UserSchema } from '../../database/schemas/User.model';
+
+export class UserResponse {
+
+    @IsString()
+    @IsNotEmpty()
+    id!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    email!: string;
+
+    constructor(userSchema: UserSchema) {
+        this.id = userSchema.id;
+        this.email = userSchema.email;
+    }
+}
