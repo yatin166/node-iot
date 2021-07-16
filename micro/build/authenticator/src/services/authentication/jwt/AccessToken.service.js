@@ -16,7 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccessTokenServiceImpl = void 0;
-var Token_config_1 = require("../../../config/Token.config");
+var Token_config_1 = require("../../../../../config/Token.config");
 var JWT_service_1 = require("./JWT.service");
 var AccessTokenServiceImpl = /** @class */ (function (_super) {
     __extends(AccessTokenServiceImpl, _super);

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccessTokenServiceImpl = void 0;
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-var Token_config_1 = require("../../config/Token.config");
+var Token_config_1 = require("../../../../config/Token.config");
 var AccessTokenServiceImpl = /** @class */ (function () {
     function AccessTokenServiceImpl() {
     }

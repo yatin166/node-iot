@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken'
-import { TokenConfig } from '../config/Token.config';
+import { TokenConfig } from '../../../config/Token.config';
 
 export interface AccessTokenPayload {
     userId: string;
