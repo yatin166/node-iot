@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start:admin:dev": "./micro/build/admin/src/index.js",
-    "start:authenticator:dev": "./micro/build/authenticator/src/index.js",
-    "start:dashboard:dev": "./micro/build/dashboard/src/index.js",
+    "start:admin:dev": "./build/admin/src/index.js",
+    "start:authenticator:dev": "./build/authenticator/src/index.js",
+    "start:dashboard:dev": "./build/dashboard/src/index.js",
     "start:dev": "npm run start:admin:dev & npm run start:authenticator:dev & npm run start:dashboard:dev"
   },
   "dependencies": {
