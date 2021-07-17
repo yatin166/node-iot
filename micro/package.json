@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start:admin:dev": "",
-    "start:authenticator:dev": "",
-    "start:dashboard:dev": "",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:admin:dev": "./micro/build/admin/src/index.js",
+    "start:authenticator:dev": "./micro/build/authenticator/src/index.js",
+    "start:dashboard:dev": "./micro/build/dashboard/src/index.js",
+    "start:dev": "npm run start:admin:dev & npm run start:authenticator:dev & npm run start:dashboard:dev"
   },
   "dependencies": {
     "@types/cors": "^2.8.10",
