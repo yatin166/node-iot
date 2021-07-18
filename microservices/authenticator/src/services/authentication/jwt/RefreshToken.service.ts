@@ -1,4 +1,4 @@
-import { TokenConfig } from '../../../config/Token.config';
+import { TokenConfig } from '../../../../../config/Token.config';
 import { JWTServiceImpl } from './JWT.service';
 
 export interface RefreshTokenPayload {
