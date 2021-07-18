@@ -33,7 +33,7 @@ export class DashboardServer extends Database {
             .then(() => {
                 this.expressApplication.listen(this.port, () => {
                     console.log(`Database connection successful`)
-                    console.log(`Admin server is up and running on ${this.port}`)
+                    console.log(`Dashboard server is up and running on ${this.port}`)
                 });
             })
             .catch(error => console.log('error', error))

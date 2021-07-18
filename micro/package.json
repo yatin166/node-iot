@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start:admin:dev": "./build/admin/src/index.js",
-    "start:authenticator:dev": "./build/authenticator/src/index.js",
-    "start:dashboard:dev": "./build/dashboard/src/index.js",
-    "start:dev": "npm run start:admin:dev & npm run start:authenticator:dev & npm run start:dashboard:dev"
+    "start:admin:dev": "node -r dotenv/config ./build/admin/src/index.js",
+    "start:authenticator:dev": "node -r dotenv/config ./build/authenticator/src/index.js",
+    "start:dashboard:dev": "node -r dotenv/config ./build/dashboard/src/index.js",
+    "start:dev": "npm run start:authenticator:dev & npm run start:admin:dev & npm run start:dashboard:dev",
+    "start:db": "docker run -d --name=mongo -it -p 27017:27017 mongo"
   },
   "dependencies": {
     "@types/cors": "^2.8.10",
