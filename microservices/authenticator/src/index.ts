@@ -1,12 +1,12 @@
 import express from 'express';
-import { DatabaseConfig } from './config/Database.config';
-import { ServerConfig } from './config/Server.config';
+import { DatabaseConfig } from '../../config/Database.config';
+import { ServerConfig } from '../../config/Server.config';
 import { MainAuthenticationController } from './controllers/base/Main.authentication.controller';
 import { Server } from './server';
 
 const authenticationServer = new Server(
     express(),
-    ServerConfig.port(),
+    ServerConfig.authenticatorServerPort(),
     new MainAuthenticationController(),
     DatabaseConfig.connectionPath()
 );

@@ -4,11 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-frontend:dev": "cd frontend && npm run start && cd ..",
-    "start-dashboard:dev": "cd ./microservices/dashboard && npm run start:dev && cd ..",
-    "start-admin:dev": "cd ./microservices/admin && npm run start:dev && cd ..",
-    "start-authenticator:dev": "cd ./microservices/authenticator && npm run start:dev && cd ..",
-    "start:dev": "npm run start-authenticator:dev & npm run start-admin:dev",
+    "start:frontend:dev": "cd frontend && npm run start && cd ..",
+    "start:microservices:dev": "cd microservices && npm run start:dev",
+    "start:dev": "npm run start:frontend:dev & npm run start:microservices:dev",
     "start:db": "docker run -d --name=mongo -it -p 27017:27017 mongo"
   },
   "repository": {

@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken'
-import { TokenConfig } from '../config/Token.config';
+import { TokenConfig } from '../../../config/Token.config';
 import { AccessTokenPayload } from '../services/auth/Token.service';
 
 export const authenticationMiddleware = (
