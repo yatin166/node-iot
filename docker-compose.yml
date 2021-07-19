@@ -8,6 +8,24 @@ services:
             - '8000:8000'
         external_links:
             - mongo
+    admin:
+        container_name: admin-service
+        restart: always
+        build: .
+        ports:
+            - '8001:8001'
+        external_links:
+            - mongo
+            - authentication
+    dashboard:
+        container_name: dashboard-service
+        restart: always
+        build: .
+        ports:
+            - '8002:8002'
+        external_links:
+            - mongo
+            - authentication
     mongo:
         container_name: mongo
         image: mongo
