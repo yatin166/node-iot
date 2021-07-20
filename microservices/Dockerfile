@@ -5,3 +5,5 @@ RUN npm install
 COPY . /service
 EXPOSE 8000
 CMD npm run start:prod
+
+
