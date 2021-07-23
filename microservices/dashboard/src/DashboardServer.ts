@@ -2,11 +2,14 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import { MainDashboardController } from './controllers/base/Main.dashboard.controller';
 import { Database } from './database/Database';
+import socketIO from "socket.io"
 
 export class DashboardServer extends Database {
     private readonly expressApplication: express.Application;
     private readonly port: number;
-    private readonly mainDashboardController: MainDashboardController
+    private readonly mainDashboardController: MainDashboardController;
+    /* private server: http.Server; */
+    //private socketIoServer: socketIO.Server;
 
     constructor(
         expressApplication: express.Application,
@@ -18,6 +21,8 @@ export class DashboardServer extends Database {
         this.expressApplication = expressApplication;
         this.port = port;
         this.mainDashboardController = mainDashboardController;
+        /* this.server = new http.Server(this.expressApplication);
+        this.socketIoServer = new socketIO.Server(this.server); */
     }
 
     public async configure(): Promise<void> {
@@ -31,10 +36,20 @@ export class DashboardServer extends Database {
     public up() {
         this.connect()
             .then(() => {
-                this.expressApplication.listen(this.port, () => {
-                    console.log(`Database connection successful`)
-                    console.log(`Dashboard server is up and running on ${this.port}`)
-                });
+                const socketIoServer = new socketIO.Server(
+                    this.expressApplication.listen(this.port, () => {
+                        console.log(`Database connection successful`)
+                        console.log(`Dashboard server is up and running on ${this.port}`)
+                    })
+                );
+
+                socketIoServer.on('connection', (socket: socketIO.Socket) => {
+                    console.log('a user connected : ' + socket.id)
+        
+                    socket.on('disconnect', function () {
+                        console.log('socket disconnected : ' + socket.id);
+                    });
+                })
             })
             .catch(error => console.log('error', error))
     }
