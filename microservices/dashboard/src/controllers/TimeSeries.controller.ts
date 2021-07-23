@@ -15,7 +15,7 @@ export class TimeSeriesController implements DashboardController {
     }
 
     private initRoutes() {
-        this.router.get(Path.All, authenticationMiddleware, this.getTimeSeriesData.bind(this))
+        this.router.get(Path.All, /* authenticationMiddleware, */ this.getTimeSeriesData.bind(this))
     }
 
     async getTimeSeriesData(req: express.Request, res: express.Response, next: express.NextFunction) {
