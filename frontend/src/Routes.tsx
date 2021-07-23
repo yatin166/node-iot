@@ -3,7 +3,7 @@ import {
     Switch,
     Route
 } from 'react-router-dom';
-import { Login } from './pages/authentication/login/Login';
+import { Login } from './pages/authentication/Login/Login';
 import { Register } from './pages/authentication/register/Register';
 import { Dashboard } from './pages/dashboard/Dashboard';
 
