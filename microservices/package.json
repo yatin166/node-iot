@@ -9,7 +9,7 @@
     "start:authenticator:dev": "node -r dotenv/config ./build/authenticator/src/index.js",
     "start:dashboard:dev": "node -r dotenv/config ./build/dashboard/src/index.js",
     "start:dev": "npm run start:authenticator:dev & npm run start:admin:dev & npm run start:dashboard:dev",
-    "start:admin:prod":"npm run tsc && node -r dotenv/config ./build/admin/src/index.js",
+    "start:admin:prod": "npm run tsc && node -r dotenv/config ./build/admin/src/index.js",
     "start:prod": "ENVIRONMENT=prod npm run start:admin:prod",
     "start:db": "docker run -d --name=mongo -it -p 27017:27017 mongo"
   },
