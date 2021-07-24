@@ -8,7 +8,7 @@ export class ServerConfig {
     public static dashboardServerPort(): number {
         if (process.env.SERVER_PORT)
             return parseInt(process.env.SERVER_PORT, 10)
-        return 9001;
+        return 8001;
     }
 
     public static adminServerPort(): number {
