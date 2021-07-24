@@ -11,9 +11,7 @@ const dashboardServer = new DashboardServer(
     DatabaseConfig.connectionPath()
 );
 
-dashboardServer.Start()
-
-/* dashboardServer
+dashboardServer
     .configure()
     .then(() => dashboardServer.up())
-    .catch(error => console.log(`Error occurred in starting server ${error}`)) */
+    .catch(error => console.log(`Error occurred in starting server ${error}`))
