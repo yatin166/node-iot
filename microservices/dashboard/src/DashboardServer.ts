@@ -44,10 +44,10 @@ export class DashboardServer extends Database {
                 });
 
                 this.socketIoServer.on('connection', (socket: socketIO.Socket) => {
-                    console.log('a user connected : ' + socket.id)
+                    console.log('New connection established: ' + socket.id)
         
                     socket.on('disconnect', function () {
-                        console.log('socket disconnected : ' + socket.id);
+                        console.log('Connection destroyed: ' + socket.id);
                     });
                 });
             })
