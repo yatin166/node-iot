@@ -22,9 +22,11 @@ export class TimeSeriesController implements DashboardController {
     }
 
     async getTimeSeriesData(req: express.Request, res: express.Response, next: express.NextFunction) {
+        console.log('controller is called')
         const MAX = 100;
         const MIN = 10;
-        setTimeout(() => this.socketService.emitData(Math.floor(Math.random() * (MAX - MIN + 1) + MIN)), 2000);
+        this.socketService.emitData();
+        //res.send();
         //res.send({ points: [2, 4, 1, 7, 2, 7, 2, 3, 4, 6, 3, 6, 8, 2] })
     }
 }

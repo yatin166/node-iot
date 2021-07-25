@@ -45,10 +45,10 @@ export class DashboardServer extends Database {
 
                 this.socketIoServer.on('connection', (socket: socketIO.Socket) => {
                     console.log('New connection established: ' + socket.id)
+
+                    socket.on('message', (message) => console.log('Message received: ' + message));
         
-                    socket.on('disconnect', function () {
-                        console.log('Connection destroyed: ' + socket.id);
-                    });
+                    socket.on('disconnect', () => console.log('Connection destroyed: ' + socket.id));
                 });
             })
             .catch(error => console.log('error', error));
