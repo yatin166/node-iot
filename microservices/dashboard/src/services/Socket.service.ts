@@ -1,7 +1,7 @@
 import { io, Socket } from 'socket.io-client';
 
 export interface SocketService {
-    emitData(data: number)
+    emitData(data: number): void
 }
 
 export class SocketServiceImpl {
@@ -13,7 +13,7 @@ export class SocketServiceImpl {
         this.socketIoClient = io(this.SOCKET_SERVER_URL);
     }
 
-    public emitData(data: number) {
+    public emitData(data: number): void {
         this.socketIoClient.emit('data', data);
     }
 }
