@@ -6,6 +6,7 @@ import { Button } from '../../../components/button/Button';
 import { Flex } from '../../../components/container/flex/Flex';
 import styles from './Login.module.scss'
 import { ApiServicesContext } from '../../../context/ApiServices.context';
+import { io } from 'socket.io-client';
 
 interface State {
     email: string
@@ -43,9 +44,18 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
             .catch(error => console.error(error))
     }
 
+    const emitData = () => {
+        fetch('http://localhost:8001/api/v1/data/time-series')
+            .then((res) => res.json())
+            .then(response => console.log(response))
+            .catch(error => console.error(error))
+    }
+
     return (
         <div className={styles.formContainer}>
             <Flex.Vertical width={'25vw'}>
+                <button onClick={() => io('http://localhost:8001/')}>Connect</button>
+                <button onClick={emitData}>send</button>
                 <form onSubmit={onSubmit}>
                     <Input
                         type='email'
