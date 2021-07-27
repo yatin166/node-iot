@@ -46,9 +46,9 @@ export class DashboardServer extends Database {
                 this.socketIoServer.on('connection', (socket: socketIO.Socket) => {
                     console.log('New connection established: ' + socket.id)
 
-                    socket.on('message', (message) => {
-                        console.log('Message received: ' + message);
-                        socket.emit('message', message);
+                    socket.on('dataFromServer', (data) => {
+                        console.log('data received: ' + data);
+                        socket.broadcast.emit('dataForClient', data);
                     });
         
                     socket.on('disconnect', () => console.log('Connection destroyed: ' + socket.id));
