@@ -54,7 +54,10 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
     return (
         <div className={styles.formContainer}>
             <Flex.Vertical width={'25vw'}>
-                <button onClick={() => io('http://localhost:8001/')}>Connect</button>
+                <button onClick={() => {
+                    const socketServer = io('http://localhost:8001/');
+                    socketServer.on('dataForClient', message => console.log(message))
+                }}>Connect</button>
                 <button onClick={emitData}>send</button>
                 <form onSubmit={onSubmit}>
                     <Input

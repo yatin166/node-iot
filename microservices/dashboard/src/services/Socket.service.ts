@@ -16,6 +16,6 @@ export class SocketServiceImpl {
     public emitData(): void {
         const MAX = 100;
         const MIN = 10;
-        setInterval(() => this.socketIoClient.emit('message', Math.floor(Math.random() * (MAX - MIN + 1) + MIN)), 2000);
+        setInterval(() => this.socketIoClient.emit('dataFromServer', Math.floor(Math.random() * (MAX - MIN + 1) + MIN)), 2000);
     }
 }
