@@ -1,3 +1,9 @@
 .dashboardContainer {
     display: flex;
+
+    .chartContainer {
+        > canvas {
+            height: 30em;
+        }
+    }
 }

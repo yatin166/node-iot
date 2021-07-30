@@ -6,6 +6,7 @@ import styles from './Dashboard.module.scss'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
+import { Line, Chart } from "react-chartjs-2";
 
 interface Props extends RouteComponentProps<{}> {}
 
@@ -18,14 +19,31 @@ export const Dashboard: React.FunctionComponent<Props>  = (props: Props): JSX.El
         setSocketData(ioServer);
     }, [])
 
-    console.log(socketData, 'socket data')
-
+    const data = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        datasets: [
+          {
+            data: [33, 53, 85, 41, 44, 65],
+            fill: true,
+            backgroundColor: "rgba(75,192,192,0.2)",
+            borderColor: "rgba(75,192,192,1)"
+          },
+          {
+            data: [33, 25, 35, 51, 54, 76],
+            fill: false,
+            borderColor: "#742774"
+          }
+        ]
+      };
+    
     return (
         <div className={styles.dashboardContainer}>
             <Sidebar />
             
             <Flex.Horizontal>
-                Dashboard
+                <div className={styles.chartContainer}>
+                    <Line data={data} />
+                </div>
             </Flex.Horizontal>
         </div>
     )
