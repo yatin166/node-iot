@@ -34,7 +34,15 @@ export const Dashboard: React.FunctionComponent<Props>  = (props: Props): JSX.El
             borderColor: "#742774"
           }
         ]
-      };
+    };
+
+    const chartOptions = {
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
     
     return (
         <div className={styles.dashboardContainer}>
@@ -42,7 +50,7 @@ export const Dashboard: React.FunctionComponent<Props>  = (props: Props): JSX.El
             
             <Flex.Horizontal>
                 <div className={styles.chartContainer}>
-                    <Line data={data} />
+                    <Line data={data} options={chartOptions}/>
                 </div>
             </Flex.Horizontal>
         </div>
