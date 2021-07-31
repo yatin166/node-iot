@@ -14,14 +14,12 @@ export const Dashboard: React.FunctionComponent<Props>  = (props: Props): JSX.El
 
     const [socketData, setSocketData] = useState<number[]>([]);
 
-    /* useEffect(() => {
-        const ioServer = io('http://localhost:8001/');
-        //setSocketData(ioServer);
-        ioServer.on('dataFromServer', (data) => {
-            console.log(data)
+    useEffect(() => {
+        const socketServer = io('http://localhost:8001/');
+        socketServer.on('dataForClient', message => {
+            setSocketData(prevState => [...prevState, message]);
         });
-    }, []) */
-    //console.log(socketData, 'socketData')
+    }, [])
 
     const data = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
@@ -48,26 +46,13 @@ export const Dashboard: React.FunctionComponent<Props>  = (props: Props): JSX.El
             .then(response => console.log(response))
             .catch(error => console.error(error))
     }
-
-    const connect = () => {
-        const socketServer = io('http://localhost:8001/');
-        socketServer.on('dataForClient', message => {
-            //console.log(message, 'message')
-            //const lastFiveElements = socketData.splice(-5)
-            console.log(socketData, 'sockerData', message, 'msg')
-            setSocketData([...socketData, message]);
-        });
-    }
-    
     
     return (
         <div className={styles.dashboardContainer}>
             <Sidebar />
-            
-            <Flex.Horizontal>
-                <button onClick={connect}>Connect</button>
-                <button onClick={emitData}>Emit</button>
 
+            <Flex.Horizontal>
+                <button onClick={emitData}>Emit</button>
                 <div className={styles.chartContainer}>
                     <Line data={data} options={chartOptions}/>
                 </div>
