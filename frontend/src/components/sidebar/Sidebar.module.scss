@@ -2,7 +2,33 @@
 
 .sidebarContainer {
     height: 100vh;
-    width: 5vw;
+    width: 7vw;
     background: $primarySidebarColorLightTheme;
-    border-radius: 0 0.2em 0.2em 0;
+    box-shadow: 0.7em 0 2em -0.3em #888;
+
+    .iconContainer {
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin-top: 2em;
+        
+        .icon {
+            margin-bottom: 1.5em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            > label {
+                margin-top: 0.8em;
+            }
+
+            &:hover {
+                cursor: pointer;
+                > label {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
 }
