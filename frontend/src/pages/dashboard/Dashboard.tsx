@@ -4,6 +4,7 @@ import { Sidebar } from '../../components/sidebar/Sidebar';
 import { Flex } from '../../components/container/flex/Flex'
 import styles from './Dashboard.module.scss'
 import { TimeSeriesChart } from '../../components/chart/TimeSeries/TimeSeriesChart';
+import { Button } from '../../components/button/Button';
 
 interface Props extends RouteComponentProps<{}> {}
 
@@ -19,11 +20,12 @@ export const Dashboard: React.FunctionComponent<Props>  = (props: Props): JSX.El
     return (
         <div className={styles.dashboardContainer}>
             <Sidebar />
-
-            <Flex.Horizontal>
-                <button onClick={emitData}>Emit</button>
-                <TimeSeriesChart />
-            </Flex.Horizontal>
+            <div className={styles.contentContainer}>
+                <Flex.Vertical>
+                    <Button onClick={emitData} value='Emit'/>
+                    <TimeSeriesChart />
+                </Flex.Vertical>
+            </div>
         </div>
     )
 }
