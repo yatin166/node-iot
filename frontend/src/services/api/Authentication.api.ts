@@ -12,7 +12,7 @@ const Path = {
     Register: '/register',
 }
 
-export class Authentication extends Api {
+export class AuthenticationApi extends Api {
 
     constructor() {
         super(Path.Base)

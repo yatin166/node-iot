@@ -19,7 +19,7 @@ interface Props extends RouteComponentProps<{}> {}
 
 export const Register: React.FunctionComponent<Props> = (props: Props): JSX.Element => {
 
-    const apiServicesContext = useContext(ServicesContext);
+    const service = useContext(ServicesContext);
     const [credentials, setCredentials] = useState<State>({ email: '', password: '', confirmPassword: '', firstName: '', lastName: '' });
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +51,7 @@ export const Register: React.FunctionComponent<Props> = (props: Props): JSX.Elem
             email: credentials.email,
             password: credentials.password
         }
-        apiServicesContext.authentication.register(registerRequest)
+        service.authenticationApi.register(registerRequest)
             .then(() => console.log('Registered'))
             .catch(error => console.error(error))
     }
