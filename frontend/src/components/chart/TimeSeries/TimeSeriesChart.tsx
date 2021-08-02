@@ -9,11 +9,11 @@ interface Props {}
 
 export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): JSX.Element => {
 
-    const apiServicesContext = useContext(ServicesContext);
+    const service = useContext(ServicesContext);
     const [socketData, setSocketData] = useState<number[]>([]);
 
     useEffect(() => {
-        const timeSeriesSocket = apiServicesContext.socketService.getTimeSeriesSocket();
+        const timeSeriesSocket = service.socketService.getTimeSeriesSocket();
         timeSeriesSocket.on('dataForClient', message => {
             setSocketData(prevState => [...prevState, message]);
         });

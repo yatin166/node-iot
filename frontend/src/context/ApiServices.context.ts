@@ -1,14 +1,14 @@
 import React from 'react';
-import { Authentication } from "../services/api/Authentication.api";
+import { AuthenticationApi } from "../services/api/Authentication.api";
 import { SocketService } from '../services/Socket.service';
 
 export interface Services {
-    authentication: Authentication
+    authenticationApi: AuthenticationApi
     socketService: SocketService
 }
 
 const services: Services = {
-    authentication: new Authentication(),
+    authenticationApi: new AuthenticationApi(),
     socketService: new SocketService()
 }
 

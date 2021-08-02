@@ -17,7 +17,7 @@ interface Props extends RouteComponentProps<{}> {}
 export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element => {
     
 
-    const apiServicesContext = useContext(ServicesContext);
+    const service = useContext(ServicesContext);
     const [credentials, setCredentials] = useState<State>({ email: '', password: '' });
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +38,7 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
             email: credentials.email,
             password: credentials.password
         }
-        apiServicesContext.authentication.login(loginRequest)
+        service.authenticationApi.login(loginRequest)
             .then(() => console.log('Logged in'))
             .catch(error => console.error(error))
     }
