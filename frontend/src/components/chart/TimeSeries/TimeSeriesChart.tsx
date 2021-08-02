@@ -3,13 +3,13 @@ import styles from './TimeSeriesChart.module.scss'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
-import { ApiServicesContext } from '../../../context/ApiServices.context';
+import { ServicesContext } from '../../../context/ApiServices.context';
 
 interface Props {}
 
 export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): JSX.Element => {
 
-    const apiServicesContext = useContext(ApiServicesContext);
+    const apiServicesContext = useContext(ServicesContext);
     const [socketData, setSocketData] = useState<number[]>([]);
 
     useEffect(() => {

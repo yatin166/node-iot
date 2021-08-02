@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios';
-import { AccessTokenRequest } from '../dto/request/AccessToken.request';
-import { AccessTokenResponse } from '../dto/response/AccessToken.response';
-import { LocalStorage, LocalStorageKey } from '../storage/LocalStorage';
+import { AccessTokenRequest } from '../../dto/request/AccessToken.request';
+import { AccessTokenResponse } from '../../dto/response/AccessToken.response';
+import { LocalStorage, LocalStorageKey } from '../../storage/LocalStorage';
 
 export class Api {
 

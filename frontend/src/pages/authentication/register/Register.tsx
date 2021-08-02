@@ -4,7 +4,7 @@ import { Input } from '../../../components/form/Input';
 import { Button } from '../../../components/button/Button';
 import { Flex } from '../../../components/container/flex/Flex';
 import { RouteComponentProps } from 'react-router-dom';
-import { ApiServicesContext } from '../../../context/ApiServices.context';
+import { ServicesContext } from '../../../context/ApiServices.context';
 import styles from './Register.module.scss'
 
 interface State {
@@ -19,7 +19,7 @@ interface Props extends RouteComponentProps<{}> {}
 
 export const Register: React.FunctionComponent<Props> = (props: Props): JSX.Element => {
 
-    const apiServicesContext = useContext(ApiServicesContext);
+    const apiServicesContext = useContext(ServicesContext);
     const [credentials, setCredentials] = useState<State>({ email: '', password: '', confirmPassword: '', firstName: '', lastName: '' });
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
