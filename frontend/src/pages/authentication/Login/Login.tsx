@@ -5,7 +5,7 @@ import { Input } from '../../../components/form/Input';
 import { Button } from '../../../components/button/Button';
 import { Flex } from '../../../components/container/flex/Flex';
 import styles from './Login.module.scss'
-import { ApiServicesContext } from '../../../context/ApiServices.context';
+import { ServicesContext } from '../../../context/ApiServices.context';
 
 interface State {
     email: string
@@ -17,7 +17,7 @@ interface Props extends RouteComponentProps<{}> {}
 export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element => {
     
 
-    const apiServicesContext = useContext(ApiServicesContext);
+    const apiServicesContext = useContext(ServicesContext);
     const [credentials, setCredentials] = useState<State>({ email: '', password: '' });
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {

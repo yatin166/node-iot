@@ -1,4 +1,3 @@
-import { Api } from "./Api"
 import { io, Socket } from 'socket.io-client';
 
 const Path = {

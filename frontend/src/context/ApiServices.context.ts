@@ -1,15 +1,15 @@
 import React from 'react';
-import { Authentication } from "../services/Authentication.api";
+import { Authentication } from "../services/api/Authentication.api";
 import { SocketService } from '../services/Socket.service';
 
-export interface ApiServices {
+export interface Services {
     authentication: Authentication
     socketService: SocketService
 }
 
-const apiServices: ApiServices = {
+const services: Services = {
     authentication: new Authentication(),
     socketService: new SocketService()
 }
 
-export const ApiServicesContext = React.createContext<ApiServices>(apiServices);
+export const ServicesContext = React.createContext<Services>(services);
