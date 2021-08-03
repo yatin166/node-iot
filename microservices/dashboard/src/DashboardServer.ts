@@ -46,8 +46,8 @@ export class DashboardServer extends Database {
                 this.socketIoServer.on('connection', (socket: socketIO.Socket) => {
                     console.log('New connection established: ' + socket.id)
 
-                    socket.on('dataFromServer', (data) => {
-                        console.log('dataFromServer', data)
+                    socket.on('dataForServer', (data) => {
+                        console.log('dataForServer', data)
                         socket.broadcast.emit('dataForClient', data);
                     });
         
