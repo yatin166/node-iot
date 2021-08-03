@@ -1,7 +1,7 @@
 import { io, Socket } from 'socket.io-client';
 
 const Path = {
-    Base: 'http://localhost:8000/'
+    Base: 'http://localhost:8001/'
 }
 
 export class SocketService {

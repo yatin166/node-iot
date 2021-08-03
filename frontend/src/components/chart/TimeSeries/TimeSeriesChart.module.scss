@@ -2,5 +2,10 @@
     margin-top: 3em;
     > canvas {
         height: 30em;
+        margin-top: 2em;
+    }
+
+    .actionButtonContainer {
+        display: flex;
     }
 }

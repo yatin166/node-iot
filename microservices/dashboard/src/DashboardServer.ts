@@ -1,8 +1,8 @@
-import express from 'express'
-import bodyParser from 'body-parser'
+import express from 'express';
+import bodyParser from 'body-parser';
 import { MainDashboardController } from './controllers/base/Main.dashboard.controller';
 import { Database } from './database/Database';
-import socketIO from "socket.io"
+import socketIO from "socket.io";
 import http from 'http';
 
 export class DashboardServer extends Database {
@@ -47,6 +47,7 @@ export class DashboardServer extends Database {
                     console.log('New connection established: ' + socket.id)
 
                     socket.on('dataFromServer', (data) => {
+                        console.log('dataFromServer', data)
                         socket.broadcast.emit('dataForClient', data);
                     });
         
