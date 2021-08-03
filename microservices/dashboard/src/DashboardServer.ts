@@ -4,13 +4,14 @@ import { MainDashboardController } from './controllers/base/Main.dashboard.contr
 import { Database } from './database/Database';
 import socketIO from "socket.io";
 import http from 'http';
+import { SocketServer } from './SocketServer';
 
 export class DashboardServer extends Database {
     private readonly expressApplication: express.Application;
     private readonly port: number;
     private readonly mainDashboardController: MainDashboardController;
     private readonly httpServer: http.Server;
-    private readonly socketIoServer: socketIO.Server;
+    private readonly socketServer: SocketServer;
 
     constructor(
         expressApplication: express.Application,
@@ -23,8 +24,13 @@ export class DashboardServer extends Database {
         this.port = port;
         this.mainDashboardController = mainDashboardController;
 
-        this.httpServer = new http.Server(this.expressApplication)
-        this.socketIoServer = new socketIO.Server(this.httpServer, { cors: {  origin: '*' } } );
+        this.httpServer = new http.Server(this.expressApplication);
+        this.socketServer = new SocketServer(
+            new socketIO.Server(
+                this.httpServer,
+                { cors: {  origin: '*' } } 
+            )
+        );
     }
 
     public async configure(): Promise<void> {
@@ -43,16 +49,7 @@ export class DashboardServer extends Database {
                     console.log(`Dashboard server is up and running on ${this.port}`)
                 });
 
-                this.socketIoServer.on('connection', (socket: socketIO.Socket) => {
-                    console.log('New connection established: ' + socket.id)
-
-                    socket.on('dataForServer', (data) => {
-                        console.log('dataForServer', data)
-                        socket.broadcast.emit('dataForClient', data);
-                    });
-        
-                    socket.on('disconnect', () => console.log('Connection destroyed: ' + socket.id));
-                });
+                this.socketServer.enableEvents();
             })
             .catch(error => console.log('error', error));
     }
