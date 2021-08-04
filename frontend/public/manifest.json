@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Node IoT",
+  "name": "This is a sample node IoT project",
   "icons": [
     {
       "src": "favicon.ico",
