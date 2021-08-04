@@ -1,0 +1,5 @@
+{
+    "watch": ["dashboard"],
+    "ext": "ts,json",
+    "exec": "ts-node ./authenticator/src/index.ts & ts-node ./admin/src/index.ts & ts-node ./dashboard/src/index.ts"
+  }
