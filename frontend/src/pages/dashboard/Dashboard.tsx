@@ -4,7 +4,6 @@ import { Sidebar } from '../../components/sidebar/Sidebar';
 import { Flex } from '../../components/container/flex/Flex'
 import styles from './Dashboard.module.scss'
 import { TimeSeriesChart } from '../../components/chart/TimeSeries/TimeSeriesChart';
-import { Button } from '../../components/button/Button';
 
 interface Props extends RouteComponentProps<{}> {}
 

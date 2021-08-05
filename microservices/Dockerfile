@@ -1,7 +1,7 @@
-FROM node:16.3.0-alpine
-WORKDIR /service
-COPY package*.json /service
+FROM node:16
+WORKDIR /app
+COPY package*.json /app
 RUN npm install
-COPY . /service
+COPY index.js /app
 EXPOSE 8001
-CMD npm run start:prod
+CMD node index.js

@@ -9,11 +9,6 @@ export const Sidebar: React.FunctionComponent<Props>  = (props: Props): JSX.Elem
     const icons = [
         {
             icon: <Icon />,
-            name: 'Home',
-            path: '/'
-        },
-        {
-            icon: <Icon />,
             name: 'Time series',
             path: '/time-series'
         }
