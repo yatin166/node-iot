@@ -1,4 +1,4 @@
-import { UserSocketModel } from '../schemas/UserSocket.model';
+import { UserSocketModel, UserSocketSchema } from '../schemas/UserSocket.model';
 
 export class UserSocketRepository {
 
@@ -10,4 +10,7 @@ export class UserSocketRepository {
         return UserSocketModel.findOne({ _id: id });
     }
 
+    public static async getAll(): Promise<UserSocketSchema[]> {
+        return UserSocketModel.find({});
+    }
 }
