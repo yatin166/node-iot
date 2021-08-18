@@ -6,6 +6,7 @@ import { Button } from '../../../components/button/Button';
 import { Flex } from '../../../components/container/flex/Flex';
 import styles from './Login.module.scss'
 import { ServicesContext } from '../../../context/ApiServices.context';
+import { LocalStorage } from '../../../storage/LocalStorage';
 
 interface State {
     email: string
@@ -43,6 +44,20 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
             .catch(error => console.error(error))
     }
 
+    const refreshToken = LocalStorage.getRefreshToken()
+    if (refreshToken) {
+        const refreshToeknPayload: { iat: number, exp: number } = JSON.parse(atob(refreshToken.split('.')[1]));
+        const now = new Date();
+        console.log(new Date(refreshToeknPayload.exp).toString(), refreshToeknPayload.exp, 'exp')
+        console.log(new Date(now.getTime() / 1000).toString(), now.getTime() / 1000, 'now')
+
+        console.log(refreshToeknPayload.exp < (now.getTime() / 1000))
+        if (refreshToeknPayload.exp < (now.getTime() / 1000)) {
+            console.log('token is invalid and should be logged out');
+        }
+        console.log(refreshToeknPayload, 'refreshToeknPayload')
+    }
+    
     return (
         <div className={styles.formContainer}>
             <Flex.Vertical width={'25vw'}>
