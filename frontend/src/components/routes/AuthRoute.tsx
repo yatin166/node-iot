@@ -7,14 +7,21 @@ import atob from 'atob';
 
 export const AuthRoute = ({ component: Component, ...rest }: any) => {
 
-    const isAuthenticated: boolean = true;
+    let isAuthenticated: boolean = false;
 
-    const checkRefreshTokenValidity = () => {
-        const refreshToken = LocalStorage.getRefreshToken()
-        if (!refreshToken)
-            return
+    const refreshToken = LocalStorage.getRefreshToken()
+    if (!refreshToken)
+        isAuthenticated = false;
+    else {
+        const refreshToeknPayload: { iat: number, exp: number } = JSON.parse(atob(refreshToken.split('.')[1]));
+        const now = new Date();
+        console.log(new Date(refreshToeknPayload.exp).toString(), refreshToeknPayload.exp, 'exp')
+        console.log(new Date(now.getTime() / 1000).toString(), now.getTime() / 1000, 'now')
 
-        const refreshToeknPayload = JSON.parse(atob(refreshToken));
+        console.log(refreshToeknPayload.exp < (now.getTime() / 1000))
+        if (refreshToeknPayload.exp < (now.getTime() / 1000)) {
+            console.log('token is invalid and should be logged out');
+        }
         console.log(refreshToeknPayload, 'refreshToeknPayload')
     }
 
