@@ -43,20 +43,6 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
             .then(() => console.log('Logged in'))
             .catch(error => console.error(error))
     }
-
-    const refreshToken = LocalStorage.getRefreshToken()
-    if (refreshToken) {
-        const refreshToeknPayload: { iat: number, exp: number } = JSON.parse(atob(refreshToken.split('.')[1]));
-        const now = new Date();
-        console.log(new Date(refreshToeknPayload.exp).toString(), refreshToeknPayload.exp, 'exp')
-        console.log(new Date(now.getTime() / 1000).toString(), now.getTime() / 1000, 'now')
-
-        console.log(refreshToeknPayload.exp < (now.getTime() / 1000))
-        if (refreshToeknPayload.exp < (now.getTime() / 1000)) {
-            console.log('token is invalid and should be logged out');
-        }
-        console.log(refreshToeknPayload, 'refreshToeknPayload')
-    }
     
     return (
         <div className={styles.formContainer}>
