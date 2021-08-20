@@ -6,7 +6,7 @@ import { Button } from '../../../components/button/Button';
 import { Flex } from '../../../components/container/flex/Flex';
 import styles from './Login.module.scss'
 import { ServicesContext } from '../../../context/ApiServices.context';
-import { LocalStorage } from '../../../storage/LocalStorage';
+import { Path } from '../../../components/routes/Path';
 
 interface State {
     email: string
@@ -40,7 +40,7 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
             password: credentials.password
         }
         service.authenticationApi.login(loginRequest)
-            .then(() => console.log('Logged in'))
+            .then(() => history.push(Path.DASHBOARD))
             .catch(error => console.error(error))
     }
     

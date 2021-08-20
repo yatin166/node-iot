@@ -20,7 +20,7 @@ export class TokenConfig {
             }
         }
         return {
-            expiresInSeconds: 60, //* 60 * 2, // 2h
+            expiresInSeconds: 60 * 60 * 2, // 2h
             secret: this.tokenSecret
         }
     }

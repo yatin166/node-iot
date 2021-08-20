@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import { LocalStorage } from '../../storage/LocalStorage';
 import atob from 'atob';
+import { Path } from './Path';
 
 export const AuthRoute = ({ component: Component, ...rest }: any) => {
 
@@ -27,6 +28,6 @@ export const AuthRoute = ({ component: Component, ...rest }: any) => {
           {...rest}
           render={props => isAuthenticated()
             ? <Component {...props} />
-            : <Redirect to='/' />} />
+            : <Redirect to={Path.LOGIN} />} />
     );
 }

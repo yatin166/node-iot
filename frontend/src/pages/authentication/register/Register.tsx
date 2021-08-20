@@ -6,6 +6,7 @@ import { Flex } from '../../../components/container/flex/Flex';
 import { RouteComponentProps } from 'react-router-dom';
 import { ServicesContext } from '../../../context/ApiServices.context';
 import styles from './Register.module.scss'
+import { Path } from '../../../components/routes/Path';
 
 interface State {
     email: string
@@ -52,7 +53,7 @@ export const Register: React.FunctionComponent<Props> = (props: Props): JSX.Elem
             password: credentials.password
         }
         service.authenticationApi.register(registerRequest)
-            .then(() => console.log('Registered'))
+            .then(() => props.history.push(Path.LOGIN))
             .catch(error => console.error(error))
     }
 
