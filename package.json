@@ -8,6 +8,7 @@
     "start:microservices:dev": "cd microservices && npm run start:dev && cd ..",
     "start:dev": "npm run start:frontend:dev & npm run start:microservices:dev",
     "nodemon": "cd microservices && npm run nodemon",
+    "build": "cd microservices && npm run build && cd ..",
     "start:db": "docker run -d --name=mongo -it -p 27017:27017 mongo"
   },
   "repository": {
