@@ -10,7 +10,6 @@
     "nodemon": "cd microservices && npm run nodemon",
     "install:microservices": "cd microservices && npm install && cd ..",
     "install:frontend": "cd frontend && npm install && cd ..",
-    "install": "install:microservices",
     "build": "cd microservices && npm run build && cd ..",
     "start:db": "docker run -d --name=mongo -it -p 27017:27017 mongo"
   },
