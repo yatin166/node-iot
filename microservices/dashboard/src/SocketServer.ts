@@ -17,7 +17,6 @@ export class SocketServer {
 
     private emitDataForClient(socket: Socket) {
         socket.on('dataForServer', (data) => {
-            console.log('dataForServer', data)
             socket.broadcast.emit('dataForClient', data);
         });
     }

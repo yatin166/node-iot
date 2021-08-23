@@ -15,7 +15,7 @@ export class SocketServiceImpl {
         const socket = io(this.SOCKET_SERVER_URL);
         await socket.on('connect', async () => {
             await UserSocketRepository.save(socket.id);
-        })
+        });
     }
 
     public async getSockets(): Promise<UserSocketSchema[]> {
