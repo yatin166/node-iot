@@ -3,26 +3,27 @@ import {
     Switch,
     Route
 } from 'react-router-dom';
-import { AuthRoute } from './components/routes/AuthRoute';
+import { PrivateRoute } from './components/routes/PrivateRoute';
 import { Path } from './components/routes/Path';
 import { Login } from './pages/authentication/Login/Login';
 import { Register } from './pages/authentication/register/Register';
 import { Dashboard } from './pages/dashboard/Dashboard';
+import { PublicRoute } from './components/routes/PublicRoute';
 
 export const Routes = () => {
 
     return (
         <Router>
             <Switch>
-                <AuthRoute
+                <PrivateRoute
                     exact
                     path={`/${Path.DASHBOARD}`}
                     component={Dashboard}/>
-                <Route
+                <PublicRoute
                     exact
                     path={`/${Path.REGISTER}`}
                     component={Register} />
-                <Route
+                <PublicRoute
                     exact
                     path={[`/${Path.REDIRECT}`, `/${Path.LOGIN}`]}
                     component={Login} />

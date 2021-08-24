@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Sidebar } from '../../components/sidebar/Sidebar';
+import Sidebar from '../../components/sidebar/Sidebar';
 import { Flex } from '../../components/container/flex/Flex'
 import styles from './Dashboard.module.scss'
 import { TimeSeriesChart } from '../../components/chart/TimeSeries/TimeSeriesChart';

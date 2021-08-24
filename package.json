@@ -6,7 +6,7 @@
   "scripts": {
     "start:frontend:dev": "cd frontend && npm run start && cd ..",
     "start:microservices:dev": "cd microservices && npm run start:dev && cd ..",
-    "start:dev": "npm run start:frontend:dev & npm run start:microservices:dev",
+    "start:dev": "npm run build && npm run start:frontend:dev & npm run start:microservices:dev",
     "nodemon": "cd microservices && npm run nodemon",
     "install:microservices": "cd microservices && npm install && cd ..",
     "install:frontend": "cd frontend && npm install && cd ..",
@@ -19,7 +19,7 @@
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
+  "bugs": { 
     "url": "https://github.com/yatin166/node-iot/issues"
   },
   "homepage": "https://github.com/yatin166/node-iot#readme"

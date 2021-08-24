@@ -6,7 +6,7 @@ import { LocalStorage } from '../../storage/LocalStorage';
 import atob from 'atob';
 import { Path } from './Path';
 
-export const AuthRoute = ({ component: Component, ...rest }: any) => {
+export const PrivateRoute = ({ component: Component, ...rest }: any) => {
 
     const isAuthenticated = (): boolean => {
         const refreshToken = LocalStorage.getRefreshToken()
