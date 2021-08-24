@@ -9,6 +9,10 @@ export class LocalStorage {
         localStorage.setItem(key, data)
     }
 
+    public static destroy() {
+        localStorage.clear()
+    }
+
     public static getAccessToken(): string | null {
         return localStorage.getItem(LocalStorageKey.ACCESS_TOKEN)
     }
