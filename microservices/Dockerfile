@@ -1,13 +1,14 @@
 FROM node:16
+RUN mkdir /app
 WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "./"]
 
-RUN npm config set registry https://registry.npmjs.org/
+RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN"
 
 RUN npm install
 
-COPY . .
+COPY . /app
 
 EXPOSE 8002
 
