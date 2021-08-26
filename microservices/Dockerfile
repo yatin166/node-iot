@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "./"]
 
-RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN"
-
 RUN npm install
 
 COPY . /app
