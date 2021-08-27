@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start:authenticator:prod": "npm run build && node -r dotenv/config ./build/admin/src/index.js",
+    "start:authenticator:prod": "npm run build && node -r dotenv/config ./build/authenticator/src/index.js",
     "start:authenticator:dev": "node -r dotenv/config ./build/authenticator/src/index.js",
     "start:admin:prod": "npm run build && node -r dotenv/config ./build/admin/src/index.js",
     "start:admin:dev": "node -r dotenv/config ./build/admin/src/index.js",
-    "start:dashboard:prod": "npm run build && node -r dotenv/config ./build/admin/src/index.js",
+    "start:dashboard:prod": "npm run build && node -r dotenv/config ./build/dashboard/src/index.js",
     "start:dashboard:dev": "node -r dotenv/config ./build/dashboard/src/index.js",
     "start:dev": "npm run start:authenticator:dev & npm run start:admin:dev & npm run start:dashboard:dev",
     "start:prod": "ENVIRONMENT=prod npm run start:admin:prod",
