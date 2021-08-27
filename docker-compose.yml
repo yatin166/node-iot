@@ -2,36 +2,46 @@ version: '3'
 services:
     authentication:
         container_name: authentication-service
+        environment:
+            ENVIRONMENT: PROD
         restart: always
         build: 
             context: ./microservices
             dockerfile: authenticator.Dockerfile
         ports:
             - '8000:8000'
+        depends_on:
+            - mongo
         external_links:
             - mongo
     admin:
         container_name: admin-service
+        environment:
+            ENVIRONMENT: PROD
         restart: always
         build: 
             context: ./microservices
             dockerfile: admin.Dockerfile
         ports:
             - '8001:8001'
+        depends_on:
+            - mongo
         external_links:
             - mongo
-            - authentication
     dashboard:
         container_name: dashboard-service
+        environment:
+            ENVIRONMENT: PROD
         restart: always
         build: 
             context: ./microservices
             dockerfile: dashboard.Dockerfile
         ports:
             - '8002:8002'
+        depends_on:
+            - mongo
         external_links:
             - mongo
-            - authentication
     mongo:
         container_name: mongo
         image: mongo
