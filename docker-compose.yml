@@ -3,7 +3,9 @@ services:
     authentication:
         container_name: authentication-service
         restart: always
-        build: .
+        build: 
+            context: ./microservices
+            dockerfile: authenticator.Dockerfile
         ports:
             - '8000:8000'
         external_links:
@@ -11,7 +13,9 @@ services:
     admin:
         container_name: admin-service
         restart: always
-        build: .
+        build: 
+            context: ./microservices
+            dockerfile: admin.Dockerfile
         ports:
             - '8001:8001'
         external_links:
@@ -20,7 +24,9 @@ services:
     dashboard:
         container_name: dashboard-service
         restart: always
-        build: .
+        build: 
+            context: ./microservices
+            dockerfile: dashboard.Dockerfile
         ports:
             - '8002:8002'
         external_links:
