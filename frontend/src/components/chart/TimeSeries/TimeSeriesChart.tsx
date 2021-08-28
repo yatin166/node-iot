@@ -6,6 +6,7 @@ import { Line } from 'react-chartjs-2';
 import { ServicesContext } from '../../../context/ApiServices.context';
 import { Button } from '../../button/Button';
 import { Socket } from 'socket.io-client';
+import { LocalStorage } from '../../../storage/LocalStorage';
 
 interface Props {}
 
@@ -17,9 +18,15 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): 
 
     useEffect(() => {
         const timeSeriesSocket = service.socketService.getTimeSeriesSocket();
-        timeSeriesSocket.on('dataForClient', message => {
-            setSocketData(prevState => [...prevState, message]);
-        });
+        const refreshToken = LocalStorage.getRefreshToken();
+        if (refreshToken) {
+            const refreshTokenPayload: { userId: string } = JSON.parse(atob(refreshToken.split('.')[1]));
+            console.log(refreshTokenPayload.userId)
+
+            timeSeriesSocket.on(refreshTokenPayload.userId, message => {
+                setSocketData(prevState => [...prevState, message]);
+            });
+        }
     }, [])
 
     const data = {
@@ -42,11 +49,15 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): 
     }
 
     const emitData = () => {
-        const emmitingSocket = service.socketService.getTimeSeriesSocket();
-        const MAX = 100;
-        const MIN = 10;
-        setInterval(() => emmitingSocket?.emit('dataForServer', Math.floor(Math.random() * (MAX - MIN + 1) + MIN)), 2000);
-        setSocket(emmitingSocket);
+        service.dashboardApi.emitData()
+            .then(() => {
+                /* const emmitingSocket = service.socketService.getTimeSeriesSocket();
+                const MAX = 100;
+                const MIN = 10;
+                setInterval(() => emmitingSocket?.emit('dataForServer', Math.floor(Math.random() * (MAX - MIN + 1) + MIN)), 2000);
+                setSocket(emmitingSocket); */
+            })
+            .catch(console.error)
     }
 
     const disconnect = () => {

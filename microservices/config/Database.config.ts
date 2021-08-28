@@ -1,7 +1,6 @@
 export class DatabaseConfig {
 
     public static connectionPath() {
-        console.log(`mongodb://${this.getHostName()}:${this.getPort()}/${this.getDatabaseName()}`)
         return `mongodb://${this.getHostName()}:${this.getPort()}/${this.getDatabaseName()}`
     }
 

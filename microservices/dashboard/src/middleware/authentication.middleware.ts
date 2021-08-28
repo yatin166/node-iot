@@ -1,4 +1,5 @@
 import express from 'express';
+import { Request } from './Request'
 import jwt from 'jsonwebtoken'
 import { TokenConfig } from '../../../config/Token.config';
 
@@ -8,18 +9,21 @@ export interface AccessTokenPayload {
 }
 
 export const authenticationMiddleware = (
-    req: express.Request,
+    req: Request,
     res: express.Response, 
     next: express.NextFunction
 ) => {
-    const token = req.headers['autharization'];
+    const token = req.headers['authorization'];
 
     if (typeof token === 'string') {
         try {
             const accessTokenPayload = jwt.verify(token, TokenConfig.accessTokenSecret()) as AccessTokenPayload
     
-            if (accessTokenPayload)
+            if (accessTokenPayload) {
+                req.userId = accessTokenPayload.userId;
                 next()
+            }
+
         } catch (error) {
             res.status(403).json({ message: 'TOKEN EXPIRED' })
         }

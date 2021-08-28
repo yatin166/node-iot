@@ -47,7 +47,7 @@ export class LoginServiceImpl implements LoginService {
 
         if (!user) throw new Error('Wrong user password or Email')
 
-        const payload: AccessTokenPayload= {
+        const payload: AccessTokenPayload = {
             userId: user.id,
             userEmail: user.email
         }
