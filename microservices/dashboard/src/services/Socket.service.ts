@@ -13,17 +13,20 @@ export class SocketServiceImpl {
     private readonly SOCKET_SERVER_URL = 'http://localhost:8001/';
 
     public async emitData(userId: string): Promise<void> {
-        console.log('Emiting');
         const socket = io(this.SOCKET_SERVER_URL);
         await socket.on('connect', async () => {
             await UserSocketRepository.save(socket.id);
 
-            const timeSeriesData: TimeSeriesData = {
-                userId,
-                content: 2
-            }
-            
-            socket.emit('time-series', timeSeriesData);
+            const MAX = 100;
+            const MIN = 10;
+
+            setInterval(() => socket.emit(
+                'time-series', 
+                {
+                    userId,
+                    content: Math.floor(Math.random() * (MAX - MIN + 1) + MIN)
+                }
+            ), 2000);
         });
     }
 

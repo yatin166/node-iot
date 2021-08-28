@@ -24,4 +24,14 @@ export class LocalStorage {
     public static removeRefreshToken(): void {
         return localStorage.removeItem(LocalStorageKey.REFRESH_TOKEN);
     }
+
+    public static getUserId(): string | null {
+
+        const refreshToken = LocalStorage.getRefreshToken();
+
+        if (!refreshToken) return null;
+
+        const refreshTokenPayload: { userId: string } = JSON.parse(atob(refreshToken.split('.')[1]));
+        return refreshTokenPayload.userId;
+    }
 }

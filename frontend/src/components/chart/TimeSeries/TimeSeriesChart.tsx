@@ -18,12 +18,9 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): 
 
     useEffect(() => {
         const timeSeriesSocket = service.socketService.getTimeSeriesSocket();
-        const refreshToken = LocalStorage.getRefreshToken();
-        if (refreshToken) {
-            const refreshTokenPayload: { userId: string } = JSON.parse(atob(refreshToken.split('.')[1]));
-            console.log(refreshTokenPayload.userId)
-
-            timeSeriesSocket.on(refreshTokenPayload.userId, message => {
+        const userId = LocalStorage.getUserId();
+        if (userId) {
+            timeSeriesSocket.on(userId, message => {
                 setSocketData(prevState => [...prevState, message]);
             });
         }
