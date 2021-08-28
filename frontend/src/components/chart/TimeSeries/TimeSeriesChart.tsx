@@ -18,12 +18,9 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): 
 
     useEffect(() => {
         const timeSeriesSocket = service.socketService.getTimeSeriesSocket();
-        const refreshToken = LocalStorage.getRefreshToken();
-        if (refreshToken) {
-            const refreshTokenPayload: { userId: string } = JSON.parse(atob(refreshToken.split('.')[1]));
-            console.log(refreshTokenPayload.userId)
-
-            timeSeriesSocket.on(refreshTokenPayload.userId, message => {
+        const userId = LocalStorage.getUserId();
+        if (userId) {
+            timeSeriesSocket.on(userId, message => {
                 setSocketData(prevState => [...prevState, message]);
             });
         }
@@ -50,13 +47,7 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): 
 
     const emitData = () => {
         service.dashboardApi.emitData()
-            .then(() => {
-                /* const emmitingSocket = service.socketService.getTimeSeriesSocket();
-                const MAX = 100;
-                const MIN = 10;
-                setInterval(() => emmitingSocket?.emit('dataForServer', Math.floor(Math.random() * (MAX - MIN + 1) + MIN)), 2000);
-                setSocket(emmitingSocket); */
-            })
+            .then(() => console.log('Started emitting'))
             .catch(console.error)
     }
 
