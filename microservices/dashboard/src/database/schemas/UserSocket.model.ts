@@ -2,12 +2,14 @@ import { Schema, Model } from 'mongoose'
 import mongoose, { Document } from 'mongoose'
 
 export interface UserSocketSchema extends Document {
-    socketId: string
+    socketId: string,
+    userId: string
 }
 
 const userSocketSchema = new Schema<UserSocketSchema>(
     {
-        socketId:  { type: String, required: true }
+        socketId:  { type: String, required: true },
+        userId:  { type: String, required: true }
     },
     { timestamps: true }
 )

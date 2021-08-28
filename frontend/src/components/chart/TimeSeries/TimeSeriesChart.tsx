@@ -47,13 +47,7 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): 
 
     const emitData = () => {
         service.dashboardApi.emitData()
-            .then(() => {
-                /* const emmitingSocket = service.socketService.getTimeSeriesSocket();
-                const MAX = 100;
-                const MIN = 10;
-                setInterval(() => emmitingSocket?.emit('dataForServer', Math.floor(Math.random() * (MAX - MIN + 1) + MIN)), 2000);
-                setSocket(emmitingSocket); */
-            })
+            .then(() => console.log('Started emitting'))
             .catch(console.error)
     }
 

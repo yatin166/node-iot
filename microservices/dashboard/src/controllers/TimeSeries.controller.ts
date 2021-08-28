@@ -8,6 +8,8 @@ const Path = {
     Socket: '/socket',
     All: '/all',
     TimeSeries: '/time-series',
+    Emit: '/emit',
+    Stop: '/stop',
 }
 
 export class TimeSeriesController implements DashboardController {
@@ -21,11 +23,21 @@ export class TimeSeriesController implements DashboardController {
     }
 
     private initRoutes() {
-        this.router.get(Path.TimeSeries, authenticationMiddleware, this.getTimeSeriesData.bind(this));
+        this.router.get(Path.TimeSeries + Path.Emit, authenticationMiddleware, this.startEmitting.bind(this));
+        this.router.get(Path.TimeSeries + Path.Stop, authenticationMiddleware, this.stopEmitting.bind(this));
         this.router.get(Path.Socket + Path.All, authenticationMiddleware, this.getSockets.bind(this));
     }
 
-    async getTimeSeriesData(req: Request, res: express.Response, next: express.NextFunction) {
+    async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
+        if (!req.userId)
+            return res.send({ message: 'Could not find userId in the request' });
+        
+        this.socketService.emitData(req.userId)
+            .then(() => res.send({ message: 'time series' }))
+            .catch(console.error)
+    }
+
+    async stopEmitting(req: Request, res: express.Response, next: express.NextFunction) {
         if (!req.userId)
             return res.send({ message: 'Could not find userId in the request' });
         
