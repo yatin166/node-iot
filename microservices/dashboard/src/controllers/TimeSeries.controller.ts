@@ -26,7 +26,10 @@ export class TimeSeriesController implements DashboardController {
     }
 
     async getTimeSeriesData(req: Request, res: express.Response, next: express.NextFunction) {
-        this.socketService.emitData()
+        if (!req.userId)
+            return res.send({ message: 'Could not find userId in the request' });
+        
+        this.socketService.emitData(req.userId)
             .then(() => res.send({ message: 'time series' }))
             .catch(console.error)
     }

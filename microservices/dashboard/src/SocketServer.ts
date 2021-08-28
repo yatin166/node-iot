@@ -1,5 +1,10 @@
 import { Server, Socket } from "socket.io";
 
+export interface TimeSeriesData {
+    userId: string;
+    content: any
+}
+
 export class SocketServer {
     private readonly socketServer: Server;
 
@@ -16,8 +21,9 @@ export class SocketServer {
     }
 
     private emitDataForClient(socket: Socket) {
-        socket.on('dataForServer', (data) => {
-            socket.broadcast.emit('dataForClient', data);
+        socket.on('time-series', (timeSeriesData: TimeSeriesData) => {
+            socket.broadcast.emit(timeSeriesData.userId, timeSeriesData.content);
+            socket.broadcast.emit('dataForClient', timeSeriesData);
         });
     }
 

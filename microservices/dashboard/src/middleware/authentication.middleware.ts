@@ -13,7 +13,7 @@ export const authenticationMiddleware = (
     res: express.Response, 
     next: express.NextFunction
 ) => {
-    const token = req.headers['autharization'];
+    const token = req.headers['authorization'];
 
     if (typeof token === 'string') {
         try {

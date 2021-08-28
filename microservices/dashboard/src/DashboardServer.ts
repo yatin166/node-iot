@@ -5,6 +5,7 @@ import { Database } from './database/Database';
 import socketIO from "socket.io";
 import http from 'http';
 import { SocketServer } from './SocketServer';
+import cors from 'cors';
 
 export class DashboardServer extends Database {
     private readonly expressApplication: express.Application;
@@ -34,6 +35,7 @@ export class DashboardServer extends Database {
     }
 
     public async configure(): Promise<void> {
+        this.expressApplication.use(cors())
         this.expressApplication.use(bodyParser.json());
 
         for (const route of this.mainDashboardController.routerConfiguration) {
