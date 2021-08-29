@@ -35,10 +35,10 @@ export class SocketServer {
         });
     }
 
+    //TODO: Should be refactored
     private customDisconnect(socket: Socket) {
         socket.on('customDisconnect', (socketId: string) => {
             this.socketServer.sockets.sockets.forEach(s => {
-                console.log(s.id, ' s.id')
                 if (s.id === socketId) {
                     s.disconnect();
                     console.log('custom destroyed: ' + s.id)
