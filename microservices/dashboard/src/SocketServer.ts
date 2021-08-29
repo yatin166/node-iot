@@ -16,7 +16,8 @@ export class SocketServer {
         this.socketServer.on('connection', (socket: Socket) => {
             console.log('New connection established: ' + socket.id)
             this.emitDataForClient(socket);
-            this.disconnect(socket);          
+            this.disconnect(socket);      
+            this.customDisconnect(socket);    
         });
     }
 
@@ -24,12 +25,25 @@ export class SocketServer {
         socket.on('time-series', (timeSeriesData: TimeSeriesData) => {
             socket.broadcast.emit(timeSeriesData.userId, timeSeriesData.content);
             socket.broadcast.emit('dataForClient', timeSeriesData);
+            
         });
     }
 
     private disconnect(socket: Socket) {
         socket.on('disconnect', () => {
             console.log('Connection destroyed: ' + socket.id)
+        });
+    }
+
+    private customDisconnect(socket: Socket) {
+        socket.on('customDisconnect', (socketId: string) => {
+            this.socketServer.sockets.sockets.forEach(s => {
+                console.log(s.id, ' s.id')
+                if (s.id === socketId) {
+                    s.disconnect();
+                    console.log('custom destroyed: ' + s.id)
+                }
+            });
         });
     }
 }
