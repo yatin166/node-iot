@@ -7,6 +7,7 @@ export interface SocketService {
     startEmit(userId: string): Promise<void>
     stopEmit(userId: string): Promise<void>
     getSockets(): Promise<UserSocketSchema[]>
+    deleteSockets(): Promise<void>
 }
 
 export class SocketServiceImpl {
@@ -33,10 +34,22 @@ export class SocketServiceImpl {
 
     public async stopEmit(userId: string): Promise<void> {
         const userSocket = await UserSocketRepository.getById(userId);
-        await UserSocketRepository.delete(userSocket?.id);
+        console.log(userSocket?.socketId, ' socketId should be disconnected');
+        if (userSocket) {
+            const socket = io(this.SOCKET_SERVER_URL);
+            socket.on('connect', async () => {
+                socket.emit('customDisconnect', userSocket.socketId);
+                socket.disconnect();
+                await UserSocketRepository.delete(userSocket?.id);
+            });
+        }
     }
 
     public async getSockets(): Promise<UserSocketSchema[]> {
         return await UserSocketRepository.getAll();
+    }
+
+    public async deleteSockets(): Promise<void> {
+        await UserSocketRepository.deleteAll();
     }
 }

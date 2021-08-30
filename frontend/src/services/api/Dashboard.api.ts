@@ -13,7 +13,7 @@ export class DashboardApi extends Api {
         super(Path.Base)
     }
 
-    public async emitData() {
+    public async startEmitting() {
         return await this.http.get<void>(Path.TimeSeries + Path.Emit);
     }
 

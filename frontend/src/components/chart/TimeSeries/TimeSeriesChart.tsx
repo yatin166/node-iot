@@ -46,13 +46,15 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): 
     }
 
     const emitData = () => {
-        service.dashboardApi.emitData()
+        service.dashboardApi.startEmitting()
             .then(() => console.log('Started emitting'))
             .catch(console.error)
     }
 
     const disconnect = () => {
-        emmitingSocket?.disconnect();
+        service.dashboardApi.stopEmitting()
+            .then(() => console.log('Stopped emitting'))
+            .catch(console.error)
     }
 
     return (
