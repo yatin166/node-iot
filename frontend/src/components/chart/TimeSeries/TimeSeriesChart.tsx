@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import { ServicesContext } from '../../../context/ApiServices.context';
 import { Button } from '../../button/Button';
-import { Socket } from 'socket.io-client';
 import { LocalStorage } from '../../../storage/LocalStorage';
 
 interface Props {}
@@ -14,7 +13,6 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): 
 
     const service = useContext(ServicesContext);
     const [socketData, setSocketData] = useState<number[]>([]);
-    const [emmitingSocket, setSocket] = useState<Socket>();
 
     useEffect(() => {
         const timeSeriesSocket = service.socketService.getTimeSeriesSocket();
