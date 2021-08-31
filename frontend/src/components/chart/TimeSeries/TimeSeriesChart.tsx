@@ -9,7 +9,7 @@ import { LocalStorage } from '../../../storage/LocalStorage';
 
 interface Props {}
 
-export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): JSX.Element => {
+export const TimeSeriesChart: React.FunctionComponent<Props>  = (): JSX.Element => {
 
     const service = useContext(ServicesContext);
     const [socketData, setSocketData] = useState<number[]>([]);
