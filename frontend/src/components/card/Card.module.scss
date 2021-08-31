@@ -1,0 +1,9 @@
+@import '../../assets/sass/index.scss';
+
+.cardContainer {
+    display: flex;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 0.7em;
+    box-shadow: 0 0 1em 0 $blackColor;
+}
