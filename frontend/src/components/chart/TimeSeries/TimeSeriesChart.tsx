@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import { ServicesContext } from '../../../context/ApiServices.context';
 import { Button } from '../../button/Button';
-import { Socket } from 'socket.io-client';
 import { LocalStorage } from '../../../storage/LocalStorage';
 
 interface Props {}
