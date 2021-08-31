@@ -14,7 +14,6 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (props: Props): 
 
     const service = useContext(ServicesContext);
     const [socketData, setSocketData] = useState<number[]>([]);
-    const [emmitingSocket, setSocket] = useState<Socket>();
 
     useEffect(() => {
         const timeSeriesSocket = service.socketService.getTimeSeriesSocket();
