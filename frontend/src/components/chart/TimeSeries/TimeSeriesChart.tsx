@@ -6,6 +6,7 @@ import { Line } from 'react-chartjs-2';
 import { ServicesContext } from '../../../context/ApiServices.context';
 import { Button } from '../../button/Button';
 import { LocalStorage } from '../../../storage/LocalStorage';
+import { Card } from '../../card/Card';
 
 interface Props {}
 
@@ -56,12 +57,14 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (): JSX.Element 
     }
 
     return (
-        <div className={styles.timeSeriesChartContainer}>
-            <div className={styles.actionButtonContainer}>
-                <Button onClick={emitData} value='Emit'/>
-                <Button onClick={disconnect} value='Stop'/>
+        <Card>
+            <div className={styles.timeSeriesChartContainer}>
+                <div className={styles.actionButtonContainer}>
+                    <Button onClick={emitData} value='Emit'/>
+                    <Button onClick={disconnect} value='Stop'/>
+                </div>
+                <Line data={data} options={chartOptions}/>
             </div>
-            <Line data={data} options={chartOptions}/>
-        </div>
+        </Card>
     )
 }
