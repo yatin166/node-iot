@@ -1,4 +1,4 @@
-import { io, Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { UserSocketRepository } from '../database/repository/UserSocket.repository'
 import { UserSocketSchema } from '../database/schemas/UserSocket.model';
 
@@ -33,7 +33,6 @@ export class SocketServiceImpl {
 
     public async stopEmit(userId: string): Promise<void> {
         const userSocket = await UserSocketRepository.getById(userId);
-        console.log(userSocket?.socketId, ' socketId should be disconnected');
         if (userSocket) {
             const socket = io(this.SOCKET_SERVER_URL);
             socket.on('connect', async () => {
