@@ -33,7 +33,6 @@ export class SocketServiceImpl {
 
     public async stopEmit(userId: string): Promise<void> {
         const userSocket = await UserSocketRepository.getById(userId);
-        console.log(userSocket?.socketId, ' socketId should be disconnected');
         if (userSocket) {
             const socket = io(this.SOCKET_SERVER_URL);
             socket.on('connect', async () => {
