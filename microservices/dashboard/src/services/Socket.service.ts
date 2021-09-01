@@ -1,4 +1,4 @@
-import { io, Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { UserSocketRepository } from '../database/repository/UserSocket.repository'
 import { UserSocketSchema } from '../database/schemas/UserSocket.model';
 
