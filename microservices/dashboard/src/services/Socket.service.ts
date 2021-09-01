@@ -1,7 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 import { UserSocketRepository } from '../database/repository/UserSocket.repository'
-import { UserSocketModel, UserSocketSchema } from '../database/schemas/UserSocket.model';
-import { TimeSeriesData } from '../SocketServer';
+import { UserSocketSchema } from '../database/schemas/UserSocket.model';
 
 export interface SocketService {
     startEmit(userId: string): Promise<void>
