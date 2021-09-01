@@ -7,9 +7,10 @@ export interface SocketService {
     stopEmit(userId: string): Promise<void>
     getSockets(): Promise<UserSocketSchema[]>
     deleteSockets(): Promise<void>
+    deleteSocket(id: string): Promise<void>
 }
 
-export class SocketServiceImpl {
+export class SocketServiceImpl implements SocketService {
 
     private readonly SOCKET_SERVER_URL = 'http://localhost:8001/';
 
@@ -49,5 +50,9 @@ export class SocketServiceImpl {
 
     public async deleteSockets(): Promise<void> {
         await UserSocketRepository.deleteAll();
+    }
+    
+    public async deleteSocket(id: string): Promise<void> {
+        await UserSocketRepository.delete(id);
     }
 }

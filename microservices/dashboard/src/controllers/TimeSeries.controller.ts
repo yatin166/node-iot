@@ -10,7 +10,8 @@ const Path = {
     TimeSeries: '/time-series',
     Emit: '/emit',
     Stop: '/stop',
-    Delete: '/delete'
+    Delete: '/delete',
+    id: '/:id'
 }
 
 export class TimeSeriesController implements DashboardController {
@@ -27,7 +28,8 @@ export class TimeSeriesController implements DashboardController {
         this.router.get(Path.TimeSeries + Path.Emit, authenticationMiddleware, this.startEmitting.bind(this));
         this.router.get(Path.TimeSeries + Path.Stop, authenticationMiddleware, this.stopEmitting.bind(this));
         this.router.get(Path.Socket + Path.All, authenticationMiddleware, this.getSockets.bind(this));
-        this.router.delete(Path.Socket + Path.Delete, authenticationMiddleware, this.deleteSockets.bind(this));
+        this.router.delete(Path.Socket + Path.Delete + Path.All, authenticationMiddleware, this.deleteSockets.bind(this));
+        this.router.delete(Path.Socket + Path.Delete + Path.id, authenticationMiddleware, this.deleteSocket.bind(this));
     }
 
     async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
@@ -57,6 +59,13 @@ export class TimeSeriesController implements DashboardController {
     async deleteSockets(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.deleteSockets()
             .then(() => res.send({ message: 'All sockets are deleted'}))
+            .catch(console.error);
+    }
+
+    async deleteSocket(req: Request, res: express.Response, next: express.NextFunction) {
+        const id: string = req.params.id;
+        this.socketService.deleteSocket(id)
+            .then(() => res.send({ message: 'Sockets deleted'}))
             .catch(console.error);
     }
 }
