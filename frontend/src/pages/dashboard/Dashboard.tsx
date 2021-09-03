@@ -23,7 +23,12 @@ export const Dashboard: React.FunctionComponent<Props>  = (props: Props): JSX.El
                     </Card>
                     <Router>
                         <Switch>
-                            <Route exact path={`/${Path.DASHBOARD}/${Path.TimeSeriesChart}`}>
+                            <Route exact path={`/${Path.DASHBOARD}/a`}>
+                                this is dashboard/
+                                <TimeSeriesChart />
+                            </Route>
+                            <Route exact path={`/${Path.DASHBOARD}`}>
+                                this is dashboard/charts
                                 <TimeSeriesChart />
                             </Route>
                         </Switch>
