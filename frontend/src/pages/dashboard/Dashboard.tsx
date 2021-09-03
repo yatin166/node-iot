@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps, BrowserRouter, Switch, Route } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import Sidebar from '../../components/sidebar/Sidebar';
 import { Flex } from '../../components/container/flex/Flex'
 import styles from './Dashboard.module.scss'
