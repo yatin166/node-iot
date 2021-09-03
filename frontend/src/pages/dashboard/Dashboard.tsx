@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { RouteComponentProps, BrowserRouter, Switch, Route } from 'react-router-dom';
 import Sidebar from '../../components/sidebar/Sidebar';
 import { Flex } from '../../components/container/flex/Flex'
 import styles from './Dashboard.module.scss'
@@ -7,6 +7,7 @@ import { TimeSeriesChart } from '../../components/chart/TimeSeries/TimeSeriesCha
 import { Card } from '../../components/card/Card';
 import { PrivateRoute } from '../../components/routes/PrivateRoute';
 import { Path } from '../../components/routes/Path';
+import { Login } from '../authentication/Login/Login';
 
 interface Props extends RouteComponentProps<{}> {}
 
@@ -17,22 +18,21 @@ export const Dashboard: React.FunctionComponent<Props>  = (props: Props): JSX.El
             <Sidebar />
             <div className={styles.contentContainer}>
                 <Flex.Vertical>
-                    <button onClick={() => props.history.push(`${Path.DASHBOARD}/${Path.TimeSeriesChart}`)}>abc</button>
+                    <button onClick={() => props.history.push(`/${Path.DASHBOARD}/${Path.TimeSeriesChart}`)}>abc</button>
                     <Card>
                         Time Series
                     </Card>
-                    <Router>
+                    <BrowserRouter>
                         <Switch>
-                            <Route exact path={`/${Path.DASHBOARD}/a`}>
+                            <Route exact path={`/${Path.DASHBOARD}`}>
                                 this is dashboard/
                                 <TimeSeriesChart />
                             </Route>
-                            <Route exact path={`/${Path.DASHBOARD}`}>
-                                this is dashboard/charts
-                                <TimeSeriesChart />
-                            </Route>
+                            <Route
+                                path={`/${Path.DASHBOARD}/${Path.TimeSeriesChart}`}
+                                component={Login}/>
                         </Switch>
-                    </Router>
+                    </BrowserRouter>
                 </Flex.Vertical>
             </div>
         </div>

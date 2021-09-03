@@ -15,7 +15,6 @@ export const Routes = () => {
         <Router>
             <Switch>
                 <PrivateRoute
-                    exact
                     path={`/${Path.DASHBOARD}`}
                     component={Dashboard}/>
                 <PublicRoute
