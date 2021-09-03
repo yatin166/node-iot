@@ -3,11 +3,8 @@ import { RouteComponentProps, BrowserRouter, Switch, Route } from 'react-router-
 import Sidebar from '../../components/sidebar/Sidebar';
 import { Flex } from '../../components/container/flex/Flex'
 import styles from './Dashboard.module.scss'
-import { TimeSeriesChart } from '../../components/chart/TimeSeries/TimeSeriesChart';
 import { Card } from '../../components/card/Card';
-import { PrivateRoute } from '../../components/routes/PrivateRoute';
 import { Path } from '../../components/routes/Path';
-import { Login } from '../authentication/Login/Login';
 
 interface Props extends RouteComponentProps<{}> {}
 
@@ -18,21 +15,11 @@ export const Dashboard: React.FunctionComponent<Props>  = (props: Props): JSX.El
             <Sidebar />
             <div className={styles.contentContainer}>
                 <Flex.Vertical>
-                    <button onClick={() => props.history.push(`/${Path.DASHBOARD}/${Path.TimeSeriesChart}`)}>abc</button>
                     <Card>
-                        Time Series
+                        <div onClick={() => props.history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.TIME_SERIES_CHART}`)}>
+                            Time series chart
+                        </div>
                     </Card>
-                    <BrowserRouter>
-                        <Switch>
-                            <Route exact path={`/${Path.DASHBOARD}`}>
-                                this is dashboard/
-                                <TimeSeriesChart />
-                            </Route>
-                            <Route
-                                path={`/${Path.DASHBOARD}/${Path.TimeSeriesChart}`}
-                                component={Login}/>
-                        </Switch>
-                    </BrowserRouter>
                 </Flex.Vertical>
             </div>
         </div>
