@@ -3,5 +3,6 @@ export enum Path {
     LOGIN = 'login',
     REGISTER = 'register',
     REDIRECT = '/',
-    TimeSeriesChart = 'time-series'
+    CHARTS = 'charts',
+    TIME_SERIES_CHART = 'time-series'
 }

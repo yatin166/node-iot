@@ -9,7 +9,7 @@ interface Props extends RouteComponentProps<{}> {}
 
 const Sidebar: React.FunctionComponent<Props>  = ({ history }): JSX.Element => {
 
-    const onTimeSeriesClick = () => history.push(Path.DASHBOARD);
+    const onTimeSeriesClick = () => window.location.pathname = Path.DASHBOARD
 
     const logoutClick = () => {
         LocalStorage.destroy();

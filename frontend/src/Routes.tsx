@@ -8,6 +8,7 @@ import { Login } from './pages/authentication/Login/Login';
 import { Register } from './pages/authentication/register/Register';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { PublicRoute } from './components/routes/PublicRoute';
+import { ChartRoutes } from './pages/charts/ChartsRoute';
 
 export const Routes = () => {
 
@@ -15,8 +16,12 @@ export const Routes = () => {
         <Router>
             <Switch>
                 <PrivateRoute
+                    exact
                     path={`/${Path.DASHBOARD}`}
                     component={Dashboard}/>
+                <PrivateRoute
+                    path={`/${Path.DASHBOARD}/${Path.CHARTS}`}
+                    component={ChartRoutes}/>
                 <PublicRoute
                     exact
                     path={`/${Path.REGISTER}`}
