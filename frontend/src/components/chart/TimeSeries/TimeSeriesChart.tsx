@@ -57,14 +57,12 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (): JSX.Element 
     }
 
     return (
-        <Card>
-            <div className={styles.timeSeriesChartContainer}>
-                <div className={styles.actionButtonContainer}>
-                    <Button onClick={emitData} value='Emit'/>
-                    <Button onClick={disconnect} value='Stop'/>
-                </div>
-                <Line data={data} options={chartOptions}/>
+        <div className={styles.timeSeriesChartContainer}>
+            <div className={styles.actionButtonContainer}>
+                <Button onClick={emitData} value='Emit'/>
+                <Button onClick={disconnect} value='Stop'/>
             </div>
-        </Card>
+            <Line data={data} options={chartOptions}/>
+        </div>
     )
 }

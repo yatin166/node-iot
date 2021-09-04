@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
 import { LocalStorage } from '../../storage/LocalStorage';
 import { Icon } from '../icon/Icon';
 import { Path } from '../routes/Path';
@@ -9,19 +9,16 @@ interface Props extends RouteComponentProps<{}> {}
 
 const Sidebar: React.FunctionComponent<Props>  = ({ history }): JSX.Element => {
 
-    const onTimeSeriesClick = () => window.location.pathname = Path.DASHBOARD
+    const onDashboardClick = () => window.location.pathname = Path.DASHBOARD
 
-    const logoutClick = () => {
-        LocalStorage.destroy();
-        history.push(Path.LOGIN);
-    }
+    const logoutClick = () => LocalStorage.destroy();
 
     const icons = [
         {
             icon: <Icon />,
-            name: 'Time series',
-            path: '/time-series',
-            onClick: () => onTimeSeriesClick()
+            name: 'Dashboard',
+            path: `/${Path.DASHBOARD}`,
+            onClick: () => onDashboardClick()
         },
         {
             icon: <Icon />,
@@ -38,9 +35,9 @@ const Sidebar: React.FunctionComponent<Props>  = ({ history }): JSX.Element => {
                     return (
                         <div className={styles.icon} onClick={() => item.onClick()}>
                             {item.icon}
-                            <div>
+                            <label>
                                 {item.name}
-                            </div>
+                            </label>
                         </div>
                     )
                 })}
