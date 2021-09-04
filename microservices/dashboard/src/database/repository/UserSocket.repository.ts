@@ -6,7 +6,7 @@ export class UserSocketRepository {
         return UserSocketModel.create({ socketId, userId });
     }
 
-    public static async getById(id: string) {
+    public static async getById(id: string): Promise<UserSocketSchema | null> {
         return UserSocketModel.findOne({ userId: id });
     }
 

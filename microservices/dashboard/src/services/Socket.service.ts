@@ -6,6 +6,7 @@ export interface SocketService {
     startEmit(userId: string): Promise<void>
     stopEmit(userId: string): Promise<void>
     getSockets(): Promise<UserSocketSchema[]>
+    getSocket(id: string): Promise<UserSocketSchema | null>
     deleteSockets(): Promise<void>
     deleteSocket(id: string): Promise<void>
 }
@@ -46,6 +47,10 @@ export class SocketServiceImpl implements SocketService {
 
     public async getSockets(): Promise<UserSocketSchema[]> {
         return await UserSocketRepository.getAll();
+    }
+
+    public async getSocket(id: string): Promise<UserSocketSchema | null> {
+        return await UserSocketRepository.getById(id);
     }
 
     public async deleteSockets(): Promise<void> {
