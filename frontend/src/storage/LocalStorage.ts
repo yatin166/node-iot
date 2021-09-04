@@ -1,3 +1,5 @@
+import { Path } from "../components/routes/Path";
+
 export enum LocalStorageKey {
     REFRESH_TOKEN = 'REFRESH_TOKEN',
     ACCESS_TOKEN = 'ACCESS_TOKEN'
@@ -10,7 +12,9 @@ export class LocalStorage {
     }
 
     public static destroy() {
-        localStorage.clear()
+        localStorage.clear();
+        console.log(window.location.pathname)
+        window.location.pathname = Path.LOGIN;
     }
 
     public static getAccessToken(): string | null {
