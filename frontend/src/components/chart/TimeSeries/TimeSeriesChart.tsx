@@ -6,7 +6,6 @@ import { Line } from 'react-chartjs-2';
 import { ServicesContext } from '../../../context/ApiServices.context';
 import { Button } from '../../button/Button';
 import { LocalStorage } from '../../../storage/LocalStorage';
-import { Card } from '../../card/Card';
 
 interface Props {}
 
@@ -20,7 +19,7 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (): JSX.Element 
         const userId = LocalStorage.getUserId();
         if (userId) {
             timeSeriesSocket.on(userId, message => {
-                setSocketData(prevState => [...prevState, message]);
+                setSocketData(prevState => [...prevState.slice(-5), message]);
             });
         }
     }, [])

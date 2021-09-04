@@ -38,9 +38,14 @@ export class Api {
 
     private onResponseError = (error: AxiosError) => {
         const originalRequest = error.config;
-        if (error.response?.status === 401) {
-            const refreshToken = localStorage.getRefreshToken();
-            return this.getAccessToken('/access-token', refreshToken)
+        if (error.response?.status === 403) {
+            const refreshToken = LocalStorage.getRefreshToken();
+            if (!refreshToken) {
+                LocalStorage.removeRefreshToken();
+                window.location.reload();
+                return Promise.reject(error);
+            }
+            return this.getAccessToken('/access-token', { refreshToken })
                 .then(response => {
                     if (response.status === 200) {
                         LocalStorage.persist(LocalStorageKey.ACCESS_TOKEN, response.data.accessToken);
