@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { LocalStorage } from '../../storage/LocalStorage';
 import { Icon } from '../icon/Icon';
 import { Path } from '../routes/Path';

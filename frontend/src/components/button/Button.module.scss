@@ -4,8 +4,17 @@
     padding: 1em;
     width: 100%;
     background: $primaryButtonColorLightTheme;
-    border: 1px solid $primaryButtonColorLightTheme;
+    border: 2px solid $primaryButtonColorLightTheme;
     color: $whiteColor;
     margin: 1em;
     border-radius: 0.5em;
+    cursor: pointer;
+    transition: 0.4s;
+
+    &:hover {
+        background: transparent;
+        color: $primaryButtonColorLightTheme;
+        transition: 0.2s;
+        border: 2px solid $primaryButtonColorLightTheme;
+    }
 }
