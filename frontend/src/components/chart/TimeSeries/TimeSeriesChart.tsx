@@ -45,7 +45,7 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (): JSX.Element 
 
     const emitData = () => {
         service.dashboardApi.startEmitting()
-            .then(() => console.log('Started emitting'))
+            .then(response => console.log('Started emitting', response.data.message))
             .catch(console.error)
     }
 
