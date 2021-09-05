@@ -20,11 +20,8 @@ export class SocketServiceImpl implements SocketService {
     public async startEmit(userId: string): Promise<SocketEmitResponse> {
 
         const userSocket = await UserSocketRepository.getById(userId);
-        if (userSocket) {
-            console.log('throwing error')
+        if (userSocket)
             throw new SocketError(409, 'Socket already created')
-        }
-        console.log('creating socket ')
 
         const socket = io(this.SOCKET_SERVER_URL);
         socket.on('connect', async () => {
@@ -33,13 +30,10 @@ export class SocketServiceImpl implements SocketService {
             const MAX = 100;
             const MIN = 10;
 
-            setInterval(() => socket.emit(
-                'time-series', 
-                {
-                    userId,
-                    content: Math.floor(Math.random() * (MAX - MIN + 1) + MIN)
-                }
-            ), 2000);
+            setInterval(() => socket.emit('time-series', {
+                userId,
+                content: Math.floor(Math.random() * (MAX - MIN + 1) + MIN)
+            }), 2000);
         });
 
         return new SocketEmitResponse('New Socket created');
