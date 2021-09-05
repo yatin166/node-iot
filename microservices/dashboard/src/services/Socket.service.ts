@@ -1,9 +1,11 @@
 import { io } from 'socket.io-client';
 import { UserSocketRepository } from '../database/repository/UserSocket.repository'
 import { UserSocketSchema } from '../database/schemas/UserSocket.model';
+import { SocketEmitResponse } from '../dto/response/SocketEmit.response';
+import { SocketError } from '../errors/SocketError';
 
 export interface SocketService {
-    startEmit(userId: string): Promise<void>
+    startEmit(userId: string): Promise<SocketEmitResponse | SocketError>
     stopEmit(userId: string): Promise<void>
     getSockets(): Promise<UserSocketSchema[]>
     getSocket(id: string): Promise<UserSocketSchema | null>
@@ -15,9 +17,17 @@ export class SocketServiceImpl implements SocketService {
 
     private readonly SOCKET_SERVER_URL = 'http://localhost:8001/';
 
-    public async startEmit(userId: string): Promise<void> {
+    public async startEmit(userId: string): Promise<SocketEmitResponse> {
+
+        const userSocket = await UserSocketRepository.getById(userId);
+        if (userSocket) {
+            console.log('throwing error')
+            throw new SocketError(409, 'Socket already created')
+        }
+        console.log('creating socket ')
+
         const socket = io(this.SOCKET_SERVER_URL);
-        await socket.on('connect', async () => {
+        socket.on('connect', async () => {
             await UserSocketRepository.save(socket.id, userId);
 
             const MAX = 100;
@@ -31,6 +41,8 @@ export class SocketServiceImpl implements SocketService {
                 }
             ), 2000);
         });
+
+        return new SocketEmitResponse('New Socket created');
     }
 
     public async stopEmit(userId: string): Promise<void> {

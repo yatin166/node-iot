@@ -1,3 +1,4 @@
+import { SocketEmitResponse } from "../../dto/response/SocketEmit.response";
 import { Api } from "./Api";
 
 const Path = {
@@ -14,7 +15,7 @@ export class DashboardApi extends Api {
     }
 
     public async startEmitting() {
-        return await this.http.get<void>(Path.TimeSeries + Path.Emit);
+        return await this.http.get<SocketEmitResponse>(Path.TimeSeries + Path.Emit);
     }
 
     public async stopEmitting() {

@@ -40,8 +40,8 @@ export class TimeSeriesController implements DashboardController {
             return res.send({ message: 'Could not find userId in the request' });
         
         this.socketService.startEmit(req.userId)
-            .then(() => res.send({ message: 'Started socket' }))
-            .catch(console.error)
+            .then(response => res.send(response))
+            .catch(error => next(error))
     }
 
     async stopEmitting(req: Request, res: express.Response, next: express.NextFunction) {
