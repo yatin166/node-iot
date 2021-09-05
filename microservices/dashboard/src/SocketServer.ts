@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 
 export interface TimeSeriesData {
     userId: string;
-    content: any
+    content: any // Should be numbers
 }
 
 export class SocketServer {
