@@ -14,7 +14,7 @@ export class LocalStorage {
     public static destroy() {
         localStorage.clear();
         console.log(window.location.pathname)
-        window.location.pathname = Path.LOGIN;
+        //window.location.pathname = Path.LOGIN;
     }
 
     public static getAccessToken(): string | null {

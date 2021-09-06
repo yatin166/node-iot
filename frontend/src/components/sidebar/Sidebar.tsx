@@ -33,7 +33,7 @@ const Sidebar: React.FunctionComponent<Props>  = ({ history }): JSX.Element => {
             <div className={styles.iconContainer}>
                 {icons.map(item => {
                     return (
-                        <div className={styles.icon} onClick={() => item.onClick()}>
+                        <div className={styles.icon} onClick={() => item.onClick()} key={item.name}>
                             {item.icon}
                             <label>
                                 {item.name}

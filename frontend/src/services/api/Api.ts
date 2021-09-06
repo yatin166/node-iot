@@ -39,14 +39,16 @@ export class Api {
     private onResponseError = (error: AxiosError) => {
         const originalRequest = error.config;
         if (error.response?.status === 403) {
+            console.log('Token invalid should get new access token')
             const refreshToken = LocalStorage.getRefreshToken();
             if (!refreshToken) {
                 LocalStorage.removeRefreshToken();
                 window.location.reload();
                 return Promise.reject(error);
             }
-            return this.getAccessToken('/access-token', { refreshToken })
+            return this.getAccessToken('/auth/access-token', { refreshToken })
                 .then(response => {
+                    console.log('Got new access token', response)
                     if (response.status === 200) {
                         LocalStorage.persist(LocalStorageKey.ACCESS_TOKEN, response.data.accessToken);
                         return axios(originalRequest);
@@ -60,7 +62,7 @@ export class Api {
                         message: error.message
                     })
                     LocalStorage.removeRefreshToken();
-                    window.location.reload();
+                    //window.location.reload();
                     return Promise.reject(error);
                 });
             }
