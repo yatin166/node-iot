@@ -20,13 +20,12 @@ export class Api {
         if (token) {
             config.headers['Authorization'] = token;
         }
+        config.url = this.basePath + config.url;
         //TODO: should be refactored:
-        if (config.url && config.url.includes('8001')) {
-            config.url = 'http://localhost:8000' + config.url;
-            console.log(config.url)
-        }else {
-            config.url = this.basePath + config.url;
-        }
+        if (config.url.includes('auth/access-token'))
+            config.url = 'http://localhost:8000/api/v1/auth/access-token'
+
+        console.log(config.url, 'config')
         return config
     }
 
