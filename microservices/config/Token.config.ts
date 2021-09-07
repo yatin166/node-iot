@@ -33,7 +33,7 @@ export class TokenConfig {
             }
         }
         return {
-            expiresInSeconds: 10,//60 * 5, // 5m
+            expiresInSeconds: 60 * 5, // 5m
             secret: this.tokenSecret
         }
     }
