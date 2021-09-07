@@ -1,6 +1,7 @@
 import express from 'express';
 import { Request } from '../middleware/Request'
 import { authenticationMiddleware } from '../middleware/authentication.middleware';
+import { reqLoggerMiddleware } from '../middleware/reqLogger.middleware';
 import { DashboardController } from './base/Main.dashboard.controller';
 import { SocketService } from '../services/Socket.service';
 
@@ -25,14 +26,14 @@ export class TimeSeriesController implements DashboardController {
     }
 
     private initRoutes() {
-        this.router.get(Path.TimeSeries + Path.Emit, authenticationMiddleware, this.startEmitting.bind(this));
-        this.router.get(Path.TimeSeries + Path.Stop, authenticationMiddleware, this.stopEmitting.bind(this));
+        this.router.get(Path.TimeSeries + Path.Emit, authenticationMiddleware, reqLoggerMiddleware, this.startEmitting.bind(this));
+        this.router.get(Path.TimeSeries + Path.Stop, authenticationMiddleware, reqLoggerMiddleware, this.stopEmitting.bind(this));
 
-        this.router.get(Path.Socket + Path.All, authenticationMiddleware, this.getSockets.bind(this));
-        this.router.get(Path.Socket + Path.id, authenticationMiddleware, this.getSockets.bind(this));
+        this.router.get(Path.Socket + Path.All, authenticationMiddleware, reqLoggerMiddleware, this.getSockets.bind(this));
+        this.router.get(Path.Socket + Path.id, authenticationMiddleware, reqLoggerMiddleware, this.getSockets.bind(this));
         
-        this.router.delete(Path.Socket + Path.Delete + Path.All, authenticationMiddleware, this.deleteSockets.bind(this));
-        this.router.delete(Path.Socket + Path.Delete + Path.id, authenticationMiddleware, this.deleteSocket.bind(this));
+        this.router.delete(Path.Socket + Path.Delete + Path.All, authenticationMiddleware, reqLoggerMiddleware, this.deleteSockets.bind(this));
+        this.router.delete(Path.Socket + Path.Delete + Path.id, authenticationMiddleware, reqLoggerMiddleware, this.deleteSocket.bind(this));
     }
 
     async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
