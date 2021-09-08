@@ -5,5 +5,12 @@
     margin: 1em;
     padding: 1em;
     border-radius: 0.7em;
-    box-shadow: 0 0 1em 0 $blackColor;
+    box-shadow: 0 0 0.5em -0.2em $blackColor;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 0 0 0.6em -0.2em $blackColor;
+        text-decoration: underline;
+        transition: 0.2s;
+    }
 }
