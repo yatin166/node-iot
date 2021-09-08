@@ -15,8 +15,8 @@ export const Dashboard: React.FunctionComponent<Props>  = (props: Props): JSX.El
             <Sidebar />
             <div className={styles.contentContainer}>
                 <Flex.Vertical>
-                    <Card>
-                        <div onClick={() => props.history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.TIME_SERIES_CHART}`)}>
+                    <Card onClick={() => props.history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.TIME_SERIES_CHART}`)}>
+                        <div className={styles.cardContentContainer}>
                             Time series chart
                         </div>
                     </Card>
