@@ -5,10 +5,13 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    @include fadeInAnimation;
 
     > div {
         border: 1px solid $primaryButtonBorderColorLightTheme;
         padding: 2em;
+        border-radius: 1em;
+        background: $whiteColor;
 
         form > div > div {
             &:first-child {

@@ -5,11 +5,13 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    @include fadeInAnimation;
 
     > div {
         border: 1px solid $primaryButtonBorderColorLightTheme;
         border-radius: 1em;
         padding: 2em;
+        background: $whiteColor;
 
         form {
             width: 100%;
