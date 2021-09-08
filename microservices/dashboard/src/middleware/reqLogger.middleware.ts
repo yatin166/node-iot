@@ -6,5 +6,6 @@ export const reqLoggerMiddleware = (
     res: express.Response, 
     next: express.NextFunction
 ) => {
-    console.log('Request path:', { API_URI: `${req.rawHeaders[1]}${req.baseUrl}${req.url}`});
+    console.log('Request path:', { API_URI: `${req.baseUrl}${req.url}`});
+    next();
 }
