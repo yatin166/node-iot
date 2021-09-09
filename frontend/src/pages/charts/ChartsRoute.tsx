@@ -5,6 +5,7 @@ import { Flex } from '../../components/container/flex/Flex'
 import styles from './ChartRoutes.module.scss'
 import { TimeSeriesChart } from '../../components/chart/TimeSeries/TimeSeriesChart';
 import { Path } from '../../components/routes/Path';
+import { ScatterChart } from '../../components/chart/Scatter/ScatterChart';
 
 interface Props extends RouteComponentProps<{}> {}
 
@@ -20,7 +21,7 @@ export const ChartRoutes: React.FunctionComponent<Props>  = (props: Props): JSX.
                             <Route
                                 exact
                                 path={`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.TIME_SERIES_CHART}`}
-                                component={TimeSeriesChart}/>
+                                component={ScatterChart}/>
                         </Switch>
                     </BrowserRouter>
                 </Flex.Vertical>
