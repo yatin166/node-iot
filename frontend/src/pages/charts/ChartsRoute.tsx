@@ -21,7 +21,7 @@ export const ChartRoutes: React.FunctionComponent<Props>  = (props: Props): JSX.
                             <Route
                                 exact
                                 path={`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.TIME_SERIES_CHART}`}
-                                component={ScatterChart}/>
+                                component={TimeSeriesChart}/>
                         </Switch>
                     </BrowserRouter>
                 </Flex.Vertical>
