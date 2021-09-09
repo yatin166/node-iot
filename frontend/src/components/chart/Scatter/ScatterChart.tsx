@@ -13,7 +13,7 @@ export const ScatterChart: React.FunctionComponent<Props>  = (): JSX.Element => 
 
     const service = useContext(ServicesContext);
     const [socketData, setSocketData] = useState<number[]>([]);
-    const [yAxisData, setYAxisData] = useState<Date[]>([new Date(), new Date(), new Date(), new Date(), new Date()])
+    const [yAxisData, setYAxisData] = useState<Date[]>([new Date()])
 
     useEffect(() => {
         const timeSeriesSocket = service.socketService.getTimeSeriesSocket();
@@ -22,18 +22,16 @@ export const ScatterChart: React.FunctionComponent<Props>  = (): JSX.Element => 
             timeSeriesSocket.on(userId, message => {
                 setSocketData(prevState => [...prevState.slice(-5), message]);
                 setYAxisData(prevState => [...prevState.slice(-5), new Date()]);
-
             });
         }
     }, [])
 
+    const dd = socketData.map((s, i) => { return { x: yAxisData[i], y: s } });
+
     const data = {
         datasets: [
           {
-            label: 'A dataset',
-            data: [
-                socketData.map((s, i) => { return { x: s, y: yAxisData[i] } })
-            ],
+            data: dd,
             borderColor: "#742774"
           }
         ]
@@ -44,11 +42,19 @@ export const ScatterChart: React.FunctionComponent<Props>  = (): JSX.Element => 
             yAxes: [
                 {
                     ticks: {
-                        beginAtZero: true,
+                        beginAtZero: false,
+                        steps: 10,
+                        stepValue: 5,
+                        max: 100 
                     },
                 },
             ],
         },
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
     }
 
     const emitData = () => {
@@ -63,7 +69,6 @@ export const ScatterChart: React.FunctionComponent<Props>  = (): JSX.Element => 
             .catch(console.error)
     }
 
-    console.log(socketData, 'socketData')
     return (
         <div className={styles.scatterChartContainer}>
             <div className={styles.actionButtonContainer}>
