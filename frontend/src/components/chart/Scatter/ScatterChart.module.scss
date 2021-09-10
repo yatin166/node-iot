@@ -1,5 +1,8 @@
+@import '../../../assets/sass/index.scss';
+
 .scatterChartContainer {
     margin-top: 3em;
+    @include fadeInAnimation;
     > canvas {
         height: 30em;
         margin-top: 2em;

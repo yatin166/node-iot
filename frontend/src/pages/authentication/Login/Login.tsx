@@ -35,6 +35,8 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
 
     const onSubmit = (e: any) => {
         e.preventDefault()
+        if (!credentials.email || !credentials.password)
+            alert('Please provide valid email and password');
         const loginRequest: LoginRequest = {
             email: credentials.email,
             password: credentials.password
