@@ -14,13 +14,19 @@ export const Dashboard: React.FunctionComponent<Props>  = (props: Props): JSX.El
         <div className={styles.dashboardContainer}>
             <Sidebar />
             <div className={styles.contentContainer}>
-                <Flex.Vertical>
+                <Flex.Horizontal>
                     <Card onClick={() => props.history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.TIME_SERIES_CHART}`)}>
                         <div className={styles.cardContentContainer}>
                             Time series chart
                         </div>
                     </Card>
-                </Flex.Vertical>
+
+                    <Card onClick={() => props.history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.SCATTER_CHART}`)}>
+                        <div className={styles.cardContentContainer}>
+                            Scatter chart
+                        </div>
+                    </Card>
+                </Flex.Horizontal>
             </div>
         </div>
     )
