@@ -44,8 +44,21 @@ export const Register: React.FunctionComponent<Props> = (props: Props): JSX.Elem
         }
     }
 
+    const isFormValid = (): { status: boolean, message: string } => {
+        const { email, password, firstName, lastName, confirmPassword } = credentials;
+        if (!email || !password || !firstName || !lastName || !confirmPassword)
+            return { status: false, message: 'Please provide valid email and password' };
+        if (password !== confirmPassword)
+            return { status: false, message: 'Password and confirm password is not same' };
+        return { status: true, message: '' }
+    }
+
     const onSubmit = (e: any) => {
-        e.preventDefault()
+        e.preventDefault();
+        
+        if (!isFormValid().status)
+            return alert(isFormValid().message);
+
         const registerRequest: RegisterRequest = {
             firstName: credentials.firstName,
             lastName: credentials.lastName,
