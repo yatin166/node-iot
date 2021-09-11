@@ -7,6 +7,7 @@ import http from 'http';
 import { SocketServer } from './SocketServer';
 import cors from 'cors';
 import { router } from './decorators/Route.decorator';
+import { authenticationMiddleware } from '../../admin/src/middleware/authentication.middleware';
 
 export class DashboardServer extends Database {
     private readonly expressApplication: express.Application;
@@ -37,12 +38,13 @@ export class DashboardServer extends Database {
 
     public async configure(): Promise<void> {
         this.expressApplication.use(cors())
+        this.expressApplication.use(authenticationMiddleware)
         this.expressApplication.use(bodyParser.json());
 
         for (const route of this.mainDashboardController.routerConfiguration) {
-            this.expressApplication.use(route.path, route.controller.router);
+            //this.expressApplication.use(route.path, route.controller.router);
+            this.expressApplication.use(route.path, router);
         }
-        this.expressApplication.use(router);
     }
 
     public up() {

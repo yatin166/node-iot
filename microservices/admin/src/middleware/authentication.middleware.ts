@@ -9,6 +9,10 @@ export const authenticationMiddleware = (
     next: express.NextFunction
 ) => {
     const token = req.headers['autharization'];
+    /* console.log(req) */
+    console.log(token, ' token')
+
+    /* const token2 = req['Symbol(kHeaders)']. */
 
     if (typeof token === 'string') {
         try {
