@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 import bodyParser from 'body-parser';
 import { MainDashboardController } from './controllers/base/Main.dashboard.controller';
 import { Database } from './database/Database';
@@ -6,6 +6,20 @@ import socketIO from "socket.io";
 import http from 'http';
 import { SocketServer } from './SocketServer';
 import cors from 'cors';
+
+
+const appRouter = Router()
+interface IOptions {
+    path: string;
+    method: 'get'| 'post'| 'put' | 'delete' ;
+    router?: express.Router
+}
+
+function routesDecorator(options: IOptions) {
+    return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+       (appRouter)[options.method](options.path, target[propertyKey]);
+    };
+}
 
 export class DashboardServer extends Database {
     private readonly expressApplication: express.Application;
@@ -41,6 +55,16 @@ export class DashboardServer extends Database {
         for (const route of this.mainDashboardController.routerConfiguration) {
             this.expressApplication.use(route.path, route.controller.router);
         }
+
+        this.expressApplication.use(appRouter);
+    }
+
+    @routesDecorator({
+        path: '/someroute',
+        method: 'get'
+    })
+    async someMethod(req: express.Request, res: express.Response, next: express.NextFunction) {
+        res.send({ message: 'This is given from decorator!' });
     }
 
     public up() {

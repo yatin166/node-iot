@@ -29,7 +29,7 @@ export class MainDashboardController {
             {
                 controller: new TimeSeriesController(
                     router,
-                     new SocketServiceImpl()
+                    new SocketServiceImpl()
                 ),
                 path: this.configurePath(Path.TimeSeriesController)
             }
