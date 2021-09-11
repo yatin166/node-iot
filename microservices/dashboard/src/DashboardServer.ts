@@ -6,18 +6,19 @@ import socketIO from "socket.io";
 import http from 'http';
 import { SocketServer } from './SocketServer';
 import cors from 'cors';
+import { TimeSeriesController } from './controllers/TimeSeries.controller';
 
 
 const appRouter = Router()
 interface IOptions {
     path: string;
     method: 'get'| 'post'| 'put' | 'delete' ;
-    router?: express.Router
+    router: Router
 }
 
 function routesDecorator(options: IOptions) {
     return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
-       (appRouter)[options.method](options.path, target[propertyKey]);
+       (options.router)[options.method](options.path, target[propertyKey]);
     };
 }
 
@@ -55,13 +56,15 @@ export class DashboardServer extends Database {
         for (const route of this.mainDashboardController.routerConfiguration) {
             this.expressApplication.use(route.path, route.controller.router);
         }
+        this.expressApplication.use(TimeSeriesController.staticRouter);
 
         this.expressApplication.use(appRouter);
     }
 
     @routesDecorator({
         path: '/someroute',
-        method: 'get'
+        method: 'get',
+        router: Router()
     })
     async someMethod(req: express.Request, res: express.Response, next: express.NextFunction) {
         res.send({ message: 'This is given from decorator!' });
