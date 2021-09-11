@@ -4,6 +4,7 @@ import { authenticationMiddleware } from '../middleware/authentication.middlewar
 import { reqLoggerMiddleware } from '../middleware/reqLogger.middleware';
 import { DashboardController } from './base/Main.dashboard.controller';
 import { SocketService } from '../services/Socket.service';
+import { GET } from '../decorators/Route.decorator';
 
 const Path = {
     Socket: '/socket',
@@ -15,87 +16,14 @@ const Path = {
     id: '/:id'
 }
 
-/* function logMethod(
-    target: Object,
-    propertyName: string,
-    propertyDesciptor: PropertyDescriptor
-): PropertyDescriptor {
-        
-    const method = propertyDesciptor.value;
-
-    propertyDesciptor.value = function (...args: any[]) {
-
-        // convert list of greet arguments to string
-        const params = args.map(a => JSON.stringify(a)).join();
-
-        // invoke greet() and get its return value
-        const result = method.apply(this, args);
-
-        // convert result to string
-        const r = JSON.stringify(result);
-
-        // display in console the function call details
-        console.log(`Call: ${propertyName}(${params}) => ${r}`);
-
-        // return the result of invoking the method
-        return result;
-    }
-    return propertyDesciptor;
-}; */
-
-function logMethod(
-    router: express.Router,
-    controller: any,
-    methodType: 'get' | 'post' | 'put' | 'delete',
-    path: string,
-    propertyDesciptor?: PropertyDescriptor
-) {
-
-    //return router.get(path, authenticationMiddleware, reqLoggerMiddleware, propertyDesciptor.value.bind(controller));
-    /* const method = propertyDesciptor.value;
-
-    propertyDesciptor.value = function (...args: any[]) {
-
-        // convert list of greet arguments to string
-        const params = args.map(a => JSON.stringify(a)).join();
-
-        // invoke greet() and get its return value
-        const result = method.apply(this, args);
-
-        // convert result to string
-        const r = JSON.stringify(result);
-
-        // display in console the function call details
-        console.log(`Call: ${propertyName}(${params}) => ${r}`);
-
-        // return the result of invoking the method
-        return result;
-    }
-    return propertyDesciptor; */
-};
-
-interface IOptions {
-    path: string;
-    method: 'get'| 'post'| 'put' | 'delete' ;
-    router: Router
-}
-
-function routesDecorator(options: IOptions) {
-    return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
-       (options.router)[options.method](options.path, target[propertyKey]);
-    };
-}
-
 export class TimeSeriesController implements DashboardController {
     public readonly router: express.Router;
     private readonly socketService: SocketService
-    public static staticRouter: express.Router = Router();
 
     constructor(router: express.Router, socketService: SocketService) {
         this.router = router;
         this.socketService = socketService;
         this.initRoutes();
-        routesDecorator.bind(this)
     }
 
     private initRoutes() {
@@ -109,13 +37,9 @@ export class TimeSeriesController implements DashboardController {
         this.router.delete(Path.Socket + Path.Delete + Path.id, authenticationMiddleware, reqLoggerMiddleware, this.deleteSocket.bind(this));
     }
 
-    @routesDecorator({
-        path: '/someroute2',
-        method: 'get',
-        router: TimeSeriesController.staticRouter
-    })
-    async someMethod(req: express.Request, res: express.Response, next: express.NextFunction) {
-        res.send({ message: 'This is given from decorator2!' });
+    @GET('/someroute3')
+    async someMethod2(req: express.Request, res: express.Response, next: express.NextFunction) {
+        res.send({ message: 'This is given from decorator3!' });
     }
 
     async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
