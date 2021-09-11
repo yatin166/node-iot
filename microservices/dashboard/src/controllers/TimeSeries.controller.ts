@@ -74,15 +74,28 @@ function logMethod(
     return propertyDesciptor; */
 };
 
+interface IOptions {
+    path: string;
+    method: 'get'| 'post'| 'put' | 'delete' ;
+    router: Router
+}
+
+function routesDecorator(options: IOptions) {
+    return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+       (options.router)[options.method](options.path, target[propertyKey]);
+    };
+}
 
 export class TimeSeriesController implements DashboardController {
     public readonly router: express.Router;
     private readonly socketService: SocketService
+    public static staticRouter: express.Router = Router();
 
     constructor(router: express.Router, socketService: SocketService) {
         this.router = router;
         this.socketService = socketService;
         this.initRoutes();
+        routesDecorator.bind(this)
     }
 
     private initRoutes() {
@@ -94,6 +107,15 @@ export class TimeSeriesController implements DashboardController {
         
         this.router.delete(Path.Socket + Path.Delete + Path.All, authenticationMiddleware, reqLoggerMiddleware, this.deleteSockets.bind(this));
         this.router.delete(Path.Socket + Path.Delete + Path.id, authenticationMiddleware, reqLoggerMiddleware, this.deleteSocket.bind(this));
+    }
+
+    @routesDecorator({
+        path: '/someroute2',
+        method: 'get',
+        router: TimeSeriesController.staticRouter
+    })
+    async someMethod(req: express.Request, res: express.Response, next: express.NextFunction) {
+        res.send({ message: 'This is given from decorator2!' });
     }
 
     async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
