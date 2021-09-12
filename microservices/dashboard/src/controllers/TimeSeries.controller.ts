@@ -4,7 +4,7 @@ import { authenticationMiddleware } from '../middleware/authentication.middlewar
 import { reqLoggerMiddleware } from '../middleware/reqLogger.middleware';
 import { DashboardController } from './base/Main.dashboard.controller';
 import { SocketService } from '../services/Socket.service';
-import { GET } from '../decorators/Route.decorator';
+import { DELETE, GET } from '../decorators/Route.decorator';
 
 const Path = {
     Socket: '/socket',
@@ -13,7 +13,7 @@ const Path = {
     Emit: '/emit',
     Stop: '/stop',
     Delete: '/delete',
-    id: '/:id'
+    Id: '/:id'
 }
 
 export class TimeSeriesController implements DashboardController {
@@ -23,25 +23,26 @@ export class TimeSeriesController implements DashboardController {
     constructor(router: express.Router, socketService: SocketService) {
         this.router = router;
         this.socketService = socketService;
-        this.initRoutes();
+        /* this.initRoutes(); */
     }
 
-    private initRoutes() {
+    /* private initRoutes() {
         this.router.get(Path.TimeSeries + Path.Emit, authenticationMiddleware, reqLoggerMiddleware, this.startEmitting.bind(this));
         this.router.get(Path.TimeSeries + Path.Stop, authenticationMiddleware, reqLoggerMiddleware, this.stopEmitting.bind(this));
 
         this.router.get(Path.Socket + Path.All, authenticationMiddleware, reqLoggerMiddleware, this.getSockets.bind(this));
-        this.router.get(Path.Socket + Path.id, authenticationMiddleware, reqLoggerMiddleware, this.getSockets.bind(this));
+        this.router.get(Path.Socket + Path.Id, authenticationMiddleware, reqLoggerMiddleware, this.getSockets.bind(this));
         
         this.router.delete(Path.Socket + Path.Delete + Path.All, authenticationMiddleware, reqLoggerMiddleware, this.deleteSockets.bind(this));
-        this.router.delete(Path.Socket + Path.Delete + Path.id, authenticationMiddleware, reqLoggerMiddleware, this.deleteSocket.bind(this));
-    }
+        this.router.delete(Path.Socket + Path.Delete + Path.Id, authenticationMiddleware, reqLoggerMiddleware, this.deleteSocket.bind(this));
+    } */
 
     @GET('/someroute3')
-    async someMethod2(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async someMethod2(req: Request, res: express.Response, next: express.NextFunction) {
         res.send({ message: 'This is given from decorator3!' });
     }
 
+    @GET(`${Path.TimeSeries}${Path.Emit}`)
     async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
         if (!req.userId)
             return res.send({ message: 'Could not find userId in the request' });
@@ -51,6 +52,7 @@ export class TimeSeriesController implements DashboardController {
             .catch(error => next(error))
     }
 
+    @GET(`${Path.TimeSeries}${Path.Stop}`)
     async stopEmitting(req: Request, res: express.Response, next: express.NextFunction) {
         if (!req.userId)
             return res.send({ message: 'Could not find userId in the request' });
@@ -60,24 +62,28 @@ export class TimeSeriesController implements DashboardController {
             .catch(console.error)
     }
 
+    @GET(`${Path.TimeSeries}${Path.All}`)
     async getSockets(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.getSockets()
             .then(sockets => res.send(sockets))
             .catch(console.error);
     }
 
+    @GET(`${Path.TimeSeries}${Path.Id}`)
     async getSocket(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.getSocket(req.params.id)
             .then(socket => res.send(socket))
             .catch(console.error);
     }
 
+    @DELETE(`${Path.TimeSeries}${Path.All}`)
     async deleteSockets(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.deleteSockets()
             .then(() => res.send({ message: 'All sockets are deleted'}))
             .catch(console.error);
     }
 
+    @DELETE(`${Path.TimeSeries}${Path.Id}`)
     async deleteSocket(req: Request, res: express.Response, next: express.NextFunction) {
         const id: string = req.params.id;
         this.socketService.deleteSocket(id)
