@@ -21,16 +21,6 @@ const getRoute = (medthod: Method, path: string) => {
     return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
 
         const original = descriptor.value;
-        descriptor.value = function (...args: any[]) {
-            /* console.log('inside')
-
-            const request = args[0] as express.Request;
-            const response = args[1] as express.Response;
-            const nextFunction = args[1] as express.NextFunction;
-
-            const headers = request.headers; */
-            console.log(args[0], ' args[0]')
-        }
         console.log(descriptor.value() , ' descriptor.value')
         router.use(authenticationMiddleware);
         (router)[medthod](path, target[propertyKey]);
