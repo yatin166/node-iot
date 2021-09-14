@@ -4,7 +4,7 @@ import { authenticationMiddleware } from '../middleware/authentication.middlewar
 import { reqLoggerMiddleware } from '../middleware/reqLogger.middleware';
 import { DashboardController } from './base/Main.dashboard.controller';
 import { SocketService } from '../services/Socket.service';
-import { DELETE, GET } from '../decorators/Route.decorator';
+import { AUTH, DELETE, GET } from '../decorators/Route.decorator';
 
 const Path = {
     Socket: '/socket',
@@ -38,6 +38,7 @@ export class TimeSeriesController implements DashboardController {
     }*/
 
     @GET('/someroute3')
+    @AUTH()
     async someMethod2(req: Request, res: express.Response, next: express.NextFunction) {
         res.send({ message: 'This is given from decorator3!' });
     }

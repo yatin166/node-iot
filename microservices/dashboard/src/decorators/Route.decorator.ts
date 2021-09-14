@@ -17,6 +17,14 @@ const getRoute = (medthod: Method, path: string) => {
     };
 }
 
+export const AUTH = () => {
+    return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+        console.log(target, 'target')
+        console.log(propertyKey, 'propertyKey')
+        console.log(descriptor, 'descriptor')
+    };
+}
+
 export const GET = (path: string) => getRoute(Method.GET, path);
 export const POST = (path: string) => getRoute(Method.POST, path);
 export const PATCH = (path: string) => getRoute(Method.PATCH, path);
