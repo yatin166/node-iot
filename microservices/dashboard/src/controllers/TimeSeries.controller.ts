@@ -26,7 +26,7 @@ export class TimeSeriesController implements DashboardController {
         /* this.initRoutes(); */
     }
 
-    /* private initRoutes() {
+    /*private initRoutes() {
         this.router.get(Path.TimeSeries + Path.Emit, authenticationMiddleware, reqLoggerMiddleware, this.startEmitting.bind(this));
         this.router.get(Path.TimeSeries + Path.Stop, authenticationMiddleware, reqLoggerMiddleware, this.stopEmitting.bind(this));
 
@@ -35,7 +35,7 @@ export class TimeSeriesController implements DashboardController {
         
         this.router.delete(Path.Socket + Path.Delete + Path.All, authenticationMiddleware, reqLoggerMiddleware, this.deleteSockets.bind(this));
         this.router.delete(Path.Socket + Path.Delete + Path.Id, authenticationMiddleware, reqLoggerMiddleware, this.deleteSocket.bind(this));
-    } */
+    }*/
 
     @GET('/someroute3')
     async someMethod2(req: Request, res: express.Response, next: express.NextFunction) {
