@@ -1,7 +1,5 @@
-import express, { Router } from 'express';
+import { Router } from 'express';
 import { authenticationMiddleware } from '../../../admin/src/middleware/authentication.middleware';
-import { reqLoggerMiddleware } from '../middleware/reqLogger.middleware';
-import { Request } from '../middleware/Request'
 
 enum Method {
     GET = 'get',
