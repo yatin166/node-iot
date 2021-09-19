@@ -38,7 +38,6 @@ export class DashboardServer extends Database {
 
     public async configure(): Promise<void> {
         this.expressApplication.use(cors())
-        this.expressApplication.use(authenticationMiddleware)
         this.expressApplication.use(bodyParser.json());
 
         for (const route of this.mainDashboardController.routerConfiguration) {

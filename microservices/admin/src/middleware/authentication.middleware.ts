@@ -10,7 +10,7 @@ export const authenticationMiddleware = (
 ) => {
     const token = req.headers['autharization'];
     /* console.log(req) */
-    console.log(token, ' token')
+    //console.log(token, ' token')
 
     /* const token2 = req['Symbol(kHeaders)']. */
 
