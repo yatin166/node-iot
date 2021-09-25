@@ -19,6 +19,7 @@ export class SocketServiceImpl implements SocketService {
 
     public async startEmit(userId: string): Promise<SocketEmitResponse> {
 
+        console.log('in startEmit');
         const userSocket = await UserSocketRepository.getById(userId);
         if (userSocket)
             throw new SocketError(409, 'Socket already created')
