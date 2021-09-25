@@ -1,10 +1,8 @@
-import express, { Router } from 'express';
+import express from 'express';
 import { Request } from '../middleware/Request'
-import { authenticationMiddleware } from '../middleware/authentication.middleware';
-import { reqLoggerMiddleware } from '../middleware/reqLogger.middleware';
 import { DashboardController } from './base/Main.dashboard.controller';
 import { SocketService } from '../services/Socket.service';
-import { AUTH, DELETE, GET, routeLog } from '../decorators/Route.decorator';
+import { DELETE, GET } from '../decorators/Route.decorator';
 
 const Path = {
     Socket: '/socket',
@@ -17,31 +15,11 @@ const Path = {
 }
 
 export class TimeSeriesController implements DashboardController {
-    public readonly router: express.Router;
+    
     private readonly socketService: SocketService
 
-    constructor(router: express.Router, socketService: SocketService) {
-        this.router = router;
+    constructor(socketService: SocketService) {
         this.socketService = socketService;
-        /* this.initRoutes(); */
-    }
-
-    /*private initRoutes() {
-        this.router.get(Path.TimeSeries + Path.Emit, authenticationMiddleware, reqLoggerMiddleware, this.startEmitting.bind(this));
-        this.router.get(Path.TimeSeries + Path.Stop, authenticationMiddleware, reqLoggerMiddleware, this.stopEmitting.bind(this));
-
-        this.router.get(Path.Socket + Path.All, authenticationMiddleware, reqLoggerMiddleware, this.getSockets.bind(this));
-        this.router.get(Path.Socket + Path.Id, authenticationMiddleware, reqLoggerMiddleware, this.getSockets.bind(this));
-        
-        this.router.delete(Path.Socket + Path.Delete + Path.All, authenticationMiddleware, reqLoggerMiddleware, this.deleteSockets.bind(this));
-        this.router.delete(Path.Socket + Path.Delete + Path.Id, authenticationMiddleware, reqLoggerMiddleware, this.deleteSocket.bind(this));
-    }*/
-
-    @routeLog()
-    @GET('/someroute3')
-    @AUTH()
-    async someMethod2(req: Request, res: express.Response, next: express.NextFunction) {
-        res.send({ message: 'This is given from decorator3!' });
     }
 
     @GET(`${Path.TimeSeries}${Path.Emit}`)

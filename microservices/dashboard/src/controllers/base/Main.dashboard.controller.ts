@@ -1,4 +1,3 @@
-import express from 'express';
 import { SocketServiceImpl } from '../../services/Socket.service';
 import { TimeSeriesController } from '../TimeSeries.controller';
 
@@ -7,9 +6,7 @@ const Path = {
     TimeSeriesController: '/data'
 }
 
-export interface DashboardController {
-    router: express.Router;
-}
+export interface DashboardController { }
 
 interface RouterConfiguration {
     controller: DashboardController,
@@ -24,13 +21,9 @@ export class MainDashboardController {
     }
 
     private initRouters(): RouterConfiguration[] {
-        const router = express.Router();
         return [
             {
-                controller: new TimeSeriesController(
-                    router,
-                    new SocketServiceImpl()
-                ),
+                controller: new TimeSeriesController(new SocketServiceImpl()),
                 path: this.configurePath(Path.TimeSeriesController)
             }
         ]

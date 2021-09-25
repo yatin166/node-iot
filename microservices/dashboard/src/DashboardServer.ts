@@ -41,7 +41,6 @@ export class DashboardServer extends Database {
         this.expressApplication.use(bodyParser.json());
 
         for (const route of this.mainDashboardController.routerConfiguration) {
-            //this.expressApplication.use(route.path, route.controller.router);
             this.expressApplication.use(route.path, router);
         }
     }
