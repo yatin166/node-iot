@@ -39,28 +39,28 @@ export class TimeSeriesController implements DashboardController {
         
         this.socketService.stopEmit(req.userId)
             .then(() => res.send({ message: 'Stopped socket' }))
-            .catch(console.error)
+            .catch(error => next(error))
     }
 
     @GET(`${Path.TimeSeries}${Path.All}`)
     async getSockets(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.getSockets()
             .then(sockets => res.send(sockets))
-            .catch(console.error);
+            .catch(error => next(error));
     }
 
     @GET(`${Path.TimeSeries}${Path.Id}`)
     async getSocket(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.getSocket(req.params.id)
             .then(socket => res.send(socket))
-            .catch(console.error);
+            .catch(error => next(error));
     }
 
     @DELETE(`${Path.TimeSeries}${Path.All}`)
     async deleteSockets(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.deleteSockets()
             .then(() => res.send({ message: 'All sockets are deleted'}))
-            .catch(console.error);
+            .catch(error => next(error));
     }
 
     @DELETE(`${Path.TimeSeries}${Path.Id}`)
@@ -68,6 +68,6 @@ export class TimeSeriesController implements DashboardController {
         const id: string = req.params.id;
         this.socketService.deleteSocket(id)
             .then(() => res.send({ message: 'Sockets deleted'}))
-            .catch(console.error);
+            .catch(error => next(error));
     }
 }
