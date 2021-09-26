@@ -44,6 +44,7 @@ export class SocketServiceImpl implements SocketService {
         const userSocket = await UserSocketRepository.getById(userId);
         if (userSocket) {
             const socket = io(this.SOCKET_SERVER_URL);
+            // TODO: Should be refactored
             socket.on('connect', async () => {
                 socket.emit('customDisconnect', userSocket.socketId);
                 socket.disconnect();
