@@ -15,10 +15,10 @@ const getRoute = (medthod: Method, path: string) => {
     return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
         router.use(authenticationMiddleware);
         router.use(reqLoggerMiddleware);
-        //(router)[medthod](path, descriptor.value);
+        (router)[medthod](path, descriptor.value);
         //return descriptor;
 
-        const childFunction = descriptor.value;
+        /* const childFunction = descriptor.value;
         descriptor.value = (...args: any[]) => {
             args[0] = args[0] as Request;
             return descriptor.value.apply(this, (router)[medthod](path, target[propertyKey]));
@@ -27,9 +27,9 @@ const getRoute = (medthod: Method, path: string) => {
             return null;
         } else {
             return childFunction.apply(this, args);
-        } */
+        } 
         };
-        return descriptor;
+        return descriptor; */
 
     };
 }
