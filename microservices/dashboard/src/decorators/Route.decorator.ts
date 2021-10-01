@@ -18,18 +18,12 @@ const getRoute = (medthod: Method, path: string) => {
         (router)[medthod](path, descriptor.value);
         //return descriptor;
 
-        /* const childFunction = descriptor.value;
         descriptor.value = (...args: any[]) => {
             args[0] = args[0] as Request;
             return descriptor.value.apply(this, (router)[medthod](path, target[propertyKey]));
-        /* const emails = userEmails;
-        if (emails.indexOf(args[0].email) !== -1) {
-            return null;
-        } else {
-            return childFunction.apply(this, args);
-        } 
         };
-        return descriptor; */
+
+        return descriptor;
 
     };
 }
