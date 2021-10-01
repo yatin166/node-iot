@@ -23,6 +23,14 @@ const getRoute = (medthod: Method, path: string) => {
             return descriptor.value.apply(this, (router)[medthod](path, target[propertyKey]));
         };
 
+        /* const response = (req: Request, res: Response) => {
+            const original = descriptor.value(req, res);
+
+            res.status(200).json(original);
+        }
+
+        server.app[method](path, response); */
+
         return descriptor;
 
     };
