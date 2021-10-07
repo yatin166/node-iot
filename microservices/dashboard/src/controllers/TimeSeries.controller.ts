@@ -42,28 +42,28 @@ export class TimeSeriesController implements DashboardController {
             .catch(error => next(error))
     }
 
-    @GET(`${Path.TimeSeries}${Path.All}`)
+    @GET(`${Path.Socket}${Path.All}`)
     async getSockets(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.getSockets()
             .then(sockets => res.send(sockets))
             .catch(error => next(error));
     }
 
-    @GET(`${Path.TimeSeries}${Path.Id}`)
+    @GET(`${Path.Socket}${Path.Id}`)
     async getSocket(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.getSocket(req.params.id)
             .then(socket => res.send(socket))
             .catch(error => next(error));
     }
 
-    @DELETE(`${Path.TimeSeries}${Path.All}`)
+    @DELETE(`${Path.Socket}${Path.All}`)
     async deleteSockets(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.deleteSockets()
             .then(() => res.send({ message: 'All sockets are deleted'}))
             .catch(error => next(error));
     }
 
-    @DELETE(`${Path.TimeSeries}${Path.Id}`)
+    @DELETE(`${Path.Socket}${Path.Id}`)
     async deleteSocket(req: Request, res: express.Response, next: express.NextFunction) {
         const id: string = req.params.id;
         this.socketService.deleteSocket(id)
