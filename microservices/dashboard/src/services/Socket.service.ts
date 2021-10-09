@@ -54,6 +54,7 @@ export class SocketServiceImpl implements SocketService {
     }
 
     public async getSockets(): Promise<UserSocketSchema[]> {
+        console.log('in socket service')
         return await UserSocketRepository.getAll();
     }
 
