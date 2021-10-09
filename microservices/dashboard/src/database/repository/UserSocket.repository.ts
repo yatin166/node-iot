@@ -19,6 +19,7 @@ export class UserSocketRepository {
     }
 
     public static async getAll(): Promise<UserSocketSchema[]> {
+        console.log('in socket repo')
         return UserSocketModel.find({});
     }
 }

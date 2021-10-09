@@ -44,6 +44,7 @@ export class TimeSeriesController implements DashboardController {
 
     @GET(`${Path.Socket}${Path.All}`)
     async getSockets(req: Request, res: express.Response, next: express.NextFunction) {
+        console.log('in socket controller')
         this.socketService.getSockets()
             .then(sockets => res.send(sockets))
             .catch(error => next(error));

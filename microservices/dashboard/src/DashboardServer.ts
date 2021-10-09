@@ -42,19 +42,19 @@ export class DashboardServer extends Database {
         this.expressApplication.use(cors())
         this.expressApplication.use(bodyParser.json());
         this.expressApplication.use(reqLoggerMiddleware);
-        this.expressApplication.use(authenticationMiddleware);
+        /*this.expressApplication.use(authenticationMiddleware);*/
 
         for (const route of this.mainDashboardController.routerConfiguration) {
-            const controllerInstance: { [handleName: string]: Handler } = route.controller as any;
+            /*const controllerInstance: { [handleName: string]: Handler } = route.controller as any;
             console.log(route, 'router')
-            console.log(Reflect.hasMetadata(MetadataKeys.ROUTERS, route.controller), 'controllerInstance')
+            console.log(Reflect.hasMetadata(MetadataKeys.ROUTERS, controllerInstance), 'controllerInstance')
             const routers: RouterMetadata[] = Reflect.getMetadata(MetadataKeys.ROUTERS, controllerInstance);
             console.log(routers, 'routers')
 
             for (const routerMetadata of routers) {
                 router[routerMetadata.method](routerMetadata.path, controllerInstance[String(routerMetadata.handlerName)]);//.bind(controllerInstance));
 //                (routerMetadata.path, route.controller[routerMetadata.handlerName]).bind(route.controller));
-            }
+            }*/
 
             this.expressApplication.use(route.path, router);
         }
