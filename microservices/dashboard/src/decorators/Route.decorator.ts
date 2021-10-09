@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { authenticationMiddleware } from '../../../admin/src/middleware/authentication.middleware';
 import { reqLoggerMiddleware } from '../middleware/reqLogger.middleware';
+//const Reflect = require('reflect-metadata')
+import "reflect-metadata";
 
 enum Method {
     GET = 'get',
@@ -11,14 +13,72 @@ enum Method {
 
 export const router = Router()
 
-const getRoute = (medthod: Method, path: string) => {
-    return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
-        (router)[medthod](path, descriptor.value);
-        return descriptor;
+/*const getRoute = (method: Method, path: string) => {
+    return (target: any, propertyKey: any, descriptor: PropertyDescriptor) => {
+        //console.log(descriptor.value.toString());
+        //(router)[method](path).bind(descriptor.value);
+        //(router)[method](path, propertyKey)//.bind(descriptor.value);
+        /!*const sb: any = new target();
+        console.log(sb)
+        console.log(propertyKey)*!/
+        /!*(router)[method](path, descriptor.value)//.bind(target.constructor)
+        return descriptor;*!/
+        /!*const responseFn = async (req: Request, res: Response) => {
+            try {
+                const original = await descriptor.value(req, res);
+
+                res.status(200).json(original);
+            } catch (e) {
+                res.status(500).json({
+                    message: "Some error occurred",
+                    error: e.message,
+                    stack: e.stack,
+                });
+            }
+        }*!/
+
+        /!*(router)[method](path, (req, res, next) => {
+            descriptor.value(req, res, next)
+        });*!/
+        /!*console.log(propertyKey)
+        console.log(target)
+        console.log(Reflect.has(target, propertyKey));*!/
+        (router)[method](path, target[propertyKey]).bind(target);
     };
+}*/
+
+export interface RouterMetadata {
+    method: Method;
+    path: string;
+    handlerName: string | symbol;
 }
 
-export const GET = (path: string) => getRoute(Method.GET, path);
-export const POST = (path: string) => getRoute(Method.POST, path);
-export const PATCH = (path: string) => getRoute(Method.PATCH, path);
-export const DELETE = (path: string) => getRoute(Method.DELETE, path);
+export enum MetadataKeys {
+    BASE_PATH = 'base_path',
+    ROUTERS = 'routers',
+}
+
+const routeDecorator = (method: Method) => {
+    return (path: string): MethodDecorator => {
+        return (target: any, propertyKey: any) => {
+            const controllerClass = target.constructor;
+            console.log(Reflect.hasMetadata(MetadataKeys.ROUTERS, controllerClass), 'controllerInstance')
+            const routers: RouterMetadata[] = Reflect.hasMetadata(MetadataKeys.ROUTERS, controllerClass)
+                ? Reflect.getMetadata(MetadataKeys.ROUTERS, controllerClass)
+                : [];
+            routers.push({
+                method,
+                path,
+                handlerName: propertyKey,
+            });
+            Reflect.defineMetadata(MetadataKeys.ROUTERS, routers, controllerClass);
+            console.log(Reflect.hasMetadata(MetadataKeys.ROUTERS, controllerClass), 'controllerInstance2')
+        }
+    }
+}
+
+export const GET  = routeDecorator(Method.GET);
+/*
+export const POST = (path: string) => routeDecorator(Method.POST, path);
+export const PATCH = (path: string) => routeDecorator(Method.PATCH, path);
+export const DELETE = (path: string) => routeDecorator(Method.DELETE, path);*/

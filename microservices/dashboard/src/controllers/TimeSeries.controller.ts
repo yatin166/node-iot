@@ -2,7 +2,7 @@ import express from 'express';
 import { Request } from '../middleware/Request'
 import { DashboardController } from './base/Main.dashboard.controller';
 import { SocketService } from '../services/Socket.service';
-import { DELETE, GET } from '../decorators/Route.decorator';
+import { GET } from '../decorators/Route.decorator';
 
 const Path = {
     Socket: '/socket',
@@ -22,7 +22,7 @@ export class TimeSeriesController implements DashboardController {
         this.socketService = socketService;
     }
 
-    @GET(`${Path.TimeSeries}${Path.Emit}`)
+    //@GET(`${Path.TimeSeries}${Path.Emit}`)
     async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
         if (!req.userId)
             return res.send({ message: 'Could not find userId in the request' });
@@ -32,7 +32,7 @@ export class TimeSeriesController implements DashboardController {
             .catch(error => next(error))
     }
 
-    @GET(`${Path.TimeSeries}${Path.Stop}`)
+    //@GET(`${Path.TimeSeries}${Path.Stop}`)
     async stopEmitting(req: Request, res: express.Response, next: express.NextFunction) {
         if (!req.userId)
             return res.send({ message: 'Could not find userId in the request' });
@@ -49,21 +49,21 @@ export class TimeSeriesController implements DashboardController {
             .catch(error => next(error));
     }
 
-    @GET(`${Path.Socket}${Path.Id}`)
+    //@GET(`${Path.Socket}${Path.Id}`)
     async getSocket(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.getSocket(req.params.id)
             .then(socket => res.send(socket))
             .catch(error => next(error));
     }
 
-    @DELETE(`${Path.Socket}${Path.All}`)
+    //@DELETE(`${Path.Socket}${Path.All}`)
     async deleteSockets(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.deleteSockets()
             .then(() => res.send({ message: 'All sockets are deleted'}))
             .catch(error => next(error));
     }
 
-    @DELETE(`${Path.Socket}${Path.Id}`)
+    //@DELETE(`${Path.Socket}${Path.Id}`)
     async deleteSocket(req: Request, res: express.Response, next: express.NextFunction) {
         const id: string = req.params.id;
         this.socketService.deleteSocket(id)
