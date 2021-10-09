@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { authenticationMiddleware } from '../../../admin/src/middleware/authentication.middleware';
 import { reqLoggerMiddleware } from '../middleware/reqLogger.middleware';
+//const Reflect = require('reflect-metadata')
+import "reflect-metadata";
 
 enum Method {
     GET = 'get',
@@ -38,26 +40,45 @@ export const router = Router()
         /!*(router)[method](path, (req, res, next) => {
             descriptor.value(req, res, next)
         });*!/
+        /!*console.log(propertyKey)
+        console.log(target)
+        console.log(Reflect.has(target, propertyKey));*!/
+        (router)[method](path, target[propertyKey]).bind(target);
     };
 }*/
 
-/*const routeDecorator = (method: Method) => {
+export interface RouterMetadata {
+    method: Method;
+    path: string;
+    handlerName: string | symbol;
+}
+
+export enum MetadataKeys {
+    BASE_PATH = 'base_path',
+    ROUTERS = 'routers',
+}
+
+const routeDecorator = (method: Method) => {
     return (path: string): MethodDecorator => {
         return (target: any, propertyKey: any) => {
             const controllerClass = target.constructor;
-            const routers: IRouter[] =  Reflect.hasMetadata(MetadataKeys.ROUTERS, controllerClass) ?
-                Reflect.getMetadata(MetadataKeys.ROUTERS, controllerClass) : [];
+            console.log(Reflect.hasMetadata(MetadataKeys.ROUTERS, controllerClass), 'controllerInstance')
+            const routers: RouterMetadata[] = Reflect.hasMetadata(MetadataKeys.ROUTERS, controllerClass)
+                ? Reflect.getMetadata(MetadataKeys.ROUTERS, controllerClass)
+                : [];
             routers.push({
                 method,
                 path,
                 handlerName: propertyKey,
             });
             Reflect.defineMetadata(MetadataKeys.ROUTERS, routers, controllerClass);
+            console.log(Reflect.hasMetadata(MetadataKeys.ROUTERS, controllerClass), 'controllerInstance2')
         }
     }
-}*/
+}
 
-export const GET = (path: string) => getRoute(Method.GET, path);
-export const POST = (path: string) => getRoute(Method.POST, path);
-export const PATCH = (path: string) => getRoute(Method.PATCH, path);
-export const DELETE = (path: string) => getRoute(Method.DELETE, path);
+export const GET  = routeDecorator(Method.GET);
+/*
+export const POST = (path: string) => routeDecorator(Method.POST, path);
+export const PATCH = (path: string) => routeDecorator(Method.PATCH, path);
+export const DELETE = (path: string) => routeDecorator(Method.DELETE, path);*/
