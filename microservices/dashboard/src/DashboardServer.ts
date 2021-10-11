@@ -1,4 +1,4 @@
-import express, {Handler, Router} from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
 import { MainDashboardController } from './controllers/base/Main.dashboard.controller';
 import { Database } from './database/Database';
@@ -6,10 +6,7 @@ import socketIO from "socket.io";
 import http from 'http';
 import { SocketServer } from './SocketServer';
 import cors from 'cors';
-import {MetadataKeys, router, RouterMetadata} from './decorators/Route.decorator';
-import { authenticationMiddleware } from '../../admin/src/middleware/authentication.middleware';
 import { reqLoggerMiddleware } from './middleware/reqLogger.middleware';
-import 'reflect-metadata';
 
 export class DashboardServer extends Database {
     private readonly expressApplication: express.Application;
@@ -42,21 +39,9 @@ export class DashboardServer extends Database {
         this.expressApplication.use(cors())
         this.expressApplication.use(bodyParser.json());
         this.expressApplication.use(reqLoggerMiddleware);
-        /*this.expressApplication.use(authenticationMiddleware);*/
 
         for (const route of this.mainDashboardController.routerConfiguration) {
-            /*const controllerInstance: { [handleName: string]: Handler } = route.controller as any;
-            console.log(route, 'router')
-            console.log(Reflect.hasMetadata(MetadataKeys.ROUTERS, controllerInstance), 'controllerInstance')
-            const routers: RouterMetadata[] = Reflect.getMetadata(MetadataKeys.ROUTERS, controllerInstance);
-            console.log(routers, 'routers')
-
-            for (const routerMetadata of routers) {
-                router[routerMetadata.method](routerMetadata.path, controllerInstance[String(routerMetadata.handlerName)]);//.bind(controllerInstance));
-//                (routerMetadata.path, route.controller[routerMetadata.handlerName]).bind(route.controller));
-            }*/
-
-            this.expressApplication.use(route.path, router);
+            this.expressApplication.use(route.path, route.controller.router);
         }
     }
 
