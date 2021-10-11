@@ -22,8 +22,5 @@
   "bugs": {
     "url": "https://github.com/yatin166/node-iot/issues"
   },
-  "homepage": "https://github.com/yatin166/node-iot#readme",
-  "dependencies": {
-    "reflect-metadata": "^0.1.13"
-  }
+  "homepage": "https://github.com/yatin166/node-iot#readme"
 }
