@@ -34,7 +34,7 @@ export class TimeSeriesController implements DashboardController {
         this.router.delete(`${Path.Socket}${Path.Id}`, authenticationMiddleware, this.deleteSocket.bind(this))
     }
 
-    async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
+    private async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
         if (!req.userId)
             return res.send({ message: 'Could not find userId in the request' });
         
@@ -43,7 +43,7 @@ export class TimeSeriesController implements DashboardController {
             .catch(error => next(error))
     }
     
-    async stopEmitting(req: Request, res: express.Response, next: express.NextFunction) {
+    private async stopEmitting(req: Request, res: express.Response, next: express.NextFunction) {
         if (!req.userId)
             return res.send({ message: 'Could not find userId in the request' });
         
@@ -52,26 +52,26 @@ export class TimeSeriesController implements DashboardController {
             .catch(error => next(error))
     }
 
-    async getSockets(req: Request, res: express.Response, next: express.NextFunction) {
+    private async getSockets(req: Request, res: express.Response, next: express.NextFunction) {
         console.log('in socket controller')
         this.socketService.getSockets()
             .then(sockets => res.send(sockets))
             .catch(error => next(error));
     }
     
-    async getSocket(req: Request, res: express.Response, next: express.NextFunction) {
+    private async getSocket(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.getSocket(req.params.id)
             .then(socket => res.send(socket))
             .catch(error => next(error));
     }
     
-    async deleteSockets(req: Request, res: express.Response, next: express.NextFunction) {
+    private async deleteSockets(req: Request, res: express.Response, next: express.NextFunction) {
         this.socketService.deleteSockets()
             .then(() => res.send({ message: 'All sockets are deleted'}))
             .catch(error => next(error));
     }
     
-    async deleteSocket(req: Request, res: express.Response, next: express.NextFunction) {
+    private async deleteSocket(req: Request, res: express.Response, next: express.NextFunction) {
         const id: string = req.params.id;
         this.socketService.deleteSocket(id)
             .then(() => res.send({ message: 'Sockets deleted'}))
