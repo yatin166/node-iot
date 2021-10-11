@@ -2,7 +2,7 @@ import express from 'express';
 import { Request } from '../middleware/Request'
 import { DashboardController } from './base/Main.dashboard.controller';
 import { SocketService } from '../services/Socket.service';
-import { GET } from '../decorators/Route.decorator';
+import { authenticationMiddleware } from '../../../admin/src/middleware/authentication.middleware';
 
 const Path = {
     Socket: '/socket',
@@ -17,9 +17,16 @@ const Path = {
 export class TimeSeriesController implements DashboardController {
     
     private readonly socketService: SocketService
+    public readonly router: express.Router;
 
-    constructor(socketService: SocketService) {
+    constructor(socketService: SocketService, router: express.Router) {
+        this.router = router;
         this.socketService = socketService;
+        this.initRoutes();
+    }
+
+    private initRoutes() {
+        this.router.get(Path.All, authenticationMiddleware, this.getAllUsers.bind(this))
     }
 
     //@GET(`${Path.TimeSeries}${Path.Emit}`)
