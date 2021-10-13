@@ -27,7 +27,7 @@ export class Server extends Database {
         this.expressApplication.use(bodyParser.json());
 
         for (const route of this.mainAuthenticationController.routerConfiguration) {
-            router
+            this.expressApplication.use(route.path, router)
             //this.expressApplication.use(route.path, route.controller.router);
         }
     }
