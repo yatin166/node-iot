@@ -1,4 +1,5 @@
 import express from 'express';
+import { GET } from '../decorators/RouteDecorators';
 import { LoginService } from '../services/authentication/Login.service';
 import { RegisterService } from '../services/authentication/Register.service';
 import { Controller } from './base/Main.authentication.controller';
@@ -23,12 +24,21 @@ export class AuthenticationController implements Controller {
         this.loginService = loginService;
         this.registerService = registerService;
         this.initRoutes();
+
+        this.login2.bind(this)
     }
 
     private initRoutes() {
         this.router.post(Path.Login, this.login.bind(this))
         this.router.post(Path.AccessToken, this.getAccessToken.bind(this))
         this.router.post(Path.Register, this.register.bind(this))
+    }
+
+    @GET("/new-login")
+    async login2(req: express.Request, res: express.Response, next: express.NextFunction) {
+        this.loginService.login(req.body)
+            .then(loginResponse => res.send(loginResponse))
+            .catch(error => next(error))
     }
 
     async login(req: express.Request, res: express.Response, next: express.NextFunction) {
