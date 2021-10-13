@@ -3,6 +3,7 @@ import cors from 'cors';
 import { MainAuthenticationController } from './controllers/base/Main.authentication.controller';
 import bodyParser from 'body-parser'
 import { Database } from './database/Database';
+import {router} from './decorators/RouteDecorators';
 
 export class Server extends Database {
     private readonly expressApplication: express.Application;
@@ -26,7 +27,8 @@ export class Server extends Database {
         this.expressApplication.use(bodyParser.json());
 
         for (const route of this.mainAuthenticationController.routerConfiguration) {
-            this.expressApplication.use(route.path, route.controller.router);
+            router
+            //this.expressApplication.use(route.path, route.controller.router);
         }
     }
 

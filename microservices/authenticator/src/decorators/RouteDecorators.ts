@@ -1,7 +1,7 @@
 import express, {Router, Response, NextFunction} from 'express';
 
 enum Method {
-    GET = "GET"
+    GET = "get"
 }
 
 export const router = Router()
