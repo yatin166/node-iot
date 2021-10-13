@@ -1,7 +1,7 @@
 import express, {Router, Response, NextFunction} from 'express';
 
 enum Method {
-    GET = "GET"
+    GET = "get"
 }
 
 export const router = Router()
@@ -23,6 +23,7 @@ const routeDecorator = (method: Method, path: string) => {
         //console.log("target.constructor.name", target.constructor.name)
 
         (router)[method](path, target[propertyKey]).bind(target.constructor);
+        return
     }
 }
 
