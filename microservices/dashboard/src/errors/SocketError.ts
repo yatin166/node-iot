@@ -9,3 +9,4 @@ export class SocketError extends Error {
         this.message = message;
     }
 }
+
