@@ -14,4 +14,4 @@ const dashboardServer = new DashboardServer(
 dashboardServer
     .configure()
     .then(() => dashboardServer.up())
-    .catch(error => console.log(`Error occurred in starting server ${error}`))
+    .catch(error => console.error(`Error occurred in starting server ${error}`))
