@@ -29,7 +29,7 @@ export interface RouteDefinition {
     methodName: string;
   }
 
-export const Controller = (prefix: string = ''): ClassDecorator => {
+export const ControllerDe = (prefix: string = ''): ClassDecorator => {
     return (target: any) => {
       Reflect.defineMetadata('prefix', prefix, target);
   
