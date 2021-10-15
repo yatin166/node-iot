@@ -21,19 +21,14 @@ const routeDecorator = (method: Method, path: string) => {
 export const GET = (path: string) => routeDecorator(Method.GET, path);
 
 export interface RouteDefinition {
-    // Path to our route
     path: string;
-    // HTTP Request method (get, post, ...)
     requestMethod: 'get' | 'post' | 'delete' | 'options' | 'put';
-    // Method name within our class responsible for this route
     methodName: string;
   }
 
 export const ControllerDe = (prefix: string = ''): ClassDecorator => {
     return (target: any) => {
       Reflect.defineMetadata('prefix', prefix, target);
-  
-      // Since routes are set by our methods this should almost never be true (except the controller has no methods)
       if (! Reflect.hasMetadata('routes', target)) {
         Reflect.defineMetadata('routes', [], target);
       }

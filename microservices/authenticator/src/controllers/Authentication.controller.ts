@@ -9,7 +9,6 @@ const Path = {
     Register: '/register'
 }
 
-@ControllerDe()
 export class AuthenticationController implements Controller {
     public readonly router: express.Router;
     private readonly loginService: LoginService;
