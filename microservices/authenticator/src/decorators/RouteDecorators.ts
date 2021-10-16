@@ -5,6 +5,7 @@ enum Method {
     GET = "get"
 }
 
+
 export const router = Router();
 
 const routeDecorator = (method: Method, path: string) => {
