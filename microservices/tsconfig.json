@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "emitDecoratorMetadata": false,
-    "experimentalDecorators": true
+    "experimentalDecorators": false
   },
   "include": ["./**/src/*"]
 }
