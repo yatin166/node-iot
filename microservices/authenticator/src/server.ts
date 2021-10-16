@@ -33,12 +33,14 @@ export class Server extends Database {
 
     public up() {
         this.connect()
-            .then(() => {
-                this.expressApplication.listen(this.port, () => {
-                    console.log(`Database connection successful`)
-                    console.log(`Authentication server is up and running on ${this.port}`)
-                });
-            })
+            .then(() => this.listenServer())
             .catch(error => console.log('error', error))
+    }
+
+    private listenServer() {
+        this.expressApplication.listen(this.port, () => {
+            console.log(`Database connection successful`)
+            console.log(`Authentication server is up and running on ${this.port}`)
+        });
     }
 }
