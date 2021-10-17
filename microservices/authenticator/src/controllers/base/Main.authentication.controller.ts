@@ -12,7 +12,7 @@ const Path = {
 }
 
 export interface Controller {
-    //router: express.Router;
+    router: express.Router;
 }
 
 interface RouterConfiguration {
@@ -32,12 +32,12 @@ export class MainAuthenticationController {
         return [
             {
                 controller: new AuthenticationController(
-                    /* router,
+                    router,
                     new LoginServiceImpl(
                         new RefreshTokenServiceImpl(),
                         new AccessTokenServiceImpl()
                     ),
-                    new RegisterServiceImpl() */
+                    new RegisterServiceImpl()
                 ),
                 path: this.configurePath(Path.AuthenticationController)
             }

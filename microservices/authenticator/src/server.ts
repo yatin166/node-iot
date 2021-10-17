@@ -29,9 +29,6 @@ export class Server extends Database {
         this.expressApplication.use(bodyParser.json());
 
         for (const route of this.mainAuthenticationController.routerConfiguration) {
-
-            const metada = Reflect.getMetadata(Metadata.ROUUTES, AuthenticationController)
-            console.log('metadata', metada)
             this.expressApplication.use(route.path, router)
         }
     }

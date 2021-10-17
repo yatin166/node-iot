@@ -10,9 +10,8 @@ const Path = {
     Register: '/register'
 }
 
-@CONTROLLER()
 export class AuthenticationController {
-    /* public readonly router: express.Router;
+    public readonly router: express.Router;
     private readonly loginService: LoginService;
     private readonly registerService: RegisterService;
 
@@ -31,14 +30,9 @@ export class AuthenticationController {
         this.router.post(Path.Login, this.login.bind(this))
         this.router.post(Path.AccessToken, this.getAccessToken.bind(this))
         this.router.post(Path.Register, this.register.bind(this))
-    } */
-
-    @GET("/new-login")
-    login2(req: express.Request, res: express.Response, next: express.NextFunction) {
-        res.send({message: "Hello World!"})
     }
 
-    /* async login(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async login(req: express.Request, res: express.Response, next: express.NextFunction) {
         this.loginService.login(req.body)
             .then(loginResponse => res.send(loginResponse))
             .catch(error => next(error))
@@ -54,5 +48,5 @@ export class AuthenticationController {
         this.registerService.register(req.body)
             .then(() => res.status(200).send())
             .catch(error => next(error))
-    } */
+    }
 }
