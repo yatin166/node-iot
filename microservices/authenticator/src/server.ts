@@ -3,7 +3,9 @@ import cors from 'cors';
 import { MainAuthenticationController } from './controllers/base/Main.authentication.controller';
 import bodyParser from 'body-parser'
 import { Database } from './database/Database';
-import { router } from './decorators/RouteDecorators';
+import { Metadata, router } from './decorators/RouteDecorators';
+import 'reflect-metadata';
+import { AuthenticationController } from './controllers/Authentication.controller';
 
 export class Server extends Database {
     private readonly expressApplication: express.Application;
@@ -32,6 +34,7 @@ export class Server extends Database {
     }
 
     public up() {
+
         this.connect()
             .then(() => this.listenServer())
             .catch(error => console.log('error', error))

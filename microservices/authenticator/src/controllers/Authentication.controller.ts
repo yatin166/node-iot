@@ -2,6 +2,7 @@ import express from 'express';
 import { LoginService } from '../services/authentication/Login.service';
 import { RegisterService } from '../services/authentication/Register.service';
 import { Controller } from './base/Main.authentication.controller';
+import { GET , CONTROLLER} from '../decorators/RouteDecorators';
 
 const Path = {
     Login: '/login',
@@ -9,7 +10,7 @@ const Path = {
     Register: '/register'
 }
 
-export class AuthenticationController implements Controller {
+export class AuthenticationController {
     public readonly router: express.Router;
     private readonly loginService: LoginService;
     private readonly registerService: RegisterService;

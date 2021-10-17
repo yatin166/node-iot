@@ -8,7 +8,7 @@ enum Method {
 
 export const router = Router();
 
-const routeDecorator = (method: Method, path: string) => {
+/* const routeDecorator = (method: Method, path: string) => {
     return (
         target: any,
         propertyKey: string,
@@ -19,7 +19,7 @@ const routeDecorator = (method: Method, path: string) => {
     }
 }
 
-export const GET = (path: string) => routeDecorator(Method.GET, path);
+export const GET = (path: string) => routeDecorator(Method.GET, path); */
 
 export interface RouteDefinition {
     path: string;
@@ -31,20 +31,23 @@ export enum Metadata {
   ROUUTES = 'routes'
 }
 
-export const ControllerDe = (prefix: string = ''): ClassDecorator => {
+export const CONTROLLER = (): ClassDecorator => {
     return (target: any) => {
-      Reflect.defineMetadata('prefix', prefix, target);
-      if (! Reflect.hasMetadata(Metadata.ROUUTES, target)) {
+      //Reflect.defineMetadata('prefix', prefix, target);
+      if (!Reflect.hasMetadata(Metadata.ROUUTES, target)) {
+        console.log("Does not have route metadata")
         Reflect.defineMetadata(Metadata.ROUUTES, [], target);
       }
     };
 };
 
-export const Get = (path: string) => {
+export const GET = (path: string) => {
     return (target: any, propertyKey: string): void => {
-      if (! Reflect.hasMetadata(Metadata.ROUUTES, target.constructor)) {
+      if (!Reflect.hasMetadata(Metadata.ROUUTES, target.constructor)) {
+        console.log("Does not have route metadata for GET decorator")
         Reflect.defineMetadata(Metadata.ROUUTES, [], target.constructor);
       }
+      
       const routes: RouteDefinition[] = Reflect.getMetadata(Metadata.ROUUTES, target.constructor) as Array<RouteDefinition>;
   
       routes.push({
