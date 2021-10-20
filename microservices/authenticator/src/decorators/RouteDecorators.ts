@@ -1,8 +1,11 @@
-import express, {Router, Response, NextFunction} from 'express';
+import {Router} from 'express';
 import 'reflect-metadata'
 
 enum Method {
-    GET = "get"
+    GET = "get",
+    POST = "post",
+    PUT = "put",
+    DELETE = "delete"
 }
 
 
