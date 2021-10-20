@@ -6,7 +6,7 @@ enum Method {
 }
 
 
-export const router = Router();
+export const router2 = Router();
 
 /* const routeDecorator = (method: Method, path: string) => {
     return (
@@ -42,6 +42,14 @@ export const CONTROLLER = (): ClassDecorator => {
 };
 
 export const GET = (path: string) => {
+    /* return (
+        target: any,
+        propertyKey: string,
+        descriptor: PropertyDescriptor
+    ) => {
+        (router2)['get'](path, target[propertyKey].bind(target.constructor));
+        return
+    } */
     return (target: any, propertyKey: string): void => {
       if (!Reflect.hasMetadata(Metadata.ROUUTES, target.constructor)) {
         console.log("Does not have route metadata for GET decorator")

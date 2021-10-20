@@ -3,7 +3,7 @@ import cors from 'cors';
 import { MainAuthenticationController } from './controllers/base/Main.authentication.controller';
 import bodyParser from 'body-parser'
 import { Database } from './database/Database';
-import { Metadata, router } from './decorators/RouteDecorators';
+import { Metadata,  router2 } from './decorators/RouteDecorators';
 import 'reflect-metadata';
 import { AuthenticationController } from './controllers/Authentication.controller';
 
@@ -29,12 +29,13 @@ export class Server extends Database {
         this.expressApplication.use(bodyParser.json());
 
         for (const route of this.mainAuthenticationController.routerConfiguration) {
-            this.expressApplication.use(route.path, router)
+            this.expressApplication.use(route.path, route.controller.router)
+            console.log('constructor name ', route.controller.constructor.name)
+            console.log('metadata ', Reflect.getMetadata(Metadata.ROUUTES, route.controller.constructor))
         }
     }
 
     public up() {
-
         this.connect()
             .then(() => this.listenServer())
             .catch(error => console.log('error', error))
