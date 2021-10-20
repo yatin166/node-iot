@@ -30,8 +30,9 @@ export class Server extends Database {
 
         for (const route of this.mainAuthenticationController.routerConfiguration) {
             this.expressApplication.use(route.path, route.controller.router)
+            console.log('constructor name ', route.controller.constructor.name)
+            console.log('metadata ', Reflect.getMetadata(Metadata.ROUUTES, route.controller.constructor))
         }
-        this.expressApplication.use('/api/v1', router2)
     }
 
     public up() {
