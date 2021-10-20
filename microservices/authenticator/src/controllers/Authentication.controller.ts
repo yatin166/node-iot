@@ -32,6 +32,13 @@ export class AuthenticationController {
         this.router.post(Path.Register, this.register.bind(this))
     }
 
+    @GET('/new-login')
+    async login2(req: express.Request, res: express.Response, next: express.NextFunction) {
+        this.loginService.login(req.body)
+            .then(loginResponse => res.send(loginResponse))
+            .catch(error => next(error))
+    }
+
     async login(req: express.Request, res: express.Response, next: express.NextFunction) {
         this.loginService.login(req.body)
             .then(loginResponse => res.send(loginResponse))
