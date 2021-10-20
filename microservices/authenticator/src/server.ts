@@ -3,7 +3,7 @@ import cors from 'cors';
 import { MainAuthenticationController } from './controllers/base/Main.authentication.controller';
 import bodyParser from 'body-parser'
 import { Database } from './database/Database';
-import { Metadata,  router2 } from './decorators/RouteDecorators';
+import { Metadata } from './decorators/RouteDecorators';
 import 'reflect-metadata';
 import { AuthenticationController } from './controllers/Authentication.controller';
 
