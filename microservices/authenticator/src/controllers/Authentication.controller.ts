@@ -34,7 +34,7 @@ export class AuthenticationController {
 
     @GET('/new-login')
     async login2(req: express.Request, res: express.Response, next: express.NextFunction) {
-        this.loginService.login(req.body)
+        this.loginService.login2()
             .then(loginResponse => res.send(loginResponse))
             .catch(error => next(error))
     }
