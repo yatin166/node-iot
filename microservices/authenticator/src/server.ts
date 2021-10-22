@@ -5,7 +5,6 @@ import bodyParser from 'body-parser'
 import { Database } from './database/Database';
 import { DecoratorMetadata, RouteConfiguration } from './decorators/RouteDecorators';
 import 'reflect-metadata';
-import { AuthenticationController } from './controllers/Authentication.controller';
 
 export class Server extends Database {
     private readonly expressApplication: express.Application;
@@ -31,8 +30,6 @@ export class Server extends Database {
         const router = Router();
 
         for (const configuration of this.mainAuthenticationController.controllerConfiguration) {
-            /* console.log('constructor name ', route.controller.constructor.name)
-            console.log('metadata ', Reflect.getMetadata(Metadata.ROUUTES, route.controller.constructor)) */
 
             const routes: Array<RouteConfiguration> = Reflect.getMetadata(DecoratorMetadata.ROUTE, configuration.controller.constructor);
     

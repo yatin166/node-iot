@@ -1,4 +1,3 @@
-import express from 'express';
 import { AccessTokenServiceImpl } from '../../services/authentication/jwt/AccessToken.service';
 import { LoginServiceImpl } from '../../services/authentication/Login.service';
 import { RefreshTokenServiceImpl } from '../../services/authentication/jwt/RefreshToken.service';
@@ -11,9 +10,7 @@ const Path = {
     UserController: '/user'
 }
 
-export interface Controller {
-    //router: express.Router;
-}
+export interface Controller {}
 
 interface ControllerConfiguration {
     controller: Controller,
@@ -28,7 +25,6 @@ export class MainAuthenticationController {
     }
 
     private initController(): ControllerConfiguration[] {
-        //const router = express.Router();
         return [
             {
                 controller: new AuthenticationController(

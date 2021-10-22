@@ -9,8 +9,6 @@ import { RefreshTokenPayload, RefreshTokenService } from './jwt/RefreshToken.ser
 export interface LoginService {
     login(loginRequest: LoginRequest): Promise<LoginResponse>
 
-    login2(): Promise<string>
-
     getAccessToken(accessTokenRequest: AccessTokenRequest): Promise<AccessTokenResponse | undefined>
 }
 
@@ -22,10 +20,6 @@ export class LoginServiceImpl implements LoginService {
     constructor(refreshTokenService: RefreshTokenService, accessTokenService: AccessTokenService) {
         this.refreshTokenService = refreshTokenService;
         this.accessTokenService = accessTokenService;
-    }
-
-    async login2() {
-        return Promise.resolve('Provise resolved')
     }
 
     async login(loginRequest: LoginRequest): Promise<LoginResponse> {
