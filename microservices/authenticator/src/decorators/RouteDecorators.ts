@@ -28,6 +28,7 @@ export interface RouteDefinition {
     path: string;
     requestMethod: 'get' | 'post' | 'delete' | 'options' | 'put';
     methodName: string;
+    functionTobeProcessed?: () => any
 }
 
 export enum Metadata {
@@ -56,8 +57,11 @@ export const GET = (path: string) => {
       routes.push({
         requestMethod: 'get',
         path,
-        methodName: propertyKey
+        methodName: propertyKey,
+        functionTobeProcessed: target[propertyKey]
       });
+
+      console.log(target[propertyKey])
 
       Reflect.defineMetadata(Metadata.ROUUTES, routes, target.constructor);
     };

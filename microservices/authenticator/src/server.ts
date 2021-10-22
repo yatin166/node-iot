@@ -37,11 +37,11 @@ export class Server extends Database {
 
             const routes: Array<RouteDefinition> = Reflect.getMetadata(Metadata.ROUUTES, route.controller.constructor);
     
-            routes.forEach(route2 => {
+            /* routes.forEach(route2 => {
                 ro[route2.requestMethod](route2.path, (req: express.Request, res: express.Response) => {
-                  route.controller[route2.methodName](req, res);
+                    route.controller[route2.methodName](req, res);
                 });
-            });
+            }); */
         }
 
     }
