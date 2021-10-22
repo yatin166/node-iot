@@ -34,7 +34,6 @@ export class Server extends Database {
             const routes: Array<RouteConfiguration> = Reflect.getMetadata(DecoratorMetadata.ROUTE, configuration.controller.constructor);
     
             for (const route of routes) {
-                console.log('ROUTE ', route)
                 router[route.method](route.path, route.func.bind(configuration.controller));
             }
 
