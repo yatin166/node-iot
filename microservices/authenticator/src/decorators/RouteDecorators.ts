@@ -1,68 +1,40 @@
-import {Router} from 'express';
 import 'reflect-metadata'
 
 export enum Method {
-    GET = "get",
-    POST = "post",
-    PUT = "put",
-    DELETE = "delete"
+    GET = 'get',
+    POST = 'post',
+    PUT = 'put',
+    DELETE = 'delete'
 }
 
-
-export const router2 = Router();
-
-/* const routeDecorator = (method: Method, path: string) => {
-    return (
-        target: any,
-        propertyKey: string,
-        descriptor: PropertyDescriptor
-    ) => {
-        (router)[method](path, target[propertyKey]).bind(target.constructor);
-        return
-    }
+export enum DecoratorMetadata {
+  ROUTE = 'routes'
 }
 
-export const GET = (path: string) => routeDecorator(Method.GET, path); */
-
-export interface RouteDefinition {
+export interface RouteConfiguration {
     path: string;
-    requestMethod: Method;
-    methodName: string;
-    functionTobeProcessed?: any
+    method: Method;
+    func: any
 }
 
-export enum Metadata {
-  ROUUTES = 'routes'
+const decorator = (path: string, method: Method) => {
+  return (target: any, propertyKey: string): void => {
+    if (!Reflect.hasMetadata(DecoratorMetadata.ROUTE, target.constructor))
+      Reflect.defineMetadata(DecoratorMetadata.ROUTE, [], target.constructor);
+    
+    const routeConfiguration: RouteConfiguration[] = Reflect.getMetadata(DecoratorMetadata.ROUTE, target.constructor) as RouteConfiguration[];
+
+    routeConfiguration.push({
+      path,
+      method,
+      func: target[propertyKey]
+    });
+
+    Reflect.defineMetadata(DecoratorMetadata.ROUTE, routeConfiguration, target.constructor);
+  };
 }
 
-export const CONTROLLER = (): ClassDecorator => {
-    return (target: any) => {
-      //Reflect.defineMetadata('prefix', prefix, target);
-      if (!Reflect.hasMetadata(Metadata.ROUUTES, target)) {
-        console.log("Does not have route metadata")
-        Reflect.defineMetadata(Metadata.ROUUTES, [], target);
-      }
-    };
-};
-
-export const GET = (path: string, method: Method) => {
-    return (target: any, propertyKey: string): void => {
-      if (!Reflect.hasMetadata(Metadata.ROUUTES, target.constructor)) {
-        console.log("Does not have route metadata for GET decorator")
-        Reflect.defineMetadata(Metadata.ROUUTES, [], target.constructor);
-      }
-      
-      const routes: RouteDefinition[] = Reflect.getMetadata(Metadata.ROUUTES, target.constructor) as Array<RouteDefinition>;
-  
-      routes.push({
-        requestMethod: method,
-        path,
-        methodName: propertyKey,
-        functionTobeProcessed: target[propertyKey]
-      });
-
-      //console.log('function -> ', target[propertyKey].toString())
-
-      Reflect.defineMetadata(Metadata.ROUUTES, routes, target.constructor);
-    };
-};
+export const GET = (path: string) => decorator(path, Method.GET);
+export const POST = (path: string) => decorator(path, Method.POST);
+export const PUT = (path: string) => decorator(path, Method.PUT);
+export const DELETE = (path: string) => decorator(path, Method.DELETE);
