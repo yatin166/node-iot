@@ -31,17 +31,17 @@ export class Server extends Database {
         const ro = Router();
 
         for (const route of this.mainAuthenticationController.routerConfiguration) {
-            this.expressApplication.use(route.path, route.controller.router)
-            console.log('constructor name ', route.controller.constructor.name)
-            console.log('metadata ', Reflect.getMetadata(Metadata.ROUUTES, route.controller.constructor))
+            /* console.log('constructor name ', route.controller.constructor.name)
+            console.log('metadata ', Reflect.getMetadata(Metadata.ROUUTES, route.controller.constructor)) */
 
             const routes: Array<RouteDefinition> = Reflect.getMetadata(Metadata.ROUUTES, route.controller.constructor);
     
-            /* routes.forEach(route2 => {
-                ro[route2.requestMethod](route2.path, (req: express.Request, res: express.Response) => {
-                    route.controller[route2.methodName](req, res);
-                });
-            }); */
+            routes.forEach(route2 => {
+                console.log('ROUTE2 ', route2)
+                ro[route2.requestMethod](route2.path, route2.functionTobeProcessed?.bind(route.controller));
+            });
+            this.expressApplication.use(route.path, route.controller.router)
+            this.expressApplication.use(route.path, ro)
         }
 
     }

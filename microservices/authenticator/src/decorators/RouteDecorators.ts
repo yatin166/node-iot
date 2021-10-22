@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import 'reflect-metadata'
 
-enum Method {
+export enum Method {
     GET = "get",
     POST = "post",
     PUT = "put",
@@ -26,9 +26,9 @@ export const GET = (path: string) => routeDecorator(Method.GET, path); */
 
 export interface RouteDefinition {
     path: string;
-    requestMethod: 'get' | 'post' | 'delete' | 'options' | 'put';
+    requestMethod: Method;
     methodName: string;
-    functionTobeProcessed?: () => any
+    functionTobeProcessed?: any
 }
 
 export enum Metadata {
@@ -45,7 +45,7 @@ export const CONTROLLER = (): ClassDecorator => {
     };
 };
 
-export const GET = (path: string) => {
+export const GET = (path: string, method: Method) => {
     return (target: any, propertyKey: string): void => {
       if (!Reflect.hasMetadata(Metadata.ROUUTES, target.constructor)) {
         console.log("Does not have route metadata for GET decorator")
@@ -55,13 +55,13 @@ export const GET = (path: string) => {
       const routes: RouteDefinition[] = Reflect.getMetadata(Metadata.ROUUTES, target.constructor) as Array<RouteDefinition>;
   
       routes.push({
-        requestMethod: 'get',
+        requestMethod: method,
         path,
         methodName: propertyKey,
         functionTobeProcessed: target[propertyKey]
       });
 
-      console.log(target[propertyKey])
+      //console.log('function -> ', target[propertyKey].toString())
 
       Reflect.defineMetadata(Metadata.ROUUTES, routes, target.constructor);
     };
