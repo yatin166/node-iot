@@ -12,27 +12,26 @@ const Path = {
 }
 
 export interface Controller {
-    router: express.Router;
+    //router: express.Router;
 }
 
-interface RouterConfiguration {
+interface ControllerConfiguration {
     controller: Controller,
     path: string
 }
 
 export class MainAuthenticationController {
-    public routerConfiguration: RouterConfiguration[] = [];
+    public controllerConfiguration: ControllerConfiguration[] = [];
 
     constructor() {
-        this.routerConfiguration.push(...this.initRouters());
+        this.controllerConfiguration.push(...this.initController());
     }
 
-    private initRouters(): RouterConfiguration[] {
-        const router = express.Router();
+    private initController(): ControllerConfiguration[] {
+        //const router = express.Router();
         return [
             {
                 controller: new AuthenticationController(
-                    router,
                     new LoginServiceImpl(
                         new RefreshTokenServiceImpl(),
                         new AccessTokenServiceImpl()
