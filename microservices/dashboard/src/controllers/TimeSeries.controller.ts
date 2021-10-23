@@ -33,7 +33,7 @@ export class TimeSeriesController implements DashboardController {
 
     @GET(`${Path.TimeSeries}${Path.Emit}`)
     async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
-        console.log(req.userId)
+        console.log('USERID: ', req.userId)
         if (!req.userId)
             return res.send({ message: 'Could not find userId in the request' });
         

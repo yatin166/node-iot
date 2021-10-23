@@ -51,7 +51,8 @@ export class DashboardServer extends Database {
             const routes: Array<RouteConfiguration> = Reflect.getMetadata(DecoratorMetadata.ROUTE, configuration.controller.constructor);
     
             for (const route of routes) {
-                route.func.bind(authenticationMiddleware)
+                //route.func.arg
+                //route.func.bind(authenticationMiddleware)
                 router[route.method](route.path, route.func.bind(configuration.controller));
             }
 
