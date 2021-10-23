@@ -1,7 +1,7 @@
 import express from 'express';
 import { LoginService } from '../services/authentication/Login.service';
 import { RegisterService } from '../services/authentication/Register.service';
-import { POST } from '../decorators/RouteDecorators';
+import { POST } from '../../../common/decorators/RouteDecorators';
 import { Controller } from './base/Main.authentication.controller';
 
 const Path = {

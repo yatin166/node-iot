@@ -1,4 +1,3 @@
-import { Router } from 'express';
 import { SocketServiceImpl } from '../../services/Socket.service';
 import { TimeSeriesController } from '../TimeSeries.controller';
 
@@ -7,27 +6,24 @@ const Path = {
     TimeSeriesController: '/data'
 }
 
-export interface DashboardController {
-    router: Router;
- }
+export interface DashboardController {} 
 
-interface RouterConfiguration {
+interface ControllerConfiguration {
     controller: DashboardController,
     path: string
 }
 
 export class MainDashboardController {
-    public routerConfiguration: RouterConfiguration[] = [];
+    public controllerConfiguration: ControllerConfiguration[] = [];
 
     constructor() {
-        this.routerConfiguration.push(...this.initRouters());
+        this.controllerConfiguration.push(...this.initRouters());
     }
 
-    private initRouters(): RouterConfiguration[] {
-        const router = Router();
+    private initRouters(): ControllerConfiguration[] {
         return [
             {
-                controller: new TimeSeriesController(new SocketServiceImpl(), router),
+                controller: new TimeSeriesController(new SocketServiceImpl()),
                 path: this.configurePath(Path.TimeSeriesController)
             }
         ]
