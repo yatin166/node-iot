@@ -12,7 +12,7 @@
     "emitDecoratorMetadata": false,
     "experimentalDecorators": true
   },
-  "include": ["./**/src/*"]
+  "include": ["./**/src/*", "./**/config/*", "./**/decorators/*"]
 }
 
 

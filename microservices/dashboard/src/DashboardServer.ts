@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 import bodyParser from 'body-parser';
 import { MainDashboardController } from './controllers/base/Main.dashboard.controller';
 import { Database } from './database/Database';
@@ -7,6 +7,8 @@ import http from 'http';
 import { SocketServer } from './SocketServer';
 import cors from 'cors';
 import { reqLoggerMiddleware } from './middleware/reqLogger.middleware';
+import { authenticationMiddleware } from '../../admin/src/middleware/authentication.middleware';
+import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
 
 export class DashboardServer extends Database {
     private readonly expressApplication: express.Application;
@@ -38,10 +40,22 @@ export class DashboardServer extends Database {
     public async configure(): Promise<void> {
         this.expressApplication.use(cors())
         this.expressApplication.use(bodyParser.json());
+        //this.expressApplication.use(authenticationMiddleware);
         this.expressApplication.use(reqLoggerMiddleware);
 
-        for (const route of this.mainDashboardController.routerConfiguration) {
-            this.expressApplication.use(route.path, route.controller.router);
+        const router = Router();
+        router.use(authenticationMiddleware)
+        
+        for (const configuration of this.mainDashboardController.controllerConfiguration) {
+
+            const routes: Array<RouteConfiguration> = Reflect.getMetadata(DecoratorMetadata.ROUTE, configuration.controller.constructor);
+    
+            for (const route of routes) {
+                route.func.bind(authenticationMiddleware)
+                router[route.method](route.path, route.func.bind(configuration.controller));
+            }
+
+            this.expressApplication.use(configuration.path, router)
         }
     }
 
