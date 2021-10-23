@@ -3,7 +3,7 @@ import cors from 'cors';
 import { MainAuthenticationController } from './controllers/base/Main.authentication.controller';
 import bodyParser from 'body-parser'
 import { Database } from './database/Database';
-import { DecoratorMetadata, RouteConfiguration } from './decorators/RouteDecorators';
+import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
 import 'reflect-metadata';
 
 export class Server extends Database {

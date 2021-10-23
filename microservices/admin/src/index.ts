@@ -1,6 +1,6 @@
 import express from 'express';
-import { DatabaseConfig } from '../../config/Database.config';
-import { ServerConfig } from '../../config/Server.config';
+import { DatabaseConfig } from '../../common/config/Database.config';
+import { ServerConfig } from '../../common/config/Server.config';
 import { AdminServer } from "./AdminServer";
 import { MainAdminController } from './controllers/base/Main.admin.controller';
 
