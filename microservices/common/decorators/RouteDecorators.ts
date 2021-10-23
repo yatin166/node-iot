@@ -24,6 +24,15 @@ const decorator = (path: string, method: Method) => {
     if (!Reflect.hasMetadata(DecoratorMetadata.ROUTE, target.constructor))
       Reflect.defineMetadata(DecoratorMetadata.ROUTE, [], target.constructor);
     
+
+    const original = target[propertyKey];
+    target[propertyKey] = (...args: any[]) => {
+        args[0] as Request;
+        args[1] as Response;
+        args[2] as NextFunction;
+        original.apply(this, args);
+    }
+
     const routeConfiguration: RouteConfiguration[] = Reflect.getMetadata(DecoratorMetadata.ROUTE, target.constructor) as RouteConfiguration[];
 
     routeConfiguration.push({
@@ -34,13 +43,6 @@ const decorator = (path: string, method: Method) => {
 
     Reflect.defineMetadata(DecoratorMetadata.ROUTE, routeConfiguration, target.constructor);
 
-    const original = descriptor.value;
-    descriptor.value = function (...args: any[]) {
-        const request = args[0] as Request;
-        const response = args[1] as Response;
-        const nextFunc = args[2] as NextFunction;
-        return original.apply(this, request, response, nextFunc);
-    }
   };
 }
 
