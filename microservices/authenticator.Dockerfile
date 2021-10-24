@@ -4,6 +4,6 @@ WORKDIR /app
 COPY ["package.json", "tsconfig.json", "./"]
 RUN npm install
 COPY /authenticator ./authenticator
-COPY /config ./config
+COPY /common ./common
 EXPOSE 8000
 CMD [ "npm", "run", "start:authenticator:prod" ]
