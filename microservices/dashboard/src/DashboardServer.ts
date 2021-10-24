@@ -7,7 +7,7 @@ import http from 'http';
 import { SocketServer } from './SocketServer';
 import cors from 'cors';
 import { reqLoggerMiddleware } from './middleware/reqLogger.middleware';
-import { authenticationMiddleware } from '../../admin/src/middleware/authentication.middleware';
+import { authenticationMiddleware } from './middleware/authentication.middleware';
 import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
 
 export class DashboardServer extends Database {
@@ -40,19 +40,16 @@ export class DashboardServer extends Database {
     public async configure(): Promise<void> {
         this.expressApplication.use(cors())
         this.expressApplication.use(bodyParser.json());
-        //this.expressApplication.use(authenticationMiddleware);
+        this.expressApplication.use(authenticationMiddleware);
         this.expressApplication.use(reqLoggerMiddleware);
 
         const router = Router();
-        router.use(authenticationMiddleware)
         
         for (const configuration of this.mainDashboardController.controllerConfiguration) {
 
             const routes: Array<RouteConfiguration> = Reflect.getMetadata(DecoratorMetadata.ROUTE, configuration.controller.constructor);
     
             for (const route of routes) {
-                //route.func.arg
-                //route.func.bind(authenticationMiddleware)
                 router[route.method](route.path, route.func.bind(configuration.controller));
             }
 

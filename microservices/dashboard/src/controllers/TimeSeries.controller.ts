@@ -3,6 +3,7 @@ import { Request } from '../middleware/Request'
 import { DashboardController } from './base/Main.dashboard.controller';
 import { SocketService } from '../services/Socket.service';
 import { DELETE, GET } from '../../../common/decorators/RouteDecorators';
+import { authenticationMiddleware } from '../middleware/authentication.middleware'
 
 const Path = {
     Socket: '/socket',
@@ -21,15 +22,6 @@ export class TimeSeriesController implements DashboardController {
     constructor(socketService: SocketService) {
         this.socketService = socketService;
     }
-
-    /* private initRoutes() {
-        this.router.get(`${Path.TimeSeries}${Path.Emit}`, authenticationMiddleware, this.startEmitting.bind(this))
-        this.router.get(`${Path.TimeSeries}${Path.Stop}`, authenticationMiddleware, this.stopEmitting.bind(this))
-        this.router.get(`${Path.Socket}${Path.All}`, authenticationMiddleware, this.getSockets.bind(this))
-        this.router.get(`${Path.Socket}${Path.Id}`, authenticationMiddleware, this.getSocket.bind(this))
-        this.router.delete(`${Path.Socket}${Path.All}`, authenticationMiddleware, this.deleteSockets.bind(this))
-        this.router.delete(`${Path.Socket}${Path.Id}`, authenticationMiddleware, this.deleteSocket.bind(this))
-    } */
 
     @GET(`${Path.TimeSeries}${Path.Emit}`)
     async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
