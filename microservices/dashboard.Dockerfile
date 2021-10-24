@@ -4,6 +4,6 @@ WORKDIR /app
 COPY ["package.json", "tsconfig.json", "./"]
 RUN npm install
 COPY /dashboard ./dashboard
-COPY /config ./config
+COPY /common ./common
 EXPOSE 8001
 CMD [ "npm", "run", "start:dashboard:prod" ]

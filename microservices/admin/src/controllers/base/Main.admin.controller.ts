@@ -1,4 +1,3 @@
-import express from 'express';
 import { UserController } from '../User.controller';
 
 const Path = {
@@ -6,27 +5,24 @@ const Path = {
     UserController: '/user'
 }
 
-export interface AdminController {
-    router: express.Router;
-}
+export interface AdminController { }
 
-interface RouterConfiguration {
+interface ControllerConfiguration {
     controller: AdminController,
     path: string
 }
 
 export class MainAdminController {
-    public routerConfiguration: RouterConfiguration[] = [];
+    public controllerConfiguration: ControllerConfiguration[] = [];
 
     constructor() {
-        this.routerConfiguration.push(...this.initRouters());
+        this.controllerConfiguration.push(...this.initControllers());
     }
 
-    private initRouters(): RouterConfiguration[] {
-        const router = express.Router();
+    private initControllers(): ControllerConfiguration[] {
         return [
             {
-                controller: new UserController(router),
+                controller: new UserController(),
                 path: this.configurePath(Path.UserController)
             }
         ]
