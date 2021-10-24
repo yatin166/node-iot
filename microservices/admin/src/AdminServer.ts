@@ -1,7 +1,9 @@
-import express from 'express'
+import express, { Router } from 'express'
 import bodyParser from 'body-parser'
 import { MainAdminController } from './controllers/base/Main.admin.controller';
 import { Database } from './database/Database';
+import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
+import { authenticationMiddleware } from './middleware/authentication.middleware';
 
 export class AdminServer extends Database {
     private readonly expressApplication: express.Application;
@@ -22,9 +24,18 @@ export class AdminServer extends Database {
 
     public async configure(): Promise<void> {
         this.expressApplication.use(bodyParser.json());
+        this.expressApplication.use(authenticationMiddleware)
 
-        for (const route of this.mainAdminController.routerConfiguration) {
-            this.expressApplication.use(route.path, route.controller.router);
+        const router = Router();
+
+        for (const config of this.mainAdminController.controllerConfiguration) {
+            const routes: Array<RouteConfiguration> = Reflect.getMetadata(DecoratorMetadata.ROUTE, config.controller.constructor);
+    
+            for (const route of routes) {
+                router[route.method](route.path, route.func.bind(config.controller));
+            }
+
+            this.expressApplication.use(config.path, router)
         }
     }
 
