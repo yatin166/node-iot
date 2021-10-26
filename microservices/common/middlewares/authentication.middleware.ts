@@ -1,11 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken'
-import { TokenConfig } from '../../../common/config/Token.config';
-import { AccessTokenPayload } from '../services/auth/Token.service';
-
-export interface Request extends express.Request {
-    userId?: string
-}
+import { AccessTokenPayload, TokenConfig } from '../config/Token.config';
 
 export const authenticationMiddleware = (
     req: express.Request,
@@ -17,7 +12,7 @@ export const authenticationMiddleware = (
     if (typeof token === 'string') {
         try {
             const accessTokenPayload = jwt.verify(token, TokenConfig.accessTokenSecret()) as AccessTokenPayload
-    
+
             if (accessTokenPayload)
                 next()
         } catch (error) {
