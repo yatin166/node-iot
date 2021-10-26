@@ -4,8 +4,8 @@ import { RefreshTokenServiceImpl } from '../../services/authentication/jwt/Refre
 import { RegisterServiceImpl } from '../../services/authentication/Register.service';
 import { AuthenticationController } from '../Authentication.controller';
 
-const Path = {
-    Api: '/api/v1',
+const ControllerPath = {
+    ApiV1: '/api/v1',
     AuthenticationController: '/auth',
     UserController: '/user'
 }
@@ -34,12 +34,12 @@ export class MainAuthenticationController {
                     ),
                     new RegisterServiceImpl()
                 ),
-                path: this.configurePath(Path.AuthenticationController)
+                path: this.configurePath(ControllerPath.AuthenticationController)
             }
         ]
     }
 
     private configurePath(path: string): string {
-        return Path.Api + path;
+        return ControllerPath.ApiV1 + path;
     }
 }

@@ -1,7 +1,7 @@
 import { UserController } from '../User.controller';
 
-const Path = {
-    Api: '/api/v1',
+const ControllerPath = {
+    ApiV1: '/api/v1',
     UserController: '/user'
 }
 
@@ -23,12 +23,12 @@ export class MainAdminController {
         return [
             {
                 controller: new UserController(),
-                path: this.configurePath(Path.UserController)
+                path: this.configurePath(ControllerPath.UserController)
             }
         ]
     }
 
     private configurePath(path: string): string {
-        return Path.Api + path;
+        return ControllerPath.ApiV1 + path;
     }
 }
