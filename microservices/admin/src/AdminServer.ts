@@ -24,7 +24,8 @@ export class AdminServer extends Database {
 
     public async configure(): Promise<void> {
         this.expressApplication.use(bodyParser.json());
-        this.expressApplication.use(authenticationMiddleware)
+        this.expressApplication.use(authenticationMiddleware);
+        this.expressApplication.use(adminMiddleware);
 
         const router = Router();
 
@@ -50,3 +51,7 @@ export class AdminServer extends Database {
             .catch(error => console.log('error', error))
     }
 }
+function adminMiddleware(adminMiddleware: any) {
+    throw new Error('Function not implemented.');
+}
+
