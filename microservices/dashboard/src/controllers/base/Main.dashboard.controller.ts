@@ -1,8 +1,8 @@
 import { SocketServiceImpl } from '../../services/Socket.service';
 import { TimeSeriesController } from '../TimeSeries.controller';
 
-const Path = {
-    Api: '/api/v1',
+const ControllerPath = {
+    ApiV1: '/api/v1',
     TimeSeriesController: '/data'
 }
 
@@ -24,12 +24,12 @@ export class MainDashboardController {
         return [
             {
                 controller: new TimeSeriesController(new SocketServiceImpl()),
-                path: this.configurePath(Path.TimeSeriesController)
+                path: this.configurePath(ControllerPath.TimeSeriesController)
             }
         ]
     }
 
     private configurePath(path: string): string {
-        return Path.Api + path;
+        return ControllerPath.ApiV1 + path;
     }
 }

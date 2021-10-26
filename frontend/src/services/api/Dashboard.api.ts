@@ -4,8 +4,8 @@ import { Api } from "./Api";
 const Path = {
     Base: 'http://localhost:8001/api/v1',
     TimeSeries: '/data/time-series',
-    Emit: '/emit',
-    Stop: '/stop'
+    Emit: '/emit/start',
+    Stop: '/emit/stop'
 }
 
 export class DashboardApi extends Api {
