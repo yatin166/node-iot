@@ -5,4 +5,8 @@ export class UserRepository {
     public static async getAll() {
         return UserModel.find({});
     }
+
+    public static async getById(id: string) {
+        return UserModel.findById(id);
+    }
 }

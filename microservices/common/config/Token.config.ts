@@ -3,6 +3,11 @@ export interface JWTConfig {
     secret: string
 }
 
+export interface AccessTokenPayload {
+    userId: string;
+    userEmail: string;
+}
+
 export class TokenConfig {
     private static readonly tokenSecret = 'HeD7y2RjKXcXUVKMrnfcNKwlyenM0bIk';
 
