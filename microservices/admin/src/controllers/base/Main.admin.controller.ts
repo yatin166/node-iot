@@ -1,3 +1,4 @@
+import { UserServiceImpl } from '../../services/User.service';
 import { UserController } from '../User.controller';
 
 const ControllerPath = {
@@ -22,7 +23,9 @@ export class MainAdminController {
     private initControllers(): ControllerConfiguration[] {
         return [
             {
-                controller: new UserController(),
+                controller: new UserController(
+                    new UserServiceImpl()
+                ),
                 path: this.configurePath(ControllerPath.UserController)
             }
         ]
