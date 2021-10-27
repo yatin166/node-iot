@@ -7,7 +7,7 @@ import http from 'http';
 import { SocketServer } from './SocketServer';
 import cors from 'cors';
 import { reqLoggerMiddleware } from './middleware/reqLogger.middleware';
-import { authenticationMiddleware } from './middleware/authentication.middleware';
+import { authenticationMiddleware } from '../../common/middlewares/authentication.middleware';
 import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
 
 export class DashboardServer extends Database {

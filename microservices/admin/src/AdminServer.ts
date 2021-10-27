@@ -3,7 +3,8 @@ import bodyParser from 'body-parser'
 import { MainAdminController } from './controllers/base/Main.admin.controller';
 import { Database } from './database/Database';
 import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
-import { authenticationMiddleware } from './middleware/authentication.middleware';
+import { authenticationMiddleware } from '../../common/middlewares/authentication.middleware';
+import { reqLoggerMiddleware } from '../../dashboard/src/middleware/reqLogger.middleware';
 
 export class AdminServer extends Database {
     private readonly expressApplication: express.Application;
@@ -25,6 +26,7 @@ export class AdminServer extends Database {
     public async configure(): Promise<void> {
         this.expressApplication.use(bodyParser.json());
         this.expressApplication.use(authenticationMiddleware);
+        this.expressApplication.use(reqLoggerMiddleware);
         this.expressApplication.use(adminMiddleware);
 
         const router = Router();
