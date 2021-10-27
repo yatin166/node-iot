@@ -2,12 +2,12 @@ import express, { Router } from 'express'
 import cors from 'cors';
 import { MainAuthenticationController } from './controllers/base/Main.authentication.controller';
 import bodyParser from 'body-parser'
-import { Database } from './database/Database';
+import { DatabaseConnection } from '../../common/database/DatabaseConnection';
 import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
 import 'reflect-metadata';
 import { reqLoggerMiddleware } from '../../dashboard/src/middleware/reqLogger.middleware';
 
-export class Server extends Database {
+export class Server extends DatabaseConnection {
     private readonly expressApplication: express.Application;
     private readonly port: number;
     private readonly mainAuthenticationController: MainAuthenticationController
@@ -15,10 +15,9 @@ export class Server extends Database {
     constructor(
         expressApplication: express.Application,
         port: number,
-        mainAuthenticationController: MainAuthenticationController,
-        databaseConnectionUrl: string
+        mainAuthenticationController: MainAuthenticationController
     ) {
-        super(databaseConnectionUrl)
+        super()
         this.expressApplication = expressApplication;
         this.port = port;
         this.mainAuthenticationController = mainAuthenticationController;

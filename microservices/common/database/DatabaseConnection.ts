@@ -1,11 +1,7 @@
 import mongoose, { ConnectOptions } from 'mongoose'
+import { DatabaseConfig } from '../config/Database.config';
 
-export class Database {
-    private readonly connectionString: string;
-
-    constructor(connectionString: string) {
-        this.connectionString = connectionString;
-    }
+export class DatabaseConnection {
 
     protected async connect(): Promise<void> {
         const databaseOptions: ConnectOptions = {
@@ -13,6 +9,6 @@ export class Database {
             useUnifiedTopology: true,
             useCreateIndex: true
         }
-        await mongoose.connect(this.connectionString, databaseOptions);
+        await mongoose.connect(DatabaseConfig.connectionPath(), databaseOptions);
     }
 }
