@@ -4,7 +4,7 @@ import { MainAdminController } from './controllers/base/Main.admin.controller';
 import { DatabaseConnection } from '../../common/database/DatabaseConnection';
 import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
 import { authenticationMiddleware } from '../../common/middlewares/authentication.middleware';
-import { reqLoggerMiddleware } from '../../dashboard/src/middleware/reqLogger.middleware';
+import { reqLoggerMiddleware } from '../../common/middlewares/reqLogger.middleware';
 
 export class AdminServer extends DatabaseConnection {
     private readonly expressApplication: express.Application;

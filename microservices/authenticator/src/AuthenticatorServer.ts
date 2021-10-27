@@ -4,8 +4,8 @@ import { MainAuthenticationController } from './controllers/base/Main.authentica
 import bodyParser from 'body-parser'
 import { DatabaseConnection } from '../../common/database/DatabaseConnection';
 import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
+import { reqLoggerMiddleware } from '../../common/middlewares/reqLogger.middleware';
 import 'reflect-metadata';
-import { reqLoggerMiddleware } from '../../dashboard/src/middleware/reqLogger.middleware';
 
 export class Server extends DatabaseConnection {
     private readonly expressApplication: express.Application;
