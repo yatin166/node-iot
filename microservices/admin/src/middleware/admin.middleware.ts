@@ -17,5 +17,5 @@ export const adminMiddleware = (
                 return res.status(403).json({ message: 'Access denied, not admin user!' })
             next();
         })
-        .catch(error => res.status(403).json({ message: 'Error occured' }))
+        .catch(error => res.status(403).json({ message: 'Error occured ' + error }))
 }

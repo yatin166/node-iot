@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 import { Database } from './database/Database';
 import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
 import 'reflect-metadata';
+import { reqLoggerMiddleware } from '../../dashboard/src/middleware/reqLogger.middleware';
 
 export class Server extends Database {
     private readonly expressApplication: express.Application;
@@ -26,6 +27,7 @@ export class Server extends Database {
     public async configure(): Promise<void> {
         this.expressApplication.use(cors())
         this.expressApplication.use(bodyParser.json());
+        this.expressApplication.use(reqLoggerMiddleware);
 
         const router = Router();
 
