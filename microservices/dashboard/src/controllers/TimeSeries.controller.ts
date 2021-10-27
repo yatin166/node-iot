@@ -1,5 +1,5 @@
 import express from 'express';
-import { Request } from '../middleware/Request'
+import { Request } from '../../../common/middlewares/Request';
 import { DashboardController } from './base/Main.dashboard.controller';
 import { SocketService } from '../services/Socket.service';
 import { DELETE, GET } from '../../../common/decorators/RouteDecorators';
