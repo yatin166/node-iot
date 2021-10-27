@@ -1,5 +1,5 @@
 import express from 'express';
-import { Request } from '../middleware/authentication.middleware';
+import { Request } from '../../../common/middlewares/Request';
 import { GET } from '../../../common/decorators/RouteDecorators';
 import { AdminController } from "./base/Main.admin.controller";
 import { UserService } from '../services/User.service';
