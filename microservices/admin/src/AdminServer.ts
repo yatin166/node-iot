@@ -1,12 +1,12 @@
 import express, { Router } from 'express'
 import bodyParser from 'body-parser'
 import { MainAdminController } from './controllers/base/Main.admin.controller';
-import { Database } from './database/Database';
+import { DatabaseConnection } from '../../common/database/DatabaseConnection';
 import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
 import { authenticationMiddleware } from '../../common/middlewares/authentication.middleware';
 import { reqLoggerMiddleware } from '../../dashboard/src/middleware/reqLogger.middleware';
 
-export class AdminServer extends Database {
+export class AdminServer extends DatabaseConnection {
     private readonly expressApplication: express.Application;
     private readonly port: number;
     private readonly mainAdminController: MainAdminController
@@ -14,10 +14,9 @@ export class AdminServer extends Database {
     constructor(
         expressApplication: express.Application,
         port: number,
-        mainAdminController: MainAdminController,
-        databaseConnectionUrl: string
+        mainAdminController: MainAdminController
     ) {
-        super(databaseConnectionUrl)
+        super()
         this.expressApplication = expressApplication;
         this.port = port;
         this.mainAdminController = mainAdminController;

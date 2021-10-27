@@ -18,8 +18,6 @@ export class SocketServiceImpl implements SocketService {
     private readonly SOCKET_SERVER_URL = 'http://localhost:8001/';
 
     public async startEmit(userId: string): Promise<SocketEmitResponse> {
-
-        console.log('in startEmit');
         const userSocket = await UserSocketRepository.getById(userId);
         if (userSocket)
             throw new SocketError(409, 'Socket already created')

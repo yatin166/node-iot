@@ -1,7 +1,6 @@
 import express, { Router } from 'express';
 import bodyParser from 'body-parser';
 import { MainDashboardController } from './controllers/base/Main.dashboard.controller';
-import { Database } from './database/Database';
 import socketIO from "socket.io";
 import http from 'http';
 import { SocketServer } from './SocketServer';
@@ -9,8 +8,9 @@ import cors from 'cors';
 import { reqLoggerMiddleware } from './middleware/reqLogger.middleware';
 import { authenticationMiddleware } from '../../common/middlewares/authentication.middleware';
 import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
+import { DatabaseConnection } from '../../common/database/DatabaseConnection';
 
-export class DashboardServer extends Database {
+export class DashboardServer extends DatabaseConnection {
     private readonly expressApplication: express.Application;
     private readonly port: number;
     private readonly mainDashboardController: MainDashboardController;
@@ -20,10 +20,9 @@ export class DashboardServer extends Database {
     constructor(
         expressApplication: express.Application,
         port: number,
-        mainDashboardController: MainDashboardController,
-        databaseConnectionUrl: string
+        mainDashboardController: MainDashboardController
     ) {
-        super(databaseConnectionUrl)
+        super();
         this.expressApplication = expressApplication;
         this.port = port;
         this.mainDashboardController = mainDashboardController;
