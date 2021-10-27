@@ -5,7 +5,7 @@ import socketIO from "socket.io";
 import http from 'http';
 import { SocketServer } from './SocketServer';
 import cors from 'cors';
-import { reqLoggerMiddleware } from './middleware/reqLogger.middleware';
+import { reqLoggerMiddleware } from '../../common/middlewares/reqLogger.middleware';
 import { authenticationMiddleware } from '../../common/middlewares/authentication.middleware';
 import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
 import { DatabaseConnection } from '../../common/database/DatabaseConnection';
