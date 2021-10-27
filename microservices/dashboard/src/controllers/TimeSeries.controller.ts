@@ -14,7 +14,6 @@ export class TimeSeriesController implements DashboardController {
 
     @GET('/time-series/emit/start')
     async startEmitting(req: Request, res: express.Response, next: express.NextFunction) {
-        console.log('USERID: ', req.userId)
         if (!req.userId)
             return res.send({ message: 'Could not find userId in the request' });
         
@@ -35,7 +34,6 @@ export class TimeSeriesController implements DashboardController {
 
     @GET('/socket/all')
     async getSockets(req: Request, res: express.Response, next: express.NextFunction) {
-        console.log('in socket controller')
         this.socketService.getSockets()
             .then(sockets => res.send(sockets))
             .catch(error => next(error));
