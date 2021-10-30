@@ -9,11 +9,11 @@ export const adminMiddleware = (
 ) => {
 
     if (!req.userId)
-        res.status(403).json({ message: 'No userId found' });
+        return res.status(403).json({ message: 'No userId found' });
 
     UserRepository.getById(req.userId)
         .then(user => {
-            if (user.role !== 'admin')
+            if (user && user.role !== 'admin')
                 return res.status(403).json({ message: 'Access denied, not admin user!' })
             next();
         })

@@ -5,6 +5,7 @@ import { DatabaseConnection } from '../../common/database/DatabaseConnection';
 import { DecoratorMetadata, RouteConfiguration } from '../../common/decorators/RouteDecorators';
 import { authenticationMiddleware } from '../../common/middlewares/authentication.middleware';
 import { reqLoggerMiddleware } from '../../common/middlewares/reqLogger.middleware';
+import { adminMiddleware } from './middleware/admin.middleware'
 
 export class AdminServer extends DatabaseConnection {
     private readonly expressApplication: express.Application;
@@ -51,8 +52,5 @@ export class AdminServer extends DatabaseConnection {
             })
             .catch(error => console.log('error', error))
     }
-}
-function adminMiddleware(adminMiddleware: any) {
-    throw new Error('Function not implemented.');
 }
 
