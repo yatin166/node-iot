@@ -11,7 +11,8 @@
     "install:microservices": "cd microservices && npm install && cd ..",
     "install:frontend": "cd frontend && npm install && cd ..",
     "build": "cd microservices && npm run build && cd ..",
-    "start:db": "docker run -d --name=mongo -it -p 27017:27017 mongo"
+    "start:db": "docker run -d --name=mongo -it -p 27017:27017 mongo",
+    "install:dependencies": "npm run install:microservices && npm run install:frontend"
   },
   "repository": {
     "type": "git",
