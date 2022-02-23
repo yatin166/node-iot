@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Flex } from '../../components/container/flex/Flex'
 import { Card } from '../../components/card/Card';
 import { Path } from '../../components/routes/Path';
-import NewSidebar from '../../components/sidebar/NewSidebar';
+import NewSidebar from '../../components/sidebar/Sidebar';
 
 interface Props extends RouteComponentProps<{}> {}
 
