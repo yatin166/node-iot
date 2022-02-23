@@ -11,9 +11,8 @@ interface Props extends RouteComponentProps<{}> {}
 
 export const ChartRoutes: React.FunctionComponent<Props>  = (props: Props): JSX.Element => {
     
-    return (
-        <div className={styles.chartsContainer}>
-            <Sidebar />
+    const chartContent = (): JSX.Element => {
+        return (
             <div className={styles.contentContainer}>
                 <Flex.Vertical>
                     <BrowserRouter>
@@ -30,6 +29,10 @@ export const ChartRoutes: React.FunctionComponent<Props>  = (props: Props): JSX.
                     </BrowserRouter>
                 </Flex.Vertical>
             </div>
-        </div>
+        )
+    }
+
+    return (
+        <Sidebar content={chartContent()}/>
     )
 }
