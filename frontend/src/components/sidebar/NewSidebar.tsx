@@ -69,6 +69,20 @@ const NewSidebar: React.FunctionComponent<Props>  = ({ history }): JSX.Element =
     const toggleDrawer = () => setOpen(!toggle);
 
     return (
+      <Drawer variant="permanent" open={toggle}>
+          <DrawerHeader />
+          <List>
+              <ListItem button key={'Dashboard'}>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Dashboard'} />
+              </ListItem>
+          </List>
+      </Drawer>
+    )
+
+    /* return (
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <Header drawerWidth={drawerWidth} toggleDrawer={toggleDrawer}/>
@@ -100,7 +114,7 @@ const NewSidebar: React.FunctionComponent<Props>  = ({ history }): JSX.Element =
               </Flex.Horizontal>
           </Box>
         </Box>
-      );
+      ); */
 }
 
 export default withRouter(NewSidebar);
