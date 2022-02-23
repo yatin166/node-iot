@@ -14,7 +14,9 @@ import ListItem from '@mui/material/ListItem';
 import { CssBaseline } from '@mui/material';
 import { Header } from '../header/Header';
 
-interface Props extends RouteComponentProps<{}> {}
+interface Props extends RouteComponentProps<{}> {
+  content: JSX.Element
+}
 
 const drawerWidth = 240;
 
@@ -62,27 +64,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 }));
 
-const NewSidebar: React.FunctionComponent<Props>  = ({ history }): JSX.Element => {
+const NewSidebar: React.FunctionComponent<Props>  = ({ history, content }): JSX.Element => {
 
     const [toggle, setOpen] = React.useState(false);
 
     const toggleDrawer = () => setOpen(!toggle);
 
     return (
-      <Drawer variant="permanent" open={toggle}>
-          <DrawerHeader />
-          <List>
-              <ListItem button key={'Dashboard'}>
-                  <ListItemIcon>
-                    <HomeIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={'Dashboard'} />
-              </ListItem>
-          </List>
-      </Drawer>
-    )
-
-    /* return (
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <Header drawerWidth={drawerWidth} toggleDrawer={toggleDrawer}/>
@@ -99,22 +87,10 @@ const NewSidebar: React.FunctionComponent<Props>  = ({ history }): JSX.Element =
           </Drawer>
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
               <DrawerHeader />
-              <Flex.Horizontal>
-                  <Card onClick={() => history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.TIME_SERIES_CHART}`)}>
-                      <div >
-                          Time series chart
-                      </div>
-                  </Card>
-
-                  <Card onClick={() => history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.SCATTER_CHART}`)}>
-                      <div>
-                          Scatter chart
-                      </div>
-                  </Card>
-              </Flex.Horizontal>
+              {content}
           </Box>
         </Box>
-      ); */
+      );
 }
 
 export default withRouter(NewSidebar);
