@@ -1,8 +1,5 @@
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { Flex } from '../../components/container/flex/Flex'
-import { Card } from '../../components/card/Card';
-import { Path } from '../../components/routes/Path';
 import { styled, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
