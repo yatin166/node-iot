@@ -76,7 +76,7 @@ const Sidebar: React.FunctionComponent<Props>  = ({ history, content }): JSX.Ele
     const toggleDrawer = () => setOpen(!toggle);
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', height: '100vh' }}>
           <CssBaseline />
           <Header drawerWidth={drawerWidth} toggleDrawer={toggleDrawer} open={toggle}/>
           <Drawer variant="permanent" open={true}>
@@ -90,7 +90,7 @@ const Sidebar: React.FunctionComponent<Props>  = ({ history, content }): JSX.Ele
                 </ListItem>
             </List>
           </Drawer>
-          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: '#1d2634', width: '100%' }}>
               <DrawerHeader />
               {content}
           </Box>
