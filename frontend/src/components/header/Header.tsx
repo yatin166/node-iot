@@ -4,7 +4,11 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
-import { IconButton } from '@mui/material';
+import { Box, Button, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { LocalStorage } from '../../storage/LocalStorage';
+import { AppBar } from '@mui/material';
+import styles from './Header.module.scss';
 
 interface Props extends MuiAppBarProps {
   open?: boolean;
@@ -12,46 +16,23 @@ interface Props extends MuiAppBarProps {
   toggleDrawer: () => void
 }
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<Props>(({ theme, open, drawerWidth }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-
 export const Header: React.FunctionComponent<Props>  = (props: Props): JSX.Element => {
 
   return (
-      <AppBar position="fixed" open={props.open} drawerWidth={props.drawerWidth} toggleDrawer={props.toggleDrawer}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={props.toggleDrawer}
-            edge="start"
-            sx={{
-              marginRight: '36px',
-              ...(props.open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="fixed" sx={{ backgroundColor: '#1d2634', boxShadow: 'none' }} className={styles.appBarContainer}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={props.toggleDrawer}
+              edge="start">
+              {props.open ? <CloseIcon /> : <MenuIcon />}
+            </IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} />
+            <Button color="inherit" onClick={() => LocalStorage.destroy()}>LOGOUT</Button>
+          </Toolbar>
+        </AppBar>
+      </Box> 
   );
 }

@@ -11,12 +11,13 @@ import ListItem from '@mui/material/ListItem';
 import { CssBaseline } from '@mui/material';
 import { Header } from '../header/Header';
 import { Path } from '../routes/Path';
+import { red } from '@mui/material/colors';
 
 interface Props extends RouteComponentProps<{}> {
   content: JSX.Element
 }
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const openedMixin = (theme: Theme): CSSObject => ({
     width: drawerWidth,
@@ -25,6 +26,9 @@ const openedMixin = (theme: Theme): CSSObject => ({
         duration: theme.transitions.duration.enteringScreen,
     }),
     overflowX: 'hidden',
+    '& > div': {
+        backgroundColor: '#263042',
+    }
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -37,6 +41,9 @@ const closedMixin = (theme: Theme): CSSObject => ({
     [theme.breakpoints.up('sm')]: {
         width: `calc(${theme.spacing(9)} + 1px)`,
     },
+    '& > div': {
+        backgroundColor: '#263042',
+    }
 });
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -71,15 +78,15 @@ const Sidebar: React.FunctionComponent<Props>  = ({ history, content }): JSX.Ele
     return (
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
-          <Header drawerWidth={drawerWidth} toggleDrawer={toggleDrawer}/>
-          <Drawer variant="permanent" open={toggle}>
+          <Header drawerWidth={drawerWidth} toggleDrawer={toggleDrawer} open={toggle}/>
+          <Drawer variant="permanent" open={true}>
             <DrawerHeader />
             <List>
                 <ListItem button key={'Dashboard'} onClick={() => history.push(`/${Path.DASHBOARD}`)}>
                     <ListItemIcon>
-                      <HomeIcon />
+                      <HomeIcon sx={{ fontSize: 32, color: 'white' }}/>
                     </ListItemIcon>
-                    <ListItemText primary={'Dashboard'} />
+                    <ListItemText sx={{ color: 'white' }} primary={'Dashboard'} />
                 </ListItem>
             </List>
           </Drawer>
