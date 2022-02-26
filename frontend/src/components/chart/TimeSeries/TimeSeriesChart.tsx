@@ -88,20 +88,20 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (): JSX.Element 
             </Button>
             <Line data={data} options={chartOptions}/>
         </Box> */
-        <Card sx={{ width: '60vw', height: '60vh', backgroundColor: '#263042' }}>
-            <CardContent className={styles.cardContentContainer}>
-                <div className={styles.timeSeriesChartContainer}>
-                    <Line data={data} options={chartOptions}/>
-                </div>
-            </CardContent>
-            <CardActions>
-                <Button size='large' onClick={emitData} sx={{ backgroundColor: '#263042' }}>
-                    EMIT
-                </Button>
-                <Button size='large' onClick={disconnect} sx={{ backgroundColor: '#263042' }}>
-                    STOP
-                </Button>
-            </CardActions>
-        </Card>
+        <Box>
+            <Card sx={{ width: '60vw', backgroundColor: '#263042', marginBottom: '1em' }}>
+                <CardContent className={styles.cardContentContainer}>
+                <Line data={data} options={chartOptions}/>
+                </CardContent>
+                <CardActions>
+                </CardActions>
+            </Card>
+            <Button size='large' onClick={emitData} sx={{ backgroundColor: '#263042', marginRight: '1em' }}>
+                EMIT
+            </Button>
+            <Button size='large' onClick={disconnect} sx={{ backgroundColor: '#263042' }}>
+                STOP
+            </Button>
+        </Box>
     )
 }
