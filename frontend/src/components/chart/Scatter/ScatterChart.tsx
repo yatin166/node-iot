@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styles from './ScatterChart.module.scss'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Line, Scatter } from 'react-chartjs-2';
+import { Scatter } from 'react-chartjs-2';
 import { ServicesContext } from '../../../context/ApiServices.context';
 import { LocalStorage } from '../../../storage/LocalStorage';
 import { Box, Card, CardContent, CardActions, Button } from '@mui/material';

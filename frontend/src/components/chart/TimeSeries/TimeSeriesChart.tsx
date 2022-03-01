@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import { ServicesContext } from '../../../context/ApiServices.context';
 import { LocalStorage } from '../../../storage/LocalStorage';
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent } from '@mui/material';
 
 interface Props {}
 
