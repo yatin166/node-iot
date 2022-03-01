@@ -26,13 +26,13 @@ export const ScatterChart: React.FunctionComponent<Props>  = (): JSX.Element => 
         }
     }, [])
 
-    const dd = socketData.map((s, i) => { return { x: yAxisData[i], y: s } });
+    const scatteredSocketData = socketData.map((s, i) => { return { x: yAxisData[i], y: s } });
 
     const data = {
         datasets: [
           {
-            data: dd,
-            borderColor: "#742774"
+            data: scatteredSocketData,
+            borderColor: "white"
           }
         ]
     };
@@ -45,10 +45,20 @@ export const ScatterChart: React.FunctionComponent<Props>  = (): JSX.Element => 
                         beginAtZero: false,
                         steps: 10,
                         stepValue: 5,
-                        max: 100 
+                        max: 100
                     },
                 },
             ],
+            y: {
+                ticks: {
+                  color: 'white'
+                }
+            },
+            x: {
+                ticks: {
+                    color: 'white'
+                }
+            },
         },
         plugins: {
             legend: {
