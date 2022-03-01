@@ -11,7 +11,6 @@ import ListItem from '@mui/material/ListItem';
 import { CssBaseline } from '@mui/material';
 import { Header } from '../header/Header';
 import { Path } from '../routes/Path';
-import { red } from '@mui/material/colors';
 
 interface Props extends RouteComponentProps<{}> {
   content: JSX.Element
