@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import styles from './ScatterChart.module.scss'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Scatter } from 'react-chartjs-2';
+import { Line, Scatter } from 'react-chartjs-2';
 import { ServicesContext } from '../../../context/ApiServices.context';
-import { Button } from '../../button/Button';
 import { LocalStorage } from '../../../storage/LocalStorage';
+import { Box, Card, CardContent, CardActions, Button } from '@mui/material';
 
 interface Props {}
 
@@ -26,13 +26,13 @@ export const ScatterChart: React.FunctionComponent<Props>  = (): JSX.Element => 
         }
     }, [])
 
-    const dd = socketData.map((s, i) => { return { x: yAxisData[i], y: s } });
+    const scatteredSocketData = socketData.map((s, i) => { return { x: yAxisData[i], y: s } });
 
     const data = {
         datasets: [
           {
-            data: dd,
-            borderColor: "#742774"
+            data: scatteredSocketData,
+            borderColor: "white"
           }
         ]
     };
@@ -45,10 +45,20 @@ export const ScatterChart: React.FunctionComponent<Props>  = (): JSX.Element => 
                         beginAtZero: false,
                         steps: 10,
                         stepValue: 5,
-                        max: 100 
+                        max: 100
                     },
                 },
             ],
+            y: {
+                ticks: {
+                  color: 'white'
+                }
+            },
+            x: {
+                ticks: {
+                    color: 'white'
+                }
+            },
         },
         plugins: {
             legend: {
@@ -70,12 +80,27 @@ export const ScatterChart: React.FunctionComponent<Props>  = (): JSX.Element => 
     }
 
     return (
-        <div className={styles.scatterChartContainer}>
+        /* <div className={styles.scatterChartContainer}>
             <div className={styles.actionButtonContainer}>
                 <Button onClick={emitData} value='Emit'/>
                 <Button onClick={disconnect} value='Stop'/>
             </div>
             <Scatter data={data} options={chartOptions}/>
-        </div>
+        </div> */
+        <Box>
+            <Card sx={{ width: '60vw', backgroundColor: '#263042', marginBottom: '1em' }}>
+                <CardContent className={styles.cardContentContainer}>
+                    <Scatter data={data} options={chartOptions}/>
+                </CardContent>
+                <CardActions>
+                </CardActions>
+            </Card>
+            <Button size='large' onClick={emitData} sx={{ backgroundColor: '#263042', marginRight: '1em' }}>
+                EMIT
+            </Button>
+            <Button size='large' onClick={disconnect} sx={{ backgroundColor: '#263042' }}>
+                STOP
+            </Button>
+        </Box>
     )
 }

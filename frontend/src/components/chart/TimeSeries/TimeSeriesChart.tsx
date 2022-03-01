@@ -68,40 +68,20 @@ export const TimeSeriesChart: React.FunctionComponent<Props>  = (): JSX.Element 
     }
 
     return (
-        /* <div className={styles.timeSeriesChartContainer}>
-            <div className={styles.actionButtonContainer}>
-                <Button onClick={emitData} sx={{ backgroundColor: '#263042', marginRight: '24px' }}>
-                    EMIT
-                </Button>
-                <Button onClick={disconnect} sx={{ backgroundColor: '#263042' }}>
-                    STOP
-                </Button>
-            </div>
-            <Line data={data} options={chartOptions}/>
-        </div> */
-        /* <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Button onClick={emitData} sx={{ backgroundColor: '#263042', marginRight: '24px' }}>
+        <Box>
+            <Card sx={{ width: '60vw', backgroundColor: '#263042', marginBottom: '1em' }}>
+                <CardContent className={styles.cardContentContainer}>
+                <Line data={data} options={chartOptions}/>
+                </CardContent>
+                <CardActions>
+                </CardActions>
+            </Card>
+            <Button size='large' onClick={emitData} sx={{ backgroundColor: '#263042', marginRight: '1em' }}>
                 EMIT
             </Button>
-            <Button onClick={disconnect} sx={{ backgroundColor: '#263042' }}>
+            <Button size='large' onClick={disconnect} sx={{ backgroundColor: '#263042' }}>
                 STOP
             </Button>
-            <Line data={data} options={chartOptions}/>
-        </Box> */
-        <Card sx={{ width: '60vw', height: '60vh', backgroundColor: '#263042' }}>
-            <CardContent className={styles.cardContentContainer}>
-                <div className={styles.timeSeriesChartContainer}>
-                    <Line data={data} options={chartOptions}/>
-                </div>
-            </CardContent>
-            <CardActions>
-                <Button size='large' onClick={emitData} sx={{ backgroundColor: '#263042' }}>
-                    EMIT
-                </Button>
-                <Button size='large' onClick={disconnect} sx={{ backgroundColor: '#263042' }}>
-                    STOP
-                </Button>
-            </CardActions>
-        </Card>
+        </Box>
     )
 }
