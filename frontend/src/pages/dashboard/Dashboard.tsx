@@ -1,10 +1,10 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Flex } from '../../components/container/flex/Flex'
-import { Card } from '../../components/card/Card';
+import { Flex } from '../../components/container/flex/Flex';
 import { Path } from '../../components/routes/Path';
 import NewSidebar from '../../components/sidebar/Sidebar';
-import { Box } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
+import styles from './Dashboard.module.scss';
 
 interface Props extends RouteComponentProps<{}> {}
 
@@ -12,21 +12,19 @@ export const Dashboard: React.FunctionComponent<Props>  = ({ history }): JSX.Ele
    
     const dashboardContent = (): JSX.Element => {
       return (
-        <Box sx={{ display: 'flex' }}>
-            <Flex.Horizontal>
-                <Card onClick={() => history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.TIME_SERIES_CHART}`)}>
-                    <div >
-                        Time series chart
-                    </div>
-                </Card>
+        <Flex.Horizontal>
+            <Card className={styles.cardContainer} onClick={() => history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.TIME_SERIES_CHART}`)}>
+                <CardContent>
+                    Time series chart
+                </CardContent>
+            </Card>
 
-                <Card onClick={() => history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.SCATTER_CHART}`)}>
-                    <div>
-                        Scatter chart
-                    </div>
-                </Card>
-            </Flex.Horizontal>
-        </Box>
+            <Card className={styles.cardContainer} onClick={() => history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.SCATTER_CHART}`)}>
+                <CardContent>
+                    Scatter chart
+                </CardContent>
+            </Card>
+        </Flex.Horizontal>
       )
     }
 

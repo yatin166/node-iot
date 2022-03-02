@@ -1,14 +1,6 @@
-.dashboardContainer {
+.cardContainer {
     display: flex;
-
-    .contentContainer {
-        display: flex;
-        width: 100%;
-        padding: 2em;
-
-        .cardContentContainer {
-            margin: 6em 4em;
-            font-size: 1.5em;
-        }
-    }
+    width: 100%;
+    padding: 2em;
+    margin-right: 2em;
 }
