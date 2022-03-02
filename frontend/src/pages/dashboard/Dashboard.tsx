@@ -14,7 +14,7 @@ export const Dashboard: React.FunctionComponent<Props>  = ({ history }): JSX.Ele
     const dashboardContent = (): JSX.Element => {
       return (
         <Flex.Horizontal>
-            <Card className={styles.cardContainer} onClick={() => history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.TIME_SERIES_CHART}`)}>
+            <Card sx={{ width: '30vw', height: '30vh', borderRadius: '0.5em', backgroundColor: '#263042' }} className={styles.cardContainer} onClick={() => history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.TIME_SERIES_CHART}`)}>
                 <CardContent>
                     <DummyTimeSeriesChart />
                 </CardContent>
