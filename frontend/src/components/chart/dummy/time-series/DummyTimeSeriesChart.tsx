@@ -1,5 +1,7 @@
+import { Box } from '@mui/material';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import styles from './DummyTimeSeriesChart.module.scss'
 
 interface Props {}
 
@@ -9,7 +11,7 @@ export const DummyTimeSeriesChart: React.FunctionComponent<Props>  = (): JSX.Ele
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
         datasets: [
           {
-            data: [10, 30, 20, 60, 100, 90],
+            data: [20, 90, 40, 60, 100, 60],
             fill: false,
             borderColor: 'white'
           }
@@ -36,5 +38,9 @@ export const DummyTimeSeriesChart: React.FunctionComponent<Props>  = (): JSX.Ele
         }
     }
 
-    return <Line data={data} options={chartOptions}/>
+    return (
+        <Box className={styles.chartContainer}>
+            <Line data={data} options={chartOptions}/>
+        </Box>
+    )
 }
