@@ -6,6 +6,7 @@ import NewSidebar from '../../components/sidebar/Sidebar';
 import { Card, CardContent } from '@mui/material';
 import styles from './Dashboard.module.scss';
 import { DummyTimeSeriesChart } from '../../components/chart/dummy/time-series/DummyTimeSeriesChart';
+import { DummyScatterChart } from '../../components/chart/dummy/scatter/DummyScatterChart';
 
 interface Props extends RouteComponentProps<{}> {}
 
@@ -20,9 +21,9 @@ export const Dashboard: React.FunctionComponent<Props>  = ({ history }): JSX.Ele
                 </CardContent>
             </Card>
 
-            <Card className={styles.cardContainer} onClick={() => history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.SCATTER_CHART}`)}>
+            <Card sx={{ width: '30vw', height: '30vh', borderRadius: '0.5em', backgroundColor: '#263042' }} className={styles.cardContainer} onClick={() => history.push(`/${Path.DASHBOARD}/${Path.CHARTS}/${Path.SCATTER_CHART}`)}>
                 <CardContent>
-                    Scatter chart
+                    <DummyScatterChart />
                 </CardContent>
             </Card>
         </Flex.Horizontal>
