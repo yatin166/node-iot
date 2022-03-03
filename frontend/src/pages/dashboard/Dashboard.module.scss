@@ -1,4 +1,8 @@
-.cardContainer {
+.dashboardContainer {
     display: flex;
-    margin-right: 2em;
+
+    .cardContainer {
+        display: flex;
+        margin-right: 2em;
+    }
 }
