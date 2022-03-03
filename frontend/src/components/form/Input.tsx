@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import React from 'react';
 import styles from './Input.module.scss'
 
@@ -13,8 +14,7 @@ export const Input: React.FunctionComponent<Props>  = (props: Props): JSX.Elemen
 
     return (
         <div className={styles.inputContainer}>
-            <label>{props.label}</label>
-            <input type={props.type} name={props.name} value={props.value} onChange={props.onChange} />
+            <TextField id="standard-basic" label={props.label} value={props.value} variant="standard" onChange={props.onChange} />
         </div>
     )
 }
