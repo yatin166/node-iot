@@ -21,7 +21,7 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
     const service = useContext(ServicesContext);
     const [credentials, setCredentials] = useState<State>({ email: '', password: '' });
 
-    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         switch (name) {
             case 'email':
@@ -54,14 +54,14 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
                         type='email'
                         label='Email'
                         name='email'
-                        onChange={handleOnChange}
+                        onChange={(e) => handleOnChange(e)}
                         value={credentials.email} />
                     <Input
                         type='password'
                         label='Password'
                         name='password'
                         onChange={handleOnChange}
-                        value={credentials.password} />
+                        value={credentials.password} /> 
                     <Button value='Login' onClick={() => {return}}/>
                 </form>
                 <Button value='Register' onClick={() => history.push('/register')}/>
