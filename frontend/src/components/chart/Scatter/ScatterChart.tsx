@@ -39,16 +39,6 @@ export const ScatterChart: React.FunctionComponent<Props>  = (): JSX.Element => 
 
     const chartOptions = {
         scales: {
-            yAxes: [
-                {
-                    ticks: {
-                        beginAtZero: false,
-                        steps: 10,
-                        stepValue: 5,
-                        max: 100
-                    },
-                },
-            ],
             y: {
                 ticks: {
                   color: 'white'
