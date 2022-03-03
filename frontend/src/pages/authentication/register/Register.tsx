@@ -23,7 +23,7 @@ export const Register: React.FunctionComponent<Props> = (props: Props): JSX.Elem
     const service = useContext(ServicesContext);
     const [credentials, setCredentials] = useState<State>({ email: '', password: '', confirmPassword: '', firstName: '', lastName: '' });
 
-    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         switch (name) {
             case 'email':
