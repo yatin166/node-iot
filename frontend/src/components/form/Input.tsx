@@ -6,15 +6,23 @@ interface Props {
     type: string;
     name: string;
     value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
     label: string;
 }
 
-export const Input: React.FunctionComponent<Props>  = (props: Props): JSX.Element => {
+export const Input: React.FunctionComponent<Props>  = ({ name, type, value, label, onChange }): JSX.Element => {
 
     return (
         <div className={styles.inputContainer}>
-            <TextField id="standard-basic" label={props.label} value={props.value} variant="standard" onChange={props.onChange} />
+            <TextField
+                id={name}
+                name={name}
+                type={type} 
+                label={label} 
+                autoComplete={value} 
+                value={value} 
+                variant="standard" 
+                onChange={onChange} />
         </div>
     )
 }
