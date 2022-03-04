@@ -77,7 +77,7 @@ const Sidebar: React.FunctionComponent<Props>  = ({ history, content }): JSX.Ele
     return (
         <Box sx={{ display: 'flex', height: '100vh' }}>
           <CssBaseline />
-          <Header drawerWidth={drawerWidth} toggleDrawer={toggleDrawer} open={toggle}/>
+          <Header toggleDrawer={toggleDrawer} open={toggle}/>
           <Drawer variant="permanent" open={true}>
             <DrawerHeader />
             <List>
