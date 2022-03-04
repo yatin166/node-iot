@@ -11,7 +11,6 @@ import styles from './Header.module.scss';
 
 interface Props extends MuiAppBarProps {
   open?: boolean;
-  drawerWidth: number;
   toggleDrawer: () => void
 }
 
