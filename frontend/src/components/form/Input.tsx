@@ -15,6 +15,7 @@ export const Input: React.FunctionComponent<Props>  = ({ name, type, value, labe
     return (
         <div className={styles.inputContainer}>
             <TextField
+                className={styles.textField}
                 id={name}
                 name={name}
                 type={type} 
