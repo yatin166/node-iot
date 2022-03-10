@@ -5,4 +5,18 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 1em;
+
+    label {
+        color: white;
+    }
+
+    input {
+        color: white;
+    }
+
+    .textField {
+        &::after {
+            border-bottom: 2px solid red;
+        }
+    }
 }
