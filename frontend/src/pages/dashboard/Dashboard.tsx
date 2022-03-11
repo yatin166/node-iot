@@ -1,6 +1,5 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Flex } from '../../components/container/flex/Flex';
 import { Path } from '../../components/routes/Path';
 import NewSidebar from '../../components/sidebar/Sidebar';
 import { Card, CardContent } from '@mui/material';
