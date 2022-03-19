@@ -1,5 +1,5 @@
 # node-iot
-This is a WIP node-express IoT project
+This is a WIP node-express IoT project along with React frontend application for IoT dashboard
 
 Install docker in order to run the project easily.
 
