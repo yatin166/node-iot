@@ -9,6 +9,8 @@ interface Props {
 export const Button: React.FunctionComponent<Props>  = (props: Props): JSX.Element => {
 
     return (
-        <button onClick={props.onClick} className={styles.button}>{props.value}</button>
+        <button onClick={props.onClick} className={styles.button}>
+            {props.value}
+        </button>
     )
 }

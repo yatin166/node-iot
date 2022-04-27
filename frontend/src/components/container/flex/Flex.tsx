@@ -34,6 +34,7 @@ export class Flex extends React.Component<{}, Props> {
             }}>
                 {props.children}
             </div>
+            
         )
     }
 
