@@ -67,6 +67,5 @@ export const Login: React.FunctionComponent<Props>  = ({ history }): JSX.Element
                 <Button value='Register' onClick={() => history.push('/register')}/>
             </Flex.Vertical>
         </div>
-        
     )
 }
