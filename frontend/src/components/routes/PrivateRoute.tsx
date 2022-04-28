@@ -29,6 +29,5 @@ export const PrivateRoute = ({ component: Component, ...rest }: any) => {
           render={props => isAuthenticated()
             ? <Component {...props} />
             : <Redirect to={Path.LOGIN} />} />
-            
     );
 }
