@@ -18,7 +18,7 @@ export const Header: React.FunctionComponent<Props>  = (props: Props): JSX.Eleme
 
   return (
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="fixed" sx={{ backgroundColor: '#1d2634', boxShadow: 'none' }} className={styles.appBarContainer}>
+        <AppBar position="fixed" sx={{ backgroundColor: '#263042', boxShadow: 'none' }} className={styles.appBarContainer}>
           <Toolbar>
             <IconButton
               color="inherit"
