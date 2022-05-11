@@ -113,7 +113,7 @@ export const Register: React.FunctionComponent<Props> = (props: Props): JSX.Elem
                             value={credentials.confirmPassword} />
                     </Flex.Horizontal>
                     <Button value='Register' onClick={() => {return}}/>
-                <Button value='Login' onClick={() => props.history.push('/')}/>
+                    <Button value='Login' onClick={() => props.history.push('/')}/>
                 </form>
             </Flex.Vertical>
         </div>
